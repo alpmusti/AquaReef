@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Fragment.ManualFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="clip_horizontal"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Efsane Renkler"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/btn_default_load"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/holo_blue_dark"
+                android:text="Default"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold" />
+
+            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                android:id="@+id/toggle_schedule_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="30dp"
+                android:textSize="13sp"
+                custom:activeBgColor="@android:color/darker_gray"
+                custom:activeTextColor="@android:color/black"
+                custom:cornerRadius="7dp"
+                custom:inactiveBgColor="@android:color/darker_gray"
+                custom:inactiveTextColor="@android:color/black"
+                custom:separatorColor="@android:color/black"
+                custom:toggleWidth="92dp" />
+
+            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                android:id="@+id/toggle_schedule_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="30dp"
+                android:textSize="13sp"
+                custom:activeBgColor="@android:color/darker_gray"
+                custom:activeTextColor="@android:color/black"
+                custom:cornerRadius="7dp"
+                custom:inactiveBgColor="@android:color/darker_gray"
+                custom:inactiveTextColor="@android:color/black"
+                custom:separatorColor="@android:color/black"
+                custom:toggleWidth="92dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/holo_blue_dark"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Paylaşım"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cihazdan AL"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_send" />
+
+    </LinearLayout>
+
+</FrameLayout>

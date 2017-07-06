@@ -20,6 +20,9 @@ import android.view.MenuItem;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.NetworkDevice;
 import com.cantekin.aquareef.network.UdpDataService;
+import com.cantekin.aquareef.ui.Fragment.ManualFragment;
+import com.cantekin.aquareef.ui.Fragment.ScheduleFragment;
+import com.cantekin.aquareef.ui.Fragment._baseFragment;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -35,11 +38,10 @@ import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import layout.ManualFragment;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public FragmentTransaction fmTr;
+
     @SuppressLint("WifiManagerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +49,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initActivity();
 
-        fmTr = getSupportFragmentManager().beginTransaction();
-        fmTr.add(R.id.fragment_content, ManualFragment.newInstance(null,null));
-        fmTr.addToBackStack(null);
-        fmTr.commit();
+        //    initFragment();
+        replaceFragment(ManualFragment.newInstance(null, null));
+        sendDataDevice();
 
+    }
+
+    private void sendDataDevice() {
         Log.i("dsadasd", "ssssssssssssssssssssssssssssss");
         Log.i("dsadasd", IP());
         final String ip = "192.168.0.";
@@ -62,14 +66,38 @@ public class MainActivity extends AppCompatActivity
                 NetworkDevice device = new NetworkDevice();
                 device.setIP("10.10.100.254");
                 device.setPort("8899");
-                  new UdpDataService().send(device,"ooooooooooooooo");
+                new UdpDataService().send(device, "ooooooooooooooo");
                 //   ArrayList<String> hosts = scanSubNet(ip);
 
 
             }
         }).start();
-
     }
+
+    private void initFragment() {
+        if (fmTr == null) {
+            fmTr = getSupportFragmentManager().beginTransaction();
+            fmTr.add(R.id.fragment_content, ManualFragment.newInstance(null, null));
+        } else {
+            fmTr = getSupportFragmentManager().beginTransaction();
+            fmTr.replace(R.id.fragment_content, ManualFragment.newInstance(null, null));
+        }
+        fmTr.addToBackStack(null);
+        fmTr.commit();
+    }
+
+    private void replaceFragment(_baseFragment fragment) {
+        if (fmTr == null) {
+            fmTr = getSupportFragmentManager().beginTransaction();
+            fmTr.add(R.id.fragment_content, fragment);
+        } else {
+            fmTr = getSupportFragmentManager().beginTransaction();
+            fmTr.replace(R.id.fragment_content, fragment);
+        }
+        fmTr.addToBackStack(null);
+        fmTr.commit();
+    }
+
 
     private void initActivity() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -99,11 +127,11 @@ public class MainActivity extends AppCompatActivity
                     String mac = splitted[3];
                     if (!splitted[3].trim().equals("00:00:00:00:00:00")) {
                         {
-                         //   Log.d("sde", "getIpFromArpCache() :: " + currentLine);
+                            //   Log.d("sde", "getIpFromArpCache() :: " + currentLine);
 
                             //                          int remove = mac.lastIndexOf(':');
                             //                          mac = mac.substring(0,remove) + mac.substring(remove+1);
-                         //   mac = mac.replace(":", "");
+                            //   mac = mac.replace(":", "");
                             Log.i("ds", "getIpFromArpCache() :: ip : " + ip + " mac : " + mac);
                             //mIpAddressesList.add(new IpAddress(ip, mac));
                         }
@@ -347,8 +375,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this,DeviceActivity.class));
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            startActivity(new Intent(this, DeviceActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             return true;
         }
 
@@ -361,15 +389,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.fragment_manual) {
+            replaceFragment(ManualFragment.newInstance(null,null));
+        } else if (id == R.id.fragment_schedule) {
+            replaceFragment(new ScheduleFragment());
+        } else if (id == R.id.fragment_effects) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.fragment_fav) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.fragment_settings) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

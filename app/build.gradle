@@ -23,23 +23,20 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    //dagger2
-    compile 'com.google.dagger:dagger:2.0'
-
-
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    compile 'com.google.dagger:dagger:2.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'us.belka:androidtoggleswitch:1.2.2'
+    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
     testCompile 'junit:junit:4.12'
     apt 'com.google.dagger:dagger-compiler:2.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-
-    //toggle buttons
-    compile 'us.belka:androidtoggleswitch:1.2.2'
 }
