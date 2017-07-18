@@ -1,5 +1,6 @@
 package com.cantekin.aquareef.ui.Fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 
 import java.util.ArrayList;
@@ -66,7 +68,13 @@ public class ScheduleFragment extends _baseFragment {
         labels.add("Koyu Mavi");
         labels.add("Mavi");
         toggleSwitchOne.setLabels(labels);
+        toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
 
+            @Override
+            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+                getActivity().startActivity(new Intent(getActivity(), ColorSetActivity.class));
+            }
+        });
 
         toggleSwitchTwo = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_two);
         labels = new ArrayList<>();

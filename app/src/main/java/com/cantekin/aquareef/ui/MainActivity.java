@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.NetworkDevice;
 import com.cantekin.aquareef.network.UdpDataService;
+import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
 import com.cantekin.aquareef.ui.Fragment.ScheduleFragment;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
@@ -41,6 +42,8 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public FragmentTransaction fmTr;
+    private String port = "8899";
+    private String IP = "192.168.0.14";
 
     @SuppressLint("WifiManagerLeak")
     @Override
@@ -68,9 +71,20 @@ public class MainActivity extends AppCompatActivity
                 device.setPort("8899");
                 new UdpDataService().send(device, "ooooooooooooooo");
                 //   ArrayList<String> hosts = scanSubNet(ip);
-
-
             }
+        }).start();
+    }
+
+    public void sendDataDevice(final String data) {
+        Log.i("sendDataDevice", data);
+        new Thread(new Runnable() {
+            public void run() {
+                NetworkDevice device = new NetworkDevice();
+                device.setIP(IP);
+                device.setPort(port);
+                new UdpDataService().send(device, data);
+            }
+
         }).start();
     }
 
@@ -390,10 +404,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.fragment_manual) {
-            replaceFragment(ManualFragment.newInstance(null,null));
+            replaceFragment(ManualFragment.newInstance(null, null));
         } else if (id == R.id.fragment_schedule) {
             replaceFragment(new ScheduleFragment());
         } else if (id == R.id.fragment_effects) {
+            replaceFragment(new EffectFragment());
 
         } else if (id == R.id.fragment_fav) {
 
