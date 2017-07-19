@@ -7,16 +7,6 @@
     android:padding="15dp"
     tools:context=".ui.Fragment.ManualFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <ImageButton
-        android:id="@+id/button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:background="@mipmap/logo"
-        android:text="Button" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -45,12 +35,22 @@
                     custom:textToggleRight="Auto"
                     custom:toggleWidth="82dp"
                     tools:layout_editor_absoluteX="118dp"
-                    tools:layout_editor_absoluteY="0dp">
+                    tools:layout_editor_absoluteY="0dp"
+                    >
 
                 </belka.us.androidtoggleswitch.widgets.ToggleSwitch>
 
+
+
             </LinearLayout>
 
+            <ImageButton
+                android:id="@+id/btnAddFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@mipmap/logo"
+                android:text="Button" />
             <!--kırmızı-->
             <LinearLayout
                 android:layout_width="match_parent"

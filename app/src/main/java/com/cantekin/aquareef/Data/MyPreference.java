@@ -18,7 +18,7 @@ public class MyPreference {
     private static String TAG = "Preference";
     private Context context;
     public static MyPreference preference;
-    public static String mainURL;
+    public static String FAVORITES = "favorites";
     public static SharedPreferences data;
 
     private MyPreference(Context context) {
@@ -40,6 +40,20 @@ public class MyPreference {
             return null;
         return jsonHelper.stringToObject(dataString, clazzType);
     }
+
+    public String getData(String key) {
+        return data.getString(key, null);
+    }
+
+    public void setData(String key, Object value) {
+        SharedPreferences.Editor editor = data.edit();
+        if (value != null && key != null)
+            editor.putString(key, jsonHelper.objectToJson(value));
+        else
+            throw new NullPointerException("paramtreler null olamaz");
+        editor.commit();
+    }
+
     //endregion
     //region Set
     public void setData(@NonNull String name, @NonNull String value) throws NullPointerException {
@@ -50,7 +64,7 @@ public class MyPreference {
         editor.commit();
     }
 
-     //endregion
+    //endregion
     //region delete
     public void clearPreferences() {
         data.edit().clear().commit();

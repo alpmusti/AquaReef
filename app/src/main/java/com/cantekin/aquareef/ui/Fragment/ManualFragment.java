@@ -1,23 +1,34 @@
 package com.cantekin.aquareef.ui.Fragment;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.Controller.Data;
+import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
+import com.google.gson.Gson;
+import com.google.gson.internal.Streams;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
@@ -33,14 +44,6 @@ public class ManualFragment extends _baseFragment {
     private SeekBar seekBarUV;
 
     public ManualFragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -58,6 +61,7 @@ public class ManualFragment extends _baseFragment {
         initFragment();
     }
 
+
     private void initFragment() {
         initToggle();
         seekBarRed = (SeekBar) getActivity().findViewById(R.id.seekBarRed);
@@ -74,6 +78,60 @@ public class ManualFragment extends _baseFragment {
         setListener(seekBarRoyal, R.id.royalBlueValue, R.id.toggle_royal);
         setListener(seekBarUV, R.id.uvValue, R.id.toggle_uv);
         setListener(seekBarWhite, R.id.whiteValue, R.id.toggle_white);
+
+
+        ImageButton btnFav = (ImageButton) getActivity().findViewById(R.id.btnAddFavorite);
+        btnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("sde", "sdfas");
+                addFavorit();
+            }
+        });
+    }
+
+    public void addFavorit() {
+        final String[] m_Text = {""};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Favori");
+        builder.setIcon(R.mipmap.cloud);
+
+        LinearLayout layout = new LinearLayout(getActivity());
+        layout.setPadding(70, 30, 50, 0);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        TextView txt = new TextView(getActivity());
+        txt.setText("Lütfen favori ayarınıza bir isim verin");
+        layout.addView(txt);
+
+        final EditText input = new EditText(getActivity());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        layout.addView(input);
+        builder.setView(layout);
+
+
+        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                m_Text[0] = input.getText().toString();
+                String fav = MyPreference.getPreference(getContext()).getData(MyPreference.FAVORITES);
+                Gson gson = new Gson();
+                Type type = new TypeToken<Map<String, Data>>() {
+                }.getType();
+                Map<String, Data> favorites = new HashMap<>();
+                if (fav != null)
+                    favorites = gson.fromJson(fav, type);
+                favorites.put(m_Text[0], data);
+                MyPreference.getPreference(getContext()).setData(MyPreference.FAVORITES, favorites);
+            }
+        });
+        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     private void changeColorListener() {

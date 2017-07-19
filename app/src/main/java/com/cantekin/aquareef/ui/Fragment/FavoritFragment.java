@@ -12,18 +12,21 @@ import android.widget.ListView;
 
 import com.cantekin.aquareef.Controller.Data;
 import com.cantekin.aquareef.Controller.FavoritesData;
+import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.MainActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 public class FavoritFragment extends _baseFragment {
 
-    LinearLayout rowLayout;
-    private Map<String, Data> defaultFavorites;
 
     public FavoritFragment() {
         // Required empty public constructor
@@ -49,22 +52,36 @@ public class FavoritFragment extends _baseFragment {
     }
 
     private void initFragment() {
-        defaultFavorites = new FavoritesData().getFavorites();
+        Map<String, Data> defaultFavorites = new FavoritesData().getFavorites();
+        setList(defaultFavorites, R.id.fvrDefaultlists);
+
+
+        String fav = MyPreference.getPreference(getContext()).getData(MyPreference.FAVORITES);
+        Gson gson = new Gson();
+        Type type = new TypeToken<Map<String, Data>>() {
+        }.getType();
+        Map<String, Data> favorites = new HashMap<>();
+        if (fav != null)
+            favorites = gson.fromJson(fav, type);
+        setList(favorites, R.id.fvrFavoritLists);
+
+    }
+
+    private void setList(final Map<String, Data> favoriList, int listView) {
         List<String> defaultList = new ArrayList<>();
-        for (Map.Entry<String, Data> entry : defaultFavorites.entrySet()) {
+        for (Map.Entry<String, Data> entry : favoriList.entrySet()) {
             defaultList.add(entry.getKey());
         }
-        ListView defaultListView = (ListView) getView().findViewById(R.id.fvrDefaultlists);
+        ListView defaultListView = (ListView) getView().findViewById(listView);
         ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
         defaultListView.setAdapter(dfltAdapter);
         defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = (String) parent.getItemAtPosition(position);
-                sendFavorites(defaultFavorites.get(value).stringToSimpleArrayBufferFavorite());
+                sendFavorites(favoriList.get(value).stringToSimpleArrayBufferFavorite());
             }
         });
-
     }
 
 
