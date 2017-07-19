@@ -16,11 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.NetworkDevice;
 import com.cantekin.aquareef.network.UdpDataService;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
+import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
 import com.cantekin.aquareef.ui.Fragment.ScheduleFragment;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         initActivity();
 
         //    initFragment();
-        replaceFragment(ManualFragment.newInstance(null, null));
+        replaceFragment(new ManualFragment());
         sendDataDevice();
 
     }
@@ -69,7 +71,9 @@ public class MainActivity extends AppCompatActivity
                 NetworkDevice device = new NetworkDevice();
                 device.setIP("10.10.100.254");
                 device.setPort("8899");
-                new UdpDataService().send(device, "ooooooooooooooo");
+                String dd = "{00}{00}{00}{00}{0F} {00}{00}{0F} {00}{00}{00}{00}";
+                new UdpDataService().send(device, dd);
+                // new UdpDataService().send(device, "ooooooooooooooo");
                 //   ArrayList<String> hosts = scanSubNet(ip);
             }
         }).start();
@@ -88,13 +92,26 @@ public class MainActivity extends AppCompatActivity
         }).start();
     }
 
+    public void sendDataDevice(final byte[] data) {
+        Log.i("sendDataDevice", "byte");
+        new Thread(new Runnable() {
+            public void run() {
+                NetworkDevice device = new NetworkDevice();
+                device.setIP(IP);
+                device.setPort(port);
+                new UdpDataService().send(device, data);
+            }
+
+        }).start();
+    }
+
     private void initFragment() {
         if (fmTr == null) {
             fmTr = getSupportFragmentManager().beginTransaction();
-            fmTr.add(R.id.fragment_content, ManualFragment.newInstance(null, null));
+            fmTr.add(R.id.fragment_content,new  ManualFragment());
         } else {
             fmTr = getSupportFragmentManager().beginTransaction();
-            fmTr.replace(R.id.fragment_content, ManualFragment.newInstance(null, null));
+            fmTr.replace(R.id.fragment_content, new  ManualFragment());
         }
         fmTr.addToBackStack(null);
         fmTr.commit();
@@ -112,6 +129,9 @@ public class MainActivity extends AppCompatActivity
         fmTr.commit();
     }
 
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
     private void initActivity() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -404,13 +424,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.fragment_manual) {
-            replaceFragment(ManualFragment.newInstance(null, null));
+            replaceFragment(new ManualFragment());
         } else if (id == R.id.fragment_schedule) {
             replaceFragment(new ScheduleFragment());
         } else if (id == R.id.fragment_effects) {
             replaceFragment(new EffectFragment());
 
         } else if (id == R.id.fragment_fav) {
+            replaceFragment(new FavoritFragment());
 
         } else if (id == R.id.fragment_settings) {
 

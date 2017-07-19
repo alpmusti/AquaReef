@@ -70,5 +70,6 @@ public class EffectFragment extends _baseFragment {
         Log.i("Image", "sendEffect");
         String data=v.getTag().toString();
         ((MainActivity) getActivity()).sendDataDevice(data);
+
     }
 }

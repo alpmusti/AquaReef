@@ -98,6 +98,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:max="100"
+                        android:tag="red"
                         android:theme="@style/seekBarThema" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch

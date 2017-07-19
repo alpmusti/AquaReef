@@ -23,6 +23,33 @@ public class UdpDataService implements IDataService {
         return true;
     }
 
+
+    @Override
+    public boolean send(NetworkDevice device, byte[] message) {
+        if (device == null || message == null)
+            return false;
+        //TODO data gönderme yapılacak
+        sendDevice(device, message);
+        return true;
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void sendDevice(NetworkDevice device, byte[] message) {
+        InetAddress addr = null;
+        try {
+            addr = InetAddress.getByName(device.getIP());
+            DatagramSocket serverSocket = new DatagramSocket();
+            DatagramPacket msgPacket = new DatagramPacket(message,
+                    message.length, addr, Integer.parseInt(device.getPort()));
+            serverSocket.send(msgPacket);
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     @Override
     public boolean send(NetworkDevice[] device, String message) {
         return false;

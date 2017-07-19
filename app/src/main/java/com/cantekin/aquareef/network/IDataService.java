@@ -6,5 +6,6 @@ package com.cantekin.aquareef.network;
 
 interface IDataService {
     boolean send(NetworkDevice device, String message);
+    boolean send(NetworkDevice device, byte[] message);
     boolean send(NetworkDevice[] device, String message);
 }
