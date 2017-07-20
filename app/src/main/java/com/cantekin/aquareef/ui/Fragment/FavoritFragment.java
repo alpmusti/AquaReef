@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.cantekin.aquareef.Controller.Data;
-import com.cantekin.aquareef.Controller.FavoritesData;
+import com.cantekin.aquareef.Data.Data;
+import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.MainActivity;
@@ -52,7 +51,7 @@ public class FavoritFragment extends _baseFragment {
     }
 
     private void initFragment() {
-        Map<String, Data> defaultFavorites = new FavoritesData().getFavorites();
+        Map<String, Data> defaultFavorites = new DefaultData().getFavorites();
         setList(defaultFavorites, R.id.fvrDefaultlists);
 
 

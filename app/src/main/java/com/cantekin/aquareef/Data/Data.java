@@ -1,6 +1,4 @@
-package com.cantekin.aquareef.Controller;
-
-import android.database.CharArrayBuffer;
+package com.cantekin.aquareef.Data;
 
 /**
  * Created by Cantekin on 19.7.2017.

@@ -1,4 +1,4 @@
-package com.cantekin.aquareef.Controller;
+package com.cantekin.aquareef.Data;
 
 /**
  * Created by Cantekin on 19.7.2017.

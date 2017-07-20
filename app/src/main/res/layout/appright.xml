@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -19,20 +18,47 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:background="@mipmap/devices"
-                android:elevation="16dp"
-                android:onClick="tik"
-                android:padding="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@mipmap/devices"
+                    android:elevation="16dp"
+                    android:onClick="tik"
+                    android:padding="20dp" />
+
+                <TextView
+                    android:id="@+id/deviceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:text="Başlık"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/addDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_menu_add" />
+            </LinearLayout>
         </android.support.v7.widget.Toolbar>
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/main_content" />
+    <include
+        android:id="@+id/btnDeviceAdd"
+        layout="@layout/main_content" />
 
 </android.support.design.widget.CoordinatorLayout>

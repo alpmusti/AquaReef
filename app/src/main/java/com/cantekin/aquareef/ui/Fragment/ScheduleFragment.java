@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.cantekin.aquareef.Data.DataSchedule;
+import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
@@ -22,7 +24,6 @@ import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
@@ -39,6 +40,7 @@ public class ScheduleFragment extends _baseFragment {
     LineChartView chart;
     ToggleSwitch toggleSwitchOne;
     ToggleSwitch toggleSwitchTwo;
+    private List<DataSchedule> scheduleData;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -60,67 +62,111 @@ public class ScheduleFragment extends _baseFragment {
     }
 
     private void initFragment() {
-        //toogle
-        toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_one);
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("Kırmızı");
-        labels.add("Yeşil");
-        labels.add("Koyu Mavi");
-        labels.add("Mavi");
-        toggleSwitchOne.setLabels(labels);
-        toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
 
+        Button btnDefaultLoad=(Button)getActivity().findViewById(R.id.btn_default_load);
+        btnDefaultLoad.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
-                getActivity().startActivity(new Intent(getActivity(), ColorSetActivity.class));
+            public void onClick(View v) {
+                loadDefault();
             }
         });
 
-        toggleSwitchTwo = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_two);
-        labels = new ArrayList<>();
-        labels.add("Beyaş");
-        labels.add("Gün Işığı");
-        labels.add("UV");
-        labels.add("Ay");
-        toggleSwitchTwo.setLabels(labels);
+        //TODO aktif olanı kaydet
+        scheduleData = new DefaultData().getScheduleFavorites().get("SPS Sert Mercan");
+        //toogle
+        initToggle();
+        loadChart();
+    }
 
+    public void loadDefault() {
+        scheduleData = new DefaultData().getSchedule();
+        loadChart();
+    }
+
+    private void sendSchedule() {
+        for (DataSchedule item : scheduleData) {
+            ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
+        }
+    }
+
+    private void loadChart() {
         chart = (LineChartView) getActivity().findViewById(R.id.chart);
         chart.setZoomEnabled(false);
+        List<Line> lines = new ArrayList<>();
+        for (DataSchedule item : scheduleData) {
+            if (item.getCode() != 'h') {
+                float startTime = Float.parseFloat(item.getStart().substring(0, 2))
+                        + Float.parseFloat(item.getStart().substring(3)) / 100;
+                float upTime = Float.parseFloat(item.getUp().substring(0, 2))
+                        + Float.parseFloat(item.getUp().substring(3)) / 100;
+                float downTime = Float.parseFloat(item.getDown().substring(0, 2))
+                        + Float.parseFloat(item.getDown().substring(3)) / 100;
+                float stopTime = Float.parseFloat(item.getStop().substring(0, 2))
+                        + Float.parseFloat(item.getStop().substring(3)) / 100;
+                List<PointValue> values = new ArrayList<PointValue>();
+                values.add(new PointValue(startTime, 0));
+                values.add(new PointValue(upTime, item.getLevel()));
+                values.add(new PointValue(downTime, item.getLevel()));
+                values.add(new PointValue(stopTime, 0));
+                Line line = new Line(values).setColor(Color.parseColor(item.getColor())).setCubic(false);
+                line.setHasLabels(true);
+                line.setHasLines(true);
+                line.setHasPoints(false);
+                lines.add(line);
+            } else {
+                float startTime = Float.parseFloat(item.getStart().substring(0, 2))
+                        + Float.parseFloat(item.getStart().substring(3)) / 100;
 
-        List<PointValue> values = new ArrayList<PointValue>();
-        values.add(new PointValue(0, 20));
-        values.add(new PointValue(5, 40));
-        values.add(new PointValue(12, 80));
-        values.add(new PointValue(24, 50));
+                float stopTime = Float.parseFloat(item.getStop().substring(0, 2))
+                        + Float.parseFloat(item.getStop().substring(3)) / 100;
+                List<PointValue> values = new ArrayList<PointValue>();
+                values.add(new PointValue(startTime, 0));
+                values.add(new PointValue(startTime, item.getLevel()));
+                values.add(new PointValue(stopTime, item.getLevel()));
+                values.add(new PointValue(stopTime, 0));
+                Line line = new Line(values).setColor(Color.parseColor(item.getColor())).setCubic(false);
+                line.setHasLabels(true);
+                line.setHasLines(true);
+                line.setHasPoints(false);
+                lines.add(line);
+            }
+        }
 
 
-        List<PointValue> values2 = new ArrayList<PointValue>();
-        values2.add(new PointValue(2, 0));
-        values2.add(new PointValue(3, 80));
-        values2.add(new PointValue(18, 80));
-        values2.add(new PointValue(20, 15));
-        values2.add(new PointValue(24, 0));
-
-        //In most cased you can call data model methods in builder-pattern-like manner.
-        Line line = new Line(values).setColor(Color.BLUE).setCubic(false);
-        List<Line> lines = new ArrayList<Line>();
-
-        line.setHasLabels(true);
-        //line.setHasLabelsOnlyForSelected(hasLabelForSelected);
-        line.setHasLines(true);
-        line.setHasPoints(false);
-        //    line.setHasGradientToTransparent(hasGradientToTransparent);
-        lines.add(line);
-
-        Line line2 = new Line(values2).setColor(Color.GREEN).setCubic(false);
-        //line.setShape(ValueShape.);
-
-        line2.setHasLabels(true);
-        line.setHasLabelsOnlyForSelected(true);
-        line2.setHasLines(true);
-        line2.setHasPoints(false);
-
-        lines.add(line2);
+//        List<PointValue> values = new ArrayList<PointValue>();
+//        values.add(new PointValue(0, 20));
+//        values.add(new PointValue(5, 40));
+//        values.add(new PointValue(12, 80));
+//        values.add(new PointValue(24, 50));
+//
+//
+//        List<PointValue> values2 = new ArrayList<PointValue>();
+//        values2.add(new PointValue(2, 0));
+//        values2.add(new PointValue(3, 80));
+//        values2.add(new PointValue(18, 80));
+//        values2.add(new PointValue(20, 15));
+//        values2.add(new PointValue(24, 0));
+//
+//        //In most cased you can call data model methods in builder-pattern-like manner.
+//        Line line = new Line(values).setColor(Color.BLUE).setCubic(false);
+//        List<Line> lines = new ArrayList<Line>();
+//
+//        line.setHasLabels(true);
+//        //line.setHasLabelsOnlyForSelected(hasLabelForSelected);
+//        line.setHasLines(true);
+//        line.setHasPoints(false);
+//        //    line.setHasGradientToTransparent(hasGradientToTransparent);
+//        lines.add(line);
+//
+//        Line line2 = new Line(values2).setColor(Color.GREEN).setCubic(false);
+//        //line.setShape(ValueShape.);
+//
+//        line2.setHasLabels(true);
+//        line.setHasLabelsOnlyForSelected(true);
+//        line2.setHasLines(true);
+//        line2.setHasPoints(false);
+//
+//        lines.add(line2);
 
         LineChartData data = new LineChartData();
 
@@ -148,6 +194,31 @@ public class ScheduleFragment extends _baseFragment {
 
         chart.setLineChartData(data);
         resetViewport();
+    }
+
+    private void initToggle() {
+        toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_one);
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("Kırmızı");
+        labels.add("Yeşil");
+        labels.add("Koyu Mavi");
+        labels.add("Mavi");
+        toggleSwitchOne.setLabels(labels);
+        toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
+
+            @Override
+            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+                getActivity().startActivity(new Intent(getActivity(), ColorSetActivity.class));
+            }
+        });
+
+        toggleSwitchTwo = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_two);
+        labels = new ArrayList<>();
+        labels.add("Beyaş");
+        labels.add("Gün Işığı");
+        labels.add("UV");
+        labels.add("Ay");
+        toggleSwitchTwo.setLabels(labels);
     }
 
     private void resetViewport() {
