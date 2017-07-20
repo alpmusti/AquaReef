@@ -30,6 +30,7 @@ import java.util.Map;
 public class DeviceActivity extends ActionBarActivity {
 
     List<GrupDevice> allDevice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +42,12 @@ public class DeviceActivity extends ActionBarActivity {
     private void init() {
         Type type = new TypeToken<ArrayList<GrupDevice>>() {
         }.getType();
-        String all=MyPreference.getPreference(getApplicationContext()).getData(MyPreference.FAVORITES);
+        String all = MyPreference.getPreference(getApplicationContext()).getData(MyPreference.GRUPS);
 
         if (all != null) {
             Gson gson = new Gson();
             allDevice = gson.fromJson(all, type);
-        }
-        else
+        } else
             createDefaultDevice();
 
         final ImageView addBtn = (ImageView) findViewById(R.id.addDevice);
@@ -60,12 +60,13 @@ public class DeviceActivity extends ActionBarActivity {
     }
 
     private void createDefaultDevice() {
-        allDevice=new ArrayList<>();
-        GrupDevice aquarium=new GrupDevice();
+        allDevice = new ArrayList<>();
+        GrupDevice aquarium = new GrupDevice();
         aquarium.setName("Aquarium");
         aquarium.setDescription("Default");
         aquarium.addDevice("10.10.100.254");
         allDevice.add(aquarium);
+        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.GRUPS, allDevice);
     }
 
     public void tik(View v) {
@@ -80,7 +81,7 @@ public class DeviceActivity extends ActionBarActivity {
     }
 
     public void addGrup() {
-        final String[] m_Text = {""};
+        final String[] m_Text = {"",""};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Akvaryum Ekle");
         builder.setIcon(R.mipmap.cloud);
@@ -107,15 +108,11 @@ public class DeviceActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
                 m_Text[1] = inputDesc.getText().toString();
-                String fav = MyPreference.getPreference(getApplicationContext()).getData(MyPreference.FAVORITES);
-                Gson gson = new Gson();
-                Type type = new TypeToken<Map<String, Data>>() {
-                }.getType();
-                Map<String, Data> favorites = new HashMap<>();
-                if (fav != null)
-                    favorites = gson.fromJson(fav, type);
-                // favorites.put(m_Text[0], data);
-                MyPreference.getPreference(getApplicationContext()).setData(MyPreference.FAVORITES, favorites);
+                GrupDevice device = new GrupDevice();
+                device.setName(m_Text[0]);
+                device.setDescription(m_Text[1]);
+                allDevice.add(device);
+                MyPreference.getPreference(getApplicationContext()).setData(MyPreference.GRUPS, allDevice);
             }
         });
         builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {

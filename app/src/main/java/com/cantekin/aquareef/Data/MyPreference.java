@@ -19,6 +19,7 @@ public class MyPreference {
     private Context context;
     public static MyPreference preference;
     public static String FAVORITES = "favorites";
+    public static String GRUPS = "Grups";
     public static SharedPreferences data;
 
     private MyPreference(Context context) {
