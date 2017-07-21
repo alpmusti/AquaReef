@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.NetworkDevice;
 import com.cantekin.aquareef.network.UdpDataService;
+import com.cantekin.aquareef.ui.DeviceList.DeviceActivity;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;

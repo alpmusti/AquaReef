@@ -1,4 +1,4 @@
-package com.cantekin.aquareef.ui;
+package com.cantekin.aquareef.ui.DeviceList;
 
 import android.content.DialogInterface;
 import android.media.Image;
@@ -7,11 +7,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.GrupDevice;
@@ -29,7 +32,10 @@ import java.util.Map;
 
 public class DeviceActivity extends ActionBarActivity {
 
-    List<GrupDevice> allDevice;
+    private List<GrupDevice> allDevice;
+    private List<GrupDevice> activeGroup;
+    private ListView lstGrups;
+    private DeviceListAdapter groupAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,18 @@ public class DeviceActivity extends ActionBarActivity {
     }
 
     private void init() {
+        loadAllGroups();
+        loadActiveGrup();
+        loadList();
+    }
+
+    private void loadList() {
+        lstGrups = (ListView) findViewById(R.id.lst_grups);
+        groupAdapter = new DeviceListAdapter(this, R.layout.row_device, allDevice);
+        lstGrups.setAdapter(groupAdapter);
+    }
+
+    private void loadAllGroups() {
         Type type = new TypeToken<ArrayList<GrupDevice>>() {
         }.getType();
         String all = MyPreference.getPreference(getApplicationContext()).getData(MyPreference.GRUPS);
@@ -66,8 +84,9 @@ public class DeviceActivity extends ActionBarActivity {
         aquarium.setDescription("Default");
         aquarium.addDevice("10.10.100.254");
         allDevice.add(aquarium);
-        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.GRUPS, allDevice);
+        updateAllDevice();
     }
+
 
     public void tik(View v) {
         finish();
@@ -81,7 +100,7 @@ public class DeviceActivity extends ActionBarActivity {
     }
 
     public void addGrup() {
-        final String[] m_Text = {"",""};
+        final String[] m_Text = {"", ""};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Akvaryum Ekle");
         builder.setIcon(R.mipmap.cloud);
@@ -89,7 +108,6 @@ public class DeviceActivity extends ActionBarActivity {
         LinearLayout layout = new LinearLayout(this);
         layout.setPadding(70, 30, 50, 0);
         layout.setOrientation(LinearLayout.VERTICAL);
-
 
         final EditText input = new EditText(this);
         input.setHint("Ad");
@@ -102,7 +120,6 @@ public class DeviceActivity extends ActionBarActivity {
         layout.addView(inputDesc);
         builder.setView(layout);
 
-
         builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -111,8 +128,14 @@ public class DeviceActivity extends ActionBarActivity {
                 GrupDevice device = new GrupDevice();
                 device.setName(m_Text[0]);
                 device.setDescription(m_Text[1]);
-                allDevice.add(device);
-                MyPreference.getPreference(getApplicationContext()).setData(MyPreference.GRUPS, allDevice);
+                if (isContainsItem(allDevice, device) != -1) {
+                    Toast.makeText(getApplicationContext(), "Bu isimde bir grup mevcut", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    allDevice.add(device);
+                    updateAllDevice();
+
+                }
             }
         });
         builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
@@ -123,6 +146,61 @@ public class DeviceActivity extends ActionBarActivity {
         });
 
         builder.show();
+    }
+
+    private void updateAllDevice() {
+        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.GRUPS, allDevice);
+        groupAdapter.notifyDataSetChanged();
+    }
+
+    public void loadActiveGrup() {
+        Type type = new TypeToken<ArrayList<GrupDevice>>() {
+        }.getType();
+        String all = MyPreference.getPreference(getApplicationContext()).getData(MyPreference.ACTIVEGRUPS);
+        Log.i("loadActiveGrup", all);
+
+        if (all != null) {
+            Gson gson = new Gson();
+            activeGroup = gson.fromJson(all, type);
+        } else
+            activeGroup = new ArrayList<>();
+    }
+
+    public void addAcitiveGrup(GrupDevice gruop) {
+        if (isContainsItem(activeGroup, gruop) == -1)
+            activeGroup.add(gruop);
+        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.ACTIVEGRUPS, activeGroup);
+
+    }
+
+    public void removeAcitiveGrup(GrupDevice gruop) {
+        int index = isContainsItem(activeGroup, gruop);
+        if (index != -1)
+            activeGroup.remove(index);
+        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.ACTIVEGRUPS, activeGroup);
+    }
+
+
+    public void removeGrup(GrupDevice gruop) {
+        int index = isContainsItem(allDevice, gruop);
+        if (index != -1)
+            allDevice.remove(index);
+        updateAllDevice();
+    }
+
+    /*
+    listede aktif görünüm yapılsın mı kontrolü
+     */
+    public int isContainsItem(GrupDevice gruop) {
+        return isContainsItem(activeGroup, gruop);
+    }
+
+    public int isContainsItem(List<GrupDevice> list, GrupDevice gruop) {
+        for (GrupDevice item : list) {
+            if (gruop.getName().equals(item.getName()))
+                return list.indexOf(item);
+        }
+        return -1;
     }
 
 
