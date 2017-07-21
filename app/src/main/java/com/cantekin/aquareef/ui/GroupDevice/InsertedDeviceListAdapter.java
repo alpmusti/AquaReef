@@ -2,7 +2,6 @@ package com.cantekin.aquareef.ui.GroupDevice;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,9 +24,9 @@ import java.util.List;
  * Created by Cantekin on 21.7.2017.
  */
 
-public class DeviceListAdapter extends ArrayAdapter<GrupDevice> {
-    GroupFragment fragment;
-    public DeviceListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<GrupDevice> objects,GroupFragment _fragment) {
+public class InsertedDeviceListAdapter extends ArrayAdapter<String> {
+    DeviceFragment fragment;
+    public InsertedDeviceListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects, DeviceFragment _fragment) {
         super(context, resource, objects);
         fragment=_fragment;
     }
@@ -39,44 +38,17 @@ public class DeviceListAdapter extends ArrayAdapter<GrupDevice> {
         if (v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.row_device, null);
+            v = vi.inflate(R.layout.row_register_device, null);
         }
-        final GrupDevice device = getItem(position);
-        if (device != null) {
+        final String ip = getItem(position);
+        if (ip != null) {
             TextView txtName = (TextView) v.findViewById(R.id.row_txt_name);
-            TextView txtCount = (TextView) v.findViewById(R.id.row_txt_count);
-            txtCount.setText(device.getDevices().size() + " lamb");
-            txtName.setText(device.getName());
-
-            ImageButton btnEdit = (ImageButton) v.findViewById(R.id.row_btn_edit);
+            txtName.setText(ip);
             ImageButton btnDelete = (ImageButton) v.findViewById(R.id.row_btn_delete);
-            if (position == 0) {
-                btnEdit.setVisibility(View.INVISIBLE);
-                btnDelete.setVisibility(View.INVISIBLE);
-            }
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    removeQuation(device);
-                }
-            });
-
-            btnEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((GroupActivity) getContext()).replaceFragment(DeviceFragment.newInstance(device));
-                }
-            });
-            CheckBox checkBox = (CheckBox) v.findViewById(R.id.row_chk_item);
-            checkBox.setChecked(((GroupActivity) getContext()).isContainsItem(device) != -1);
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked)
-                        fragment.addAcitiveGrup(device);
-                    else
-                        fragment.removeAcitiveGrup(device);
-
+                    removeQuation(ip);
                 }
             });
         }
@@ -84,7 +56,7 @@ public class DeviceListAdapter extends ArrayAdapter<GrupDevice> {
     }
 
 
-    public void removeQuation(final GrupDevice device) {
+    public void removeQuation(final String ip) {
         final String[] m_Text = {"", ""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage("Emin misiniz?");
@@ -92,7 +64,7 @@ public class DeviceListAdapter extends ArrayAdapter<GrupDevice> {
         builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                fragment.removeGrup(device);
+                fragment.deleteIP(ip);
 
             }
         });

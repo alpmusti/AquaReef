@@ -8,31 +8,40 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 
 /**
  * Created by Cantekin on 27.6.2017.
  */
 
 public class UdpDataService implements IDataService {
-    @Override
-    public boolean send(NetworkDevice device, String message) {
-        if (device == null || message == null)
-            return false;
-        //TODO data gönderme yapılacak
-        sendDevice(device, message);
-        return true;
-    }
-
 
     @Override
-    public boolean send(NetworkDevice device, byte[] message) {
-        if (device == null || message == null)
-            return false;
-        //TODO data gönderme yapılacak
-        sendDevice(device, message);
-        return true;
+    public void send(List<NetworkDevice> devices, byte[] message) {
+        for (NetworkDevice device : devices) {
+            sendDevice(device, message);
+        }
     }
 
+    @Override
+    public void send(NetworkDevice device, byte[] message) {
+        if (device == null || message == null)
+            return;
+        //TODO data gönderme yapılacak
+        sendDevice(device, message);
+    }
+
+    @Override
+    public void send(NetworkDevice device, String message) {
+        sendDevice(device, message.getBytes());
+    }
+
+    @Override
+    public void send(List<NetworkDevice>  devices, String message) {
+        for (NetworkDevice device : devices) {
+            sendDevice(device, message.getBytes());
+        }
+    }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void sendDevice(NetworkDevice device, byte[] message) {
@@ -50,26 +59,22 @@ public class UdpDataService implements IDataService {
             ex.printStackTrace();
         }
     }
-    @Override
-    public boolean send(NetworkDevice[] device, String message) {
-        return false;
-    }
 
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void sendDevice(NetworkDevice device, String message) {
-        InetAddress addr = null;
-        try {
-            addr = InetAddress.getByName(device.getIP());
-            DatagramSocket serverSocket = new DatagramSocket();
-            DatagramPacket msgPacket = new DatagramPacket(message.getBytes(),
-                    message.getBytes().length, addr, Integer.parseInt(device.getPort()));
-            serverSocket.send(msgPacket);
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.KITKAT)
+//    private void sendDevice(NetworkDevice device, String message) {
+//        InetAddress addr = null;
+//        try {
+//            addr = InetAddress.getByName(device.getIP());
+//            DatagramSocket serverSocket = new DatagramSocket();
+//            DatagramPacket msgPacket = new DatagramPacket(message.getBytes(),
+//                    message.getBytes().length, addr, Integer.parseInt(device.getPort()));
+//            serverSocket.send(msgPacket);
+//
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 }

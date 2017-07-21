@@ -50,15 +50,6 @@ public class GroupFragment extends _baseGroupFragment {
         initFragment();
     }
 
-    private void createDefaultDevice() {
-        getAct().allGroup = new ArrayList<>();
-        GrupDevice aquarium = new GrupDevice();
-        aquarium.setName("Aquarium");
-        aquarium.setDescription("Default");
-        aquarium.addDevice("10.10.100.254");
-        getAct().allGroup.add(aquarium);
-        updateAllDevice();
-    }
     private void initFragment() {
         final ImageView addBtn = (ImageView) getActivity().findViewById(R.id.addDevice);
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +63,16 @@ public class GroupFragment extends _baseGroupFragment {
         loadList();
     }
 
+    private void createDefaultDevice() {
+        getAct().allGroup = new ArrayList<>();
+        GrupDevice aquarium = new GrupDevice();
+        aquarium.setName("Aquarium");
+        aquarium.setDescription("Default");
+        aquarium.addDevice("10.10.100.254");
+        getAct().allGroup.add(aquarium);
+        updateAllDevice();
+    }
+
     private void loadAllGroups() {
         Type type = new TypeToken<ArrayList<GrupDevice>>() {
         }.getType();
@@ -82,21 +83,21 @@ public class GroupFragment extends _baseGroupFragment {
         } else
             createDefaultDevice();
     }
+
     public void loadActiveGrup() {
         Type type = new TypeToken<ArrayList<GrupDevice>>() {
         }.getType();
         String all = MyPreference.getPreference(getContext()).getData(MyPreference.ACTIVEGRUPS);
-        Log.i("loadActiveGrup", all);
-
         if (all != null) {
             Gson gson = new Gson();
             getAct().activeGroup = gson.fromJson(all, type);
         } else
             getAct().activeGroup = new ArrayList<>();
     }
+
     private void loadList() {
         lstGrups = (ListView) getActivity().findViewById(R.id.lst_grups);
-        groupAdapter = new DeviceListAdapter(getAct(), R.layout.row_device, getAct().allGroup);
+        groupAdapter = new DeviceListAdapter(getAct(), R.layout.row_device, getAct().allGroup, this);
         lstGrups.setAdapter(groupAdapter);
     }
 
@@ -149,9 +150,32 @@ public class GroupFragment extends _baseGroupFragment {
         builder.show();
     }
 
+    public void addAcitiveGrup(GrupDevice gruop) {
+        if (getAct().isContainsItem(getAct().activeGroup, gruop) == -1)
+            getAct().activeGroup.add(gruop);
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, getAct().activeGroup);
+
+    }
+
+    public void removeAcitiveGrup(GrupDevice gruop) {
+        int index = getAct().isContainsItem(getAct().activeGroup, gruop);
+        if (index != -1)
+            getAct().activeGroup.remove(index);
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, getAct().activeGroup);
+    }
+
+
+    public void removeGrup(GrupDevice gruop) {
+        int index = getAct().isContainsItem(getAct().allGroup, gruop);
+        if (index != -1)
+            getAct().allGroup.remove(index);
+        updateAllDevice();
+    }
+
     private void updateAllDevice() {
         MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getAct().allGroup);
         groupAdapter.notifyDataSetChanged();
     }
+
 
 }

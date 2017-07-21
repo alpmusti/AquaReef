@@ -56,33 +56,6 @@ public class GroupActivity extends ActionBarActivity {
         title.setText("Aquariums");
     }
 
-
-    private void updateAllDevice() {
-        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.GRUPS, allGroup);
-    }
-
-    public void addAcitiveGrup(GrupDevice gruop) {
-        if (isContainsItem(activeGroup, gruop) == -1)
-            activeGroup.add(gruop);
-        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.ACTIVEGRUPS, activeGroup);
-
-    }
-
-    public void removeAcitiveGrup(GrupDevice gruop) {
-        int index = isContainsItem(activeGroup, gruop);
-        if (index != -1)
-            activeGroup.remove(index);
-        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.ACTIVEGRUPS, activeGroup);
-    }
-
-
-    public void removeGrup(GrupDevice gruop) {
-        int index = isContainsItem(allGroup, gruop);
-        if (index != -1)
-            allGroup.remove(index);
-        updateAllDevice();
-    }
-
     /*
     listede aktif görünüm yapılsın mı kontrolü
      */

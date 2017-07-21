@@ -1,15 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/gray"
     android:padding="15dp"
+    android:orientation="vertical"
     tools:context=".ui.Fragment.ManualFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,11 +37,9 @@
                     custom:textToggleRight="Auto"
                     custom:toggleWidth="82dp"
                     tools:layout_editor_absoluteX="118dp"
-                    tools:layout_editor_absoluteY="0dp"
-                    >
+                    tools:layout_editor_absoluteY="0dp">
 
                 </belka.us.androidtoggleswitch.widgets.ToggleSwitch>
-
 
 
             </LinearLayout>
@@ -48,22 +48,21 @@
                 android:id="@+id/btnAddFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="@mipmap/logo"
+                android:layout_gravity="end"
+                android:background="@android:drawable/btn_star_big_off"
                 android:text="Button" />
             <!--kırmızı-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
+                android:orientation="horizontal"
+                android:weightSum="100">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
-                    android:orientation="horizontal"
-                    android:weightSum="10">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -74,39 +73,41 @@
                         android:textColor="@android:color/holo_red_dark"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/redValue"
+                    <SeekBar
+                        android:id="@+id/seekBarRed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:max="100"
+                        android:tag="red"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarRed"
+                    <TextView
+                        android:id="@+id/redValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:max="100"
-                        android:tag="red"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="NestedWeights" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_red"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -115,21 +116,25 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <!--yeşil-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -139,37 +144,38 @@
                         android:textColor="@android:color/holo_green_dark"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/greenValue"
+                    <SeekBar
+                        android:id="@+id/seekBarGreen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarGreen"
+                    <TextView
+                        android:id="@+id/greenValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_green"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -178,7 +184,7 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -187,12 +193,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -202,37 +210,38 @@
                         android:textColor="@color/blue"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/royalBlueValue"
+                    <SeekBar
+                        android:id="@+id/seekBarRoyal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarRoyal"
+                    <TextView
+                        android:id="@+id/royalBlueValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_royal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -241,7 +250,7 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -250,12 +259,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -265,37 +276,38 @@
                         android:textColor="@android:color/holo_blue_dark"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/blueValue"
+                    <SeekBar
+                        android:id="@+id/seekBarBlue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarBlue"
+                    <TextView
+                        android:id="@+id/blueValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -304,7 +316,7 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -313,12 +325,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -328,37 +342,38 @@
                         android:textColor="@android:color/background_light"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/whiteValue"
+                    <SeekBar
+                        android:id="@+id/seekBarWhite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarWhite"
+                    <TextView
+                        android:id="@+id/whiteValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -367,8 +382,9 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <!--Gün Işığı-->
@@ -376,12 +392,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -391,37 +409,38 @@
                         android:textColor="@android:color/holo_orange_light"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/dayLightValue"
+                    <SeekBar
+                        android:id="@+id/seekBarLight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarLight"
+                    <TextView
+                        android:id="@+id/dayLightValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -430,7 +449,7 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -439,12 +458,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_weight="30"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -454,37 +475,39 @@
                         android:textColor="@color/colorAccent"
                         android:theme="@style/leftLabelThema" />
 
-                    <TextView
-                        android:id="@+id/uvValue"
+                    <SeekBar
+                        android:id="@+id/seekBarUV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/gray_very_light"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="3"
+                        android:theme="@style/seekBarThema" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="70"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <SeekBar
-                        android:id="@+id/seekBarUV"
+                    <TextView
+                        android:id="@+id/uvValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:theme="@style/seekBarThema" />
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_very_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:ignore="InefficientWeight" />
 
                     <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                         android:id="@+id/toggle_uv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:textSize="10sp"
                         custom:activeBgColor="@android:color/darker_gray"
                         custom:activeTextColor="@android:color/black"
                         custom:cornerRadius="5dp"
@@ -493,11 +516,12 @@
                         custom:separatorColor="@android:color/black"
                         custom:textToggleLeft="-"
                         custom:textToggleRight="+"
-                        custom:toggleWidth="50dp" />
+                        custom:toggleWidth="40dp" />
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
 
-</FrameLayout>
+</LinearLayout>
