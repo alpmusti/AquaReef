@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.NetworkDevice;
 import com.cantekin.aquareef.network.UdpDataService;
-import com.cantekin.aquareef.ui.DeviceList.DeviceActivity;
+import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(this, DeviceActivity.class));
+            startActivity(new Intent(this, GroupActivity.class));
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             return true;
         }

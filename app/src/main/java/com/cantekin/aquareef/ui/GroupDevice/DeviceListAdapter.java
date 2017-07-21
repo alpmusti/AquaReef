@@ -1,23 +1,20 @@
-package com.cantekin.aquareef.ui.DeviceList;
+package com.cantekin.aquareef.ui.GroupDevice;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.R;
@@ -61,15 +58,22 @@ public class DeviceListAdapter extends ArrayAdapter<GrupDevice> {
                     removeQuation(device);
                 }
             });
+
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((GroupActivity) getContext()).replaceFragment(DeviceFragment.newInstance(device));
+                }
+            });
             CheckBox checkBox = (CheckBox) v.findViewById(R.id.row_chk_item);
-            checkBox.setChecked(((DeviceActivity) getContext()).isContainsItem(device) != -1);
+            checkBox.setChecked(((GroupActivity) getContext()).isContainsItem(device) != -1);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked)
-                        ((DeviceActivity) getContext()).addAcitiveGrup(device);
+                        ((GroupActivity) getContext()).addAcitiveGrup(device);
                     else
-                        ((DeviceActivity) getContext()).removeAcitiveGrup(device);
+                        ((GroupActivity) getContext()).removeAcitiveGrup(device);
 
                 }
             });
@@ -86,7 +90,7 @@ public class DeviceListAdapter extends ArrayAdapter<GrupDevice> {
         builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((DeviceActivity) getContext()).removeGrup(device);
+                ((GroupActivity) getContext()).removeGrup(device);
 
             }
         });

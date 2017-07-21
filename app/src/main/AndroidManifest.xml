@@ -20,9 +20,9 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.DeviceList.DeviceActivity"
+            android:name=".ui.GroupDevice.GroupActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -35,7 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ColorSetActivity"></activity>
+        <activity android:name=".ui.ColorSetActivity" />
     </application>
 
 </manifest>

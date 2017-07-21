@@ -1,5 +1,6 @@
 package com.cantekin.aquareef.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by Cantekin on 20.7.2017.
  */
 
-public class GrupDevice {
+public class GrupDevice implements Serializable {
     private String name;
     private String description;
     private List<String> devices;
