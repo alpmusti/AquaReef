@@ -22,9 +22,16 @@ import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
@@ -55,8 +62,102 @@ public class ManualFragment extends _baseFragment {
         super.onViewCreated(view, savedInstanceState);
         data = new Data();
         initFragment();
+     //   scanSubNet("192.168.0.");
+//        try {
+//            printReachableHosts();
+//        } catch (SocketException e) {
+//            e.printStackTrace();
+//        }
+
+
     }
 
+    private void ping(String ip) {
+
+
+        try {
+            InetAddress inetAddress = InetAddress.getByName(ip);
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 " + ip);
+            int returnVal = p1.waitFor();
+            if (returnVal == 0) {
+                Log.d("dsd", "Trying: " + ip);
+                //  hosts.add(inetAddress.getHostName());
+//                NetworkInterface network = NetworkInterface.getByInetAddress(inetAddress);
+//                byte[] mac = network.getHardwareAddress();
+//                StringBuilder sb = new StringBuilder();
+//                for (int j = 0; j < mac.length; j++) {
+//
+//                    sb.append(String.format("%02X%s", mac[j],
+//                            (j < mac.length - 1) ? "-" : ""));
+//                }
+//                Log.i("qwq", sb.toString() + "-" + inetAddress.getHostName());
+                //  getIpFromArpCache();
+
+            }
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            Log.d("dsd", "NullPointerException: " + ip);
+        }
+    }
+
+    public void printReachableHosts() throws SocketException {
+        String ipAddress = "192.168.0.1";
+        Log.e("aaIPPP", ipAddress);
+
+        ipAddress = ipAddress.substring(0, ipAddress.lastIndexOf('.')) + ".";
+        for (int i = 0; i < 256; i++) {
+            final String otherAddress = ipAddress + String.valueOf(i);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ping(otherAddress.toString());
+                }
+            }).start();
+        }
+    }
+
+    private void scanSubNet(final String subnet) {
+
+        int processors = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = Executors.newFixedThreadPool(processors);
+        for (int i = 1; i < 255; i++) {
+            final int finalI = i;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("dsd", "Trying: " + subnet + String.valueOf(finalI));
+                    try {
+                        InetAddress inetAddress = InetAddress.getByName(subnet + String.valueOf(finalI));
+                        if (inetAddress.isReachable(1000)) {
+                            NetworkInterface network = NetworkInterface.getByInetAddress(inetAddress);
+                            byte[] mac = network.getHardwareAddress();
+                            StringBuilder sb = new StringBuilder();
+                            for (int j = 0; j < mac.length; j++) {
+
+                                sb.append(String.format("%02X%s", mac[j],
+                                        (j < mac.length - 1) ? "-" : ""));
+                            }
+                            Log.i("qwq", sb.toString() + "-" + inetAddress.getHostName());
+                        } else {
+                            Log.e("qwq", inetAddress.getHostName());
+                        }
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+        }
+    }
 
     private void initFragment() {
         initToggle();
@@ -74,8 +175,6 @@ public class ManualFragment extends _baseFragment {
         setListener(seekBarRoyal, R.id.royalBlueValue, R.id.toggle_royal);
         setListener(seekBarUV, R.id.uvValue, R.id.toggle_uv);
         setListener(seekBarWhite, R.id.whiteValue, R.id.toggle_white);
-
-
         ImageButton btnFav = (ImageButton) getActivity().findViewById(R.id.btnAddFavorite);
         btnFav.setOnClickListener(new View.OnClickListener() {
             @Override

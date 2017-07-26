@@ -1,6 +1,7 @@
 package com.cantekin.aquareef.network;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.Data.MyPreference;
@@ -25,7 +26,6 @@ public class SendDataToClient {
     public SendDataToClient(Context context) {
         this.context = context;
         loadActiveDevices();
-        preperToProp();
     }
 
 
@@ -34,27 +34,36 @@ public class SendDataToClient {
         }.getType();
         String all = MyPreference.getPreference(context).getData(MyPreference.ACTIVEGRUPS);
         if (all != null) {
+            Log.i("loadActiveDevices", all);
             Gson gson = new Gson();
             activeGroup = gson.fromJson(all, type);
         }
+        preperToProp();
     }
 
     private void preperToProp() {
         devices = new ArrayList<>();
+        Log.i("preperToProp", "ss");
         for (GrupDevice group : activeGroup) {
+            Log.i("preperToProp active", group.getName());
+            Log.i("preperToProp active", "Count" + group.getDevices().size());
             for (String device : group.getDevices()) {
                 NetworkDevice d = new NetworkDevice();
                 d.setIP(device);
                 d.setPort(port);
                 devices.add(d);
+                Log.i("preperToProp devices", device);
+
             }
         }
     }
 
 
     public void send(final String data) {
-        if (activeGroup == null)
-            return;
+        Log.i("SendDataToClient", " Message:" + data);
+
+        //   if (activeGroup == null)
+        loadActiveDevices();
         new Thread(new Runnable() {
             public void run() {
                 dataService.send(devices, data);
@@ -65,8 +74,9 @@ public class SendDataToClient {
     }
 
     public void send(final byte[] data) {
-        if (activeGroup == null)
-            return;
+        Log.i("SendDataToClient", " Message:" + data);
+        //  if (activeGroup == null)
+        loadActiveDevices();
         new Thread(new Runnable() {
             public void run() {
                 dataService.send(devices, data);

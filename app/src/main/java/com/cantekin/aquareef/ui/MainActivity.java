@@ -16,10 +16,12 @@ import android.widget.Toast;
 
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.SendDataToClient;
+import com.cantekin.aquareef.ui.Fragment.AquaLinkFragment;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
 import com.cantekin.aquareef.ui.Fragment.ScheduleFragment;
+import com.cantekin.aquareef.ui.Fragment.ShareFragment;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
 import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 import com.cantekin.aquareef.ui.GroupDevice.GroupFragment;
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.fragment_manual) {
             replaceFragment(new ManualFragment());
         } else if (id == R.id.fragment_schedule) {
-            replaceFragment(new ScheduleFragment());
+            replaceFragment(new ShareFragment());
         } else if (id == R.id.fragment_effects) {
             replaceFragment(new EffectFragment());
 

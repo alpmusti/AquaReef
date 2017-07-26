@@ -2,6 +2,7 @@ package com.cantekin.aquareef.network;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -25,20 +26,22 @@ public class UdpDataService implements IDataService {
 
     @Override
     public void send(NetworkDevice device, byte[] message) {
-        if (device == null || message == null)
-            return;
         //TODO data gönderme yapılacak
         sendDevice(device, message);
     }
 
     @Override
     public void send(NetworkDevice device, String message) {
+        Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
+
         sendDevice(device, message.getBytes());
     }
 
     @Override
-    public void send(List<NetworkDevice>  devices, String message) {
+    public void send(List<NetworkDevice> devices, String message) {
         for (NetworkDevice device : devices) {
+            Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
+
             sendDevice(device, message.getBytes());
         }
     }

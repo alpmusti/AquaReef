@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/row_shrade_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Başlık" />
+
+        <TextView
+            android:id="@+id/row_shrade_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="time" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/row_shrade_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        app:srcCompat="@mipmap/ic_launcheroo" />
+
+    <TextView
+        android:id="@+id/row_shrade_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="description" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/row_shrade_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/row_shrade_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="like_count" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/row_shrade_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
