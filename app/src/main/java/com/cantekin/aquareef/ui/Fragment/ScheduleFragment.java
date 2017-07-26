@@ -8,13 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.Data.DefaultData;
+import com.cantekin.aquareef.Data.MyPreference;
+import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +46,8 @@ public class ScheduleFragment extends _baseFragment {
     LineChartView chart;
     ToggleSwitch toggleSwitchOne;
     ToggleSwitch toggleSwitchTwo;
-    private List<DataSchedule> scheduleData;
+    private Schedule scheduleData;
+    private TextView txtTitle;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -62,8 +69,15 @@ public class ScheduleFragment extends _baseFragment {
     }
 
     private void initFragment() {
-
-        Button btnDefaultLoad=(Button)getActivity().findViewById(R.id.btn_default_load);
+        txtTitle = (TextView) getActivity().findViewById(R.id.schedule_txt_title);
+        TextView txtShared = (TextView) getActivity().findViewById(R.id.schedule_txt_shared);
+        txtShared.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).replaceFragment(new ShareFragment());
+            }
+        });
+        Button btnDefaultLoad = (Button) getActivity().findViewById(R.id.btn_default_load);
         btnDefaultLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,20 +85,28 @@ public class ScheduleFragment extends _baseFragment {
             }
         });
 
-        //TODO aktif olanı kaydet
-        scheduleData = new DefaultData().getScheduleFavorites().get("SPS Sert Mercan");
-        //toogle
+        String data = MyPreference.getPreference(getContext()).getData(MyPreference.ACTIVESCHEDULE);
+        if (data == null)
+            loadDefault();
+        else {
+            Gson gson = new Gson();
+           // loadDefault();
+            scheduleData = gson.fromJson(data, Schedule.class);
+        }
+        txtTitle.setText(scheduleData.getName());
         initToggle();
         loadChart();
     }
 
     public void loadDefault() {
         scheduleData = new DefaultData().getSchedule();
+        txtTitle.setText(scheduleData.getName());
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVESCHEDULE, scheduleData);
         loadChart();
     }
 
     private void sendSchedule() {
-        for (DataSchedule item : scheduleData) {
+        for (DataSchedule item : scheduleData.getData()) {
             ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
         }
     }
@@ -93,7 +115,7 @@ public class ScheduleFragment extends _baseFragment {
         chart = (LineChartView) getActivity().findViewById(R.id.chart);
         chart.setZoomEnabled(false);
         List<Line> lines = new ArrayList<>();
-        for (DataSchedule item : scheduleData) {
+        for (DataSchedule item : scheduleData.getData()) {
             if (item.getCode() != 'h') {
                 float startTime = Float.parseFloat(item.getStart().substring(0, 2))
                         + Float.parseFloat(item.getStart().substring(3)) / 100;

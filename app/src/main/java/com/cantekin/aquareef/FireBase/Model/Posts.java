@@ -5,6 +5,7 @@ package com.cantekin.aquareef.FireBase.Model;
  */
 
 public class Posts {
+    private String key;
     private String deviceID;
     private String downloadURL;
     private Long like;
@@ -12,6 +13,14 @@ public class Posts {
     private String user;
     private String userNote;
     public DateAll allDate;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getDeviceID() {
         return deviceID;

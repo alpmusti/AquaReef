@@ -21,6 +21,8 @@ public class MyPreference {
     public static String FAVORITES = "favorites";
     public static String GRUPS = "Grups";
     public static String ACTIVEGRUPS = "ActiveGrups";
+    public static String LIKES = "Likes";
+    public static String ACTIVESCHEDULE = "ActiveSchedule";
     public static SharedPreferences data;
 
     private MyPreference(Context context) {

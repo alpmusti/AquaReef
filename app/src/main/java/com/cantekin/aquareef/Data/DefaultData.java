@@ -48,7 +48,9 @@ public class DefaultData {
         return favorites;
     }
 
-    public List<DataSchedule> getSchedule() {
+    public Schedule getSchedule() {
+        Schedule sch = new Schedule();
+        sch.setName("Default");
         List<DataSchedule> result = new ArrayList<>();
         DataSchedule red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 50);
         DataSchedule green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 40);
@@ -67,7 +69,8 @@ public class DefaultData {
         result.add(dWhite);
         result.add(uv);
         result.add(moon);
-        return result;
+        sch.setData(result);
+        return sch;
     }
 
     public Map<String, List<DataSchedule>> getScheduleFavorites() {

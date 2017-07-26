@@ -1,7 +1,11 @@
 package com.cantekin.aquareef.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,8 +14,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cantekin.aquareef.R;
@@ -26,8 +32,12 @@ import com.cantekin.aquareef.ui.Fragment._baseFragment;
 import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 import com.cantekin.aquareef.ui.GroupDevice.GroupFragment;
 
+import java.io.FileDescriptor;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static final int RESULT_LOAD_IMAGE = 10001;
     public FragmentTransaction fmTr;
     private SendDataToClient clinetAdapter;
 
@@ -54,7 +64,7 @@ public class MainActivity extends AppCompatActivity
         clinetAdapter.send(data);
     }
 
-    private void replaceFragment(_baseFragment fragment) {
+    public void replaceFragment(_baseFragment fragment) {
         if (fmTr == null) {
             fmTr = getSupportFragmentManager().beginTransaction();
             fmTr.add(R.id.fragment_content, fragment);
@@ -125,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.fragment_manual) {
             replaceFragment(new ManualFragment());
         } else if (id == R.id.fragment_schedule) {
-            replaceFragment(new ShareFragment());
+            replaceFragment(new ScheduleFragment());
         } else if (id == R.id.fragment_effects) {
             replaceFragment(new EffectFragment());
 
@@ -139,4 +149,20 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("onActivityResult",RESULT_LOAD_IMAGE+"");
+        Log.i("onActivityResult",requestCode+"");
+
+       // if (requestCode == RESULT_LOAD_IMAGE ) {
+            Log.i("onActivityResult","fds");
+
+            Uri selectedImage = data.getData();
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
+            ((ShareFragment)currentFragment).setImage(selectedImage);
+      //  }
+    }
+
 }
