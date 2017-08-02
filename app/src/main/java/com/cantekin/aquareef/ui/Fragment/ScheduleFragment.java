@@ -15,6 +15,7 @@ import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.AllColorActivity;
 import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
@@ -35,14 +36,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 
 public class ScheduleFragment extends _baseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     LineChartView chart;
     ToggleSwitch toggleSwitchOne;
     ToggleSwitch toggleSwitchTwo;
@@ -68,6 +62,13 @@ public class ScheduleFragment extends _baseFragment {
         initFragment();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadSchedule();
+        loadChart();
+    }
+
     private void initFragment() {
         txtTitle = (TextView) getActivity().findViewById(R.id.schedule_txt_title);
         TextView txtShared = (TextView) getActivity().findViewById(R.id.schedule_txt_shared);
@@ -77,6 +78,15 @@ public class ScheduleFragment extends _baseFragment {
                 ((MainActivity) getActivity()).replaceFragment(new ShareFragment());
             }
         });
+
+        Button txtAllColor = (Button) getActivity().findViewById(R.id.schedule_btnAll);
+        txtAllColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AllColorActivity.class));
+            }
+        });
+
         Button btnDefaultLoad = (Button) getActivity().findViewById(R.id.btn_default_load);
         btnDefaultLoad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,18 +94,22 @@ public class ScheduleFragment extends _baseFragment {
                 loadDefault();
             }
         });
+        initToggle();
 
+        loadSchedule();
+        loadChart();
+    }
+
+    private void loadSchedule() {
         String data = MyPreference.getPreference(getContext()).getData(MyPreference.ACTIVESCHEDULE);
         if (data == null)
             loadDefault();
         else {
             Gson gson = new Gson();
-           // loadDefault();
+            // loadDefault();
             scheduleData = gson.fromJson(data, Schedule.class);
         }
         txtTitle.setText(scheduleData.getName());
-        initToggle();
-        loadChart();
     }
 
     public void loadDefault() {
@@ -106,9 +120,9 @@ public class ScheduleFragment extends _baseFragment {
     }
 
     private void sendSchedule() {
-        for (DataSchedule item : scheduleData.getData()) {
-            ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
-        }
+//        for (DataSchedule item : scheduleData.getData()) {
+//            ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
+//        }
     }
 
     private void loadChart() {
@@ -223,24 +237,66 @@ public class ScheduleFragment extends _baseFragment {
         ArrayList<String> labels = new ArrayList<>();
         labels.add("Kırmızı");
         labels.add("Yeşil");
-        labels.add("Koyu Mavi");
+        labels.add("K.Mavi");
         labels.add("Mavi");
         toggleSwitchOne.setLabels(labels);
         toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
 
             @Override
             public void onToggleSwitchChangeListener(int position, boolean isChecked) {
-                getActivity().startActivity(new Intent(getActivity(), ColorSetActivity.class));
+                Intent intent = new Intent(getActivity(), ColorSetActivity.class);
+                String colorData = "";
+                switch (position) {
+                    case 0:
+                        colorData = DefaultData.colorRed;
+                        break;
+                    case 1:
+                        colorData = DefaultData.colorGreen;
+                        break;
+                    case 2:
+                        colorData = DefaultData.colorRoyal;
+                        break;
+                    case 3:
+                        colorData = DefaultData.colorBlue;
+                        break;
+                }
+                intent.putExtra("color", colorData);
+                getActivity().startActivity(intent);
             }
         });
 
         toggleSwitchTwo = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_two);
         labels = new ArrayList<>();
-        labels.add("Beyaş");
+        labels.add("Beyaz");
         labels.add("Gün Işığı");
         labels.add("UV");
         labels.add("Ay");
         toggleSwitchTwo.setLabels(labels);
+
+        toggleSwitchTwo.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
+
+            @Override
+            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+                Intent intent = new Intent(getActivity(), ColorSetActivity.class);
+                String colorData = "";
+                switch (position) {
+                    case 0:
+                        colorData = DefaultData.colorWhite;
+                        break;
+                    case 1:
+                        colorData = DefaultData.colorDWhite;
+                        break;
+                    case 2:
+                        colorData = DefaultData.colorUV;
+                        break;
+                    case 3:
+                        colorData = DefaultData.colorMoon;
+                        break;
+                }
+                intent.putExtra("color", colorData);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     private void resetViewport() {

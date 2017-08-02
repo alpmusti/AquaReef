@@ -10,6 +10,16 @@ import java.util.Map;
  */
 
 public class DefaultData {
+
+    public static final String colorRed = "Red";
+    public static final String colorGreen = "Green";
+    public static final String colorRoyal = "Royal Blue";
+    public static final String colorBlue = "Blue";
+    public static final String colorWhite = "White";
+    public static final String colorDWhite = "D.White";
+    public static final String colorUV = "UV";
+    public static final String colorMoon = "Moon";
+
     public DefaultData() {
     }
 
@@ -52,14 +62,14 @@ public class DefaultData {
         Schedule sch = new Schedule();
         sch.setName("Default");
         List<DataSchedule> result = new ArrayList<>();
-        DataSchedule red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 50);
-        DataSchedule green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 40);
-        DataSchedule rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "09:00", "10:30", "20:30", "22:00", 100);
-        DataSchedule blue = new DataSchedule("Blue", 'd', "#387ef5", "09:30", "11:00", "20:00", "21:30", 100);
-        DataSchedule white = new DataSchedule("White", 'e', "#b2b2b2", "10:00", "11:00", "17:00", "19:00", 75);
-        DataSchedule dWhite = new DataSchedule("D.White", 'f', "#ffc900", "10:30", "11:30", "17:00", "19:00", 60);
-        DataSchedule uv = new DataSchedule("UV", 'g', "#886aea", "10:30", "11:30", "18:00", "20:00", 80);
-        DataSchedule moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 0);
+        DataSchedule red = new DataSchedule(colorRed, 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 50);
+        DataSchedule green = new DataSchedule(colorGreen, 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 40);
+        DataSchedule rBlue = new DataSchedule(colorRoyal, 'c', "#11c1f3", "09:00", "10:30", "20:30", "22:00", 100);
+        DataSchedule blue = new DataSchedule(colorBlue, 'd', "#387ef5", "09:30", "11:00", "20:00", "21:30", 100);
+        DataSchedule white = new DataSchedule(colorWhite, 'e', "#b2b2b2", "10:00", "11:00", "17:00", "19:00", 75);
+        DataSchedule dWhite = new DataSchedule(colorDWhite, 'f', "#ffc900", "10:30", "11:30", "17:00", "19:00", 60);
+        DataSchedule uv = new DataSchedule(colorUV, 'g', "#886aea", "10:30", "11:30", "18:00", "20:00", 80);
+        DataSchedule moon = new DataSchedule(colorMoon, 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 0);
 
         result.add(red);
         result.add(green);
@@ -73,8 +83,8 @@ public class DefaultData {
         return sch;
     }
 
-    public Map<String, List<DataSchedule>> getScheduleFavorites() {
-        Map<String, List<DataSchedule>> resultList = new HashMap<>();
+    public List<Schedule> getScheduleFavorites() {
+        List<Schedule> resultList = new ArrayList<>();
         List<DataSchedule> item = new ArrayList<>();
         DataSchedule red = new DataSchedule("Red", 'a', "#ef473a", "10:00", "12:00", "17:00", "18:00", 30);
         DataSchedule green = new DataSchedule("Green", 'b', "#33cd5f", "10:30", "12:00", "17:00", "18:00", 30);
@@ -92,7 +102,10 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        resultList.put("SPS Sert Mercan", item);
+        Schedule schedule=new Schedule();
+        schedule.setName("SPS Sert Mercan");
+        schedule.setData(item);
+        resultList.add(schedule);
         //Marine
         item = new ArrayList<>();
         red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 20);
@@ -111,7 +124,10 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        resultList.put("Marine", item);
+        Schedule schedule1=new Schedule();
+        schedule1.setName("Marine");
+        schedule1.setData(item);
+        resultList.add(schedule1);
 
         //LPS+SPS Mix
         item = new ArrayList<>();
@@ -131,7 +147,11 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        resultList.put("LPS+SPS Mix", item);
+
+        Schedule schedule2=new Schedule();
+        schedule2.setName("LPS+SPS Mix");
+        schedule2.setData(item);
+        resultList.add(schedule2);
 
         //Erkan Akvaryum
         item = new ArrayList<>();
@@ -151,8 +171,10 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        resultList.put("Erkan Akvaryum", item);
-
+        Schedule schedule3=new Schedule();
+        schedule3.setName("Erkan Akvaryum");
+        schedule3.setData(item);
+        resultList.add(schedule3);
         return resultList;
     }
 }

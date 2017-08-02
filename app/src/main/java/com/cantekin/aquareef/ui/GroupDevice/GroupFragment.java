@@ -174,7 +174,8 @@ public class GroupFragment extends _baseGroupFragment {
 
     private void updateAllDevice() {
         MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getAct().allGroup);
-        groupAdapter.notifyDataSetChanged();
+        if (groupAdapter != null)
+            groupAdapter.notifyDataSetChanged();
     }
 
 

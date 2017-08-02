@@ -47,37 +47,37 @@
 
             <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                 android:id="@+id/toggle_schedule_one"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:textSize="13sp"
+                android:textSize="10sp"
                 custom:activeBgColor="@android:color/darker_gray"
                 custom:activeTextColor="@android:color/black"
                 custom:cornerRadius="7dp"
                 custom:inactiveBgColor="@android:color/darker_gray"
                 custom:inactiveTextColor="@android:color/black"
                 custom:separatorColor="@android:color/black"
-                custom:toggleWidth="92dp" />
+                custom:toggleWidth="80dp" />
 
             <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                 android:id="@+id/toggle_schedule_two"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="30dp"
-                android:textSize="13sp"
+                android:textSize="10sp"
                 custom:activeBgColor="@android:color/darker_gray"
                 custom:activeTextColor="@android:color/black"
                 custom:cornerRadius="7dp"
                 custom:inactiveBgColor="@android:color/darker_gray"
                 custom:inactiveTextColor="@android:color/black"
                 custom:separatorColor="@android:color/black"
-                custom:toggleWidth="92dp" />
+                custom:toggleWidth="80dp" />
         </LinearLayout>
 
     </ScrollView>
@@ -110,7 +110,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/schedule_btnAll"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:background="@android:drawable/ic_menu_send" />

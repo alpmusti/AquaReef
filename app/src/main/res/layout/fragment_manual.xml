@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    android:padding="15dp"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".ui.Fragment.ManualFragment">
 
     <ScrollView
@@ -58,6 +58,7 @@
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:weightSum="100">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -68,7 +69,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="2"
                         android:text="Kırmızı(660nm)"
                         android:textColor="@android:color/holo_red_dark"
                         android:theme="@style/leftLabelThema" />
@@ -80,7 +81,8 @@
                         android:layout_weight="3"
                         android:max="100"
                         android:tag="red"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 
@@ -149,7 +151,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 
@@ -215,7 +218,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 
@@ -281,7 +285,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 
@@ -347,7 +352,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 
@@ -414,7 +420,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 
@@ -480,7 +487,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:theme="@style/seekBarThema" />
+                        android:progressDrawable="@drawable/seek_bar_progress"
+                        android:thumb="@drawable/seek_bar_thumb" />
 
                 </LinearLayout>
 

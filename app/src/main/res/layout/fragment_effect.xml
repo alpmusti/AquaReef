@@ -30,7 +30,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:tag="i"
+                    android:tag="iiiiiiiiiiiiiii"
                     custom:srcCompat="@mipmap/daylight" />
 
                 <ImageView
@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:tag="j"
+                    android:tag="jjjjjjjjjjjjjjj"
                     custom:srcCompat="@mipmap/flash" />
 
             </TableRow>
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:tag="k"
+                    android:tag="kkkkkkkkkkkkkkk"
                     custom:srcCompat="@mipmap/cloud" />
 
                 <ImageView
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:tag="l"
+                    android:tag="lllllllllllllll"
                     custom:srcCompat="@mipmap/disco" />
 
             </TableRow>

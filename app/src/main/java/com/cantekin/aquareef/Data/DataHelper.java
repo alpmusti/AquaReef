@@ -14,4 +14,12 @@ public class DataHelper {
     public static byte ByteTranslateSecond(int value) {
         return (byte) ((value * constValue) % 256);
     }
+
+    public static byte ByteTranslateFirstNoCost(int value) {
+        return (byte) (value / 256);
+    }
+
+    public static byte ByteTranslateSecondNoCost(int value) {
+        return (byte) (value % 256);
+    }
 }

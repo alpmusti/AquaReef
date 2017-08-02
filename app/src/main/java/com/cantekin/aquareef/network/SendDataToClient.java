@@ -44,18 +44,19 @@ public class SendDataToClient {
     private void preperToProp() {
         devices = new ArrayList<>();
         Log.i("preperToProp", "ss");
-        for (GrupDevice group : activeGroup) {
-            Log.i("preperToProp active", group.getName());
-            Log.i("preperToProp active", "Count" + group.getDevices().size());
-            for (String device : group.getDevices()) {
-                NetworkDevice d = new NetworkDevice();
-                d.setIP(device);
-                d.setPort(port);
-                devices.add(d);
-                Log.i("preperToProp devices", device);
+        if (activeGroup != null)
+            for (GrupDevice group : activeGroup) {
+                Log.i("preperToProp active", group.getName());
+                Log.i("preperToProp active", "Count" + group.getDevices().size());
+                for (String device : group.getDevices()) {
+                    NetworkDevice d = new NetworkDevice();
+                    d.setIP(device);
+                    d.setPort(port);
+                    devices.add(d);
+                    Log.i("preperToProp devices", device);
 
+                }
             }
-        }
     }
 
 

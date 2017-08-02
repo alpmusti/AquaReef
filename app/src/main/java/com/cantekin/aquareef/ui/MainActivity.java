@@ -27,6 +27,7 @@ import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
 import com.cantekin.aquareef.ui.Fragment.ScheduleFragment;
+import com.cantekin.aquareef.ui.Fragment.SettingsFragment;
 import com.cantekin.aquareef.ui.Fragment.ShareFragment;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
 import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity
             replaceFragment(new FavoritFragment());
 
         } else if (id == R.id.fragment_settings) {
-
+            replaceFragment(new SettingsFragment());
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -153,16 +154,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("onActivityResult",RESULT_LOAD_IMAGE+"");
-        Log.i("onActivityResult",requestCode+"");
+        Log.i("onActivityResult", RESULT_LOAD_IMAGE + "");
+        Log.i("onActivityResult", requestCode + "");
 
-       // if (requestCode == RESULT_LOAD_IMAGE ) {
-            Log.i("onActivityResult","fds");
-
+        // if (requestCode == RESULT_LOAD_IMAGE ) {
+        Log.i("onActivityResult", "fds");
+        if (data != null) {
             Uri selectedImage = data.getData();
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
-            ((ShareFragment)currentFragment).setImage(selectedImage);
-      //  }
+            ((ShareFragment) currentFragment).setImage(selectedImage);
+        }
+        //  }
     }
 
 }
