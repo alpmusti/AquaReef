@@ -135,7 +135,7 @@ public class DeviceFragment extends _baseGroupFragment {
         builder.show();
     }
 
-    public void deleteIP(String ip) {
+    public void deleteItem(String ip) {
         groupDevice.removeDevice(ip);
         updateAllDevice();
     }

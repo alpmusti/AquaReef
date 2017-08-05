@@ -13,6 +13,7 @@ import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.GroupDevice.InsertedDeviceListAdapter;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,6 +27,8 @@ import java.util.Map;
 
 public class FavoritFragment extends _baseFragment {
 
+
+    private Map<String, Data> favorites;
 
     public FavoritFragment() {
         // Required empty public constructor
@@ -59,7 +62,7 @@ public class FavoritFragment extends _baseFragment {
         Gson gson = new Gson();
         Type type = new TypeToken<Map<String, Data>>() {
         }.getType();
-        Map<String, Data> favorites = new HashMap<>();
+        favorites = new HashMap<>();
         if (fav != null)
             favorites = gson.fromJson(fav, type);
         setList(favorites, R.id.fvrFavoritLists);
@@ -72,7 +75,8 @@ public class FavoritFragment extends _baseFragment {
             defaultList.add(entry.getKey());
         }
         ListView defaultListView = (ListView) getView().findViewById(listView);
-        ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
+        InsertedDeviceListAdapter dfltAdapter = new InsertedDeviceListAdapter(getActivity(), R.layout.row_register_device, defaultList, this);
+      //  ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
         defaultListView.setAdapter(dfltAdapter);
         defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,6 +87,12 @@ public class FavoritFragment extends _baseFragment {
         });
     }
 
+    @Override
+    public void deleteItem(String item) {
+        favorites.remove(item);
+        MyPreference.getPreference(getContext()).setData(MyPreference.FAVORITES, favorites);
+        setList(favorites, R.id.fvrFavoritLists);
+    }
 
     public void sendFavorites(byte[] data) {
         ((MainActivity) getActivity()).sendDataDevice(data);

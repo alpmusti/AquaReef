@@ -20,9 +20,9 @@ public abstract class _baseFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
 
-
+    public void deleteItem(String ip) {
+    }
 }

@@ -41,6 +41,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     apt 'com.google.dagger:dagger-compiler:2.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.2@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'jp.wasabeef:recyclerview-animators:1.0.3@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'

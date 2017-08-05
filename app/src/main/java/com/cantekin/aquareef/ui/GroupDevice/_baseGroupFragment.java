@@ -5,8 +5,9 @@ import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.Fragment._baseFragment;
 
-public abstract class _baseGroupFragment extends Fragment {
+public abstract class _baseGroupFragment extends _baseFragment {
 
 
     @Override

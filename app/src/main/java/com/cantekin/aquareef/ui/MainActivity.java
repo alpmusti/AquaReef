@@ -1,11 +1,8 @@
 package com.cantekin.aquareef.ui;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,12 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.SendDataToClient;
-import com.cantekin.aquareef.ui.Fragment.AquaLinkFragment;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
@@ -31,10 +26,6 @@ import com.cantekin.aquareef.ui.Fragment.SettingsFragment;
 import com.cantekin.aquareef.ui.Fragment.ShareFragment;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
 import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
-import com.cantekin.aquareef.ui.GroupDevice.GroupFragment;
-
-import java.io.FileDescriptor;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class GroupFragment extends _baseGroupFragment {
 
     private ListView lstGrups;
-    private DeviceListAdapter groupAdapter;
+    private ArraySwipeAdapterSample groupAdapter;
 
     public GroupFragment() {
         // Required empty public constructor
@@ -96,8 +96,11 @@ public class GroupFragment extends _baseGroupFragment {
     }
 
     private void loadList() {
+        ArraySwipeAdapterSample sd=new ArraySwipeAdapterSample(getAct(), R.layout.row_device, getAct().allGroup, this);
         lstGrups = (ListView) getActivity().findViewById(R.id.lst_grups);
-        groupAdapter = new DeviceListAdapter(getAct(), R.layout.row_device, getAct().allGroup, this);
+//        groupAdapter = new DeviceListAdapter(getAct(), R.layout.row_device, getAct().allGroup, this);
+        groupAdapter = new ArraySwipeAdapterSample(getAct(), R.layout.row_device, getAct().allGroup, this);
+
         lstGrups.setAdapter(groupAdapter);
     }
 
