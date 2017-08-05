@@ -18,15 +18,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:gravity="end"
+                android:weightSum="100">
 
                 <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                     android:id="@+id/toggle_manual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     custom:activeBgColor="@android:color/darker_gray"
                     custom:activeTextColor="@android:color/black"
                     custom:cornerRadius="5dp"
@@ -35,23 +38,25 @@
                     custom:separatorColor="@android:color/darker_gray"
                     custom:textToggleLeft="Manual"
                     custom:textToggleRight="Auto"
-                    custom:toggleWidth="82dp"
-                    tools:layout_editor_absoluteX="118dp"
-                    tools:layout_editor_absoluteY="0dp">
+                    custom:toggleWidth="82dp">
 
                 </belka.us.androidtoggleswitch.widgets.ToggleSwitch>
 
+                <ImageButton
+                    android:id="@+id/btnAddFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:background="@mipmap/aqua_favorites"
+                    android:text="Button" />
 
-            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btnAddFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="@android:drawable/btn_star_big_off"
-                android:text="Button" />
+            </RelativeLayout>
+
             <!--kırmızı-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,14 +67,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
                         android:text="Kırmızı(660nm)"
                         android:textColor="@android:color/holo_red_dark"
                         android:theme="@style/leftLabelThema" />
@@ -78,7 +82,6 @@
                         android:id="@+id/seekBarRed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
                         android:max="100"
                         android:progressDrawable="@drawable/seek_bar_progress"
                         android:tag="red"
@@ -87,9 +90,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -97,7 +99,6 @@
                         android:id="@+id/redValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
@@ -135,7 +136,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -157,9 +158,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -202,7 +202,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -224,9 +224,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -269,7 +268,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -291,9 +290,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -336,7 +334,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -358,9 +356,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -404,7 +401,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -426,9 +423,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -471,7 +467,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -493,9 +489,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
                     android:gravity="center"
                     android:orientation="vertical">
 

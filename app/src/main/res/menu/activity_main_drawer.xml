@@ -4,24 +4,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/fragment_manual"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/aqua_manuel"
             android:title="Manual" />
         <item
             android:id="@+id/fragment_schedule"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/aqua_schedule"
             android:title="Schedule" />
         <item
             android:id="@+id/fragment_effects"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@mipmap/aqua_effects"
             android:title="Effects" />
         <item
             android:id="@+id/fragment_fav"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/aqua_favorites"
             android:title="Favorites" />
-
+        <item
+            android:id="@+id/fragment_aqualink"
+            android:icon="@mipmap/aqualink"
+            android:title="AquaLink" />
         <item
             android:id="@+id/fragment_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/aqua_settings"
             android:title="Settings" />
 
     </group>

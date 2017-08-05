@@ -189,7 +189,7 @@ public class ManualFragment extends _baseFragment {
         final String[] m_Text = {""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Favori");
-        builder.setIcon(R.mipmap.cloud);
+        builder.setIcon(R.mipmap.aqua_favorites);
 
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setPadding(70, 30, 50, 0);
