@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Aqua Reef</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="templates">Templates</string>
+    <string name="templates">Şablonlar</string>
     <string name="kaydet">Kaydet</string>
     <string name="g_nder">Gönder</string>
     <string name="ba_lang_zaman">Başlangıç Zamanı</string>
@@ -11,17 +15,17 @@
     <string name="parlaklik">Parlaklık</string>
     <string name="eski">-</string>
     <string name="arti">+</string>
-    <string name="royalBlue">Royal Blue</string>
-    <string name="mavi">Blue</string>
+    <string name="royalBlue">Koyu Mavi</string>
+    <string name="mavi">Mavi</string>
     <string name="ay_dongusu">Ay Döngüsü</string>
     <string name="iptal">İptal</string>
     <string name="tamam">Tamam</string>
     <string name="gonder">Gönder</string>
-    <string name="varsayilan">Default</string>
+    <string name="varsayilan">Varsayılan</string>
     <string name="kaydedilenler">Kaydedilenler</string>
     <string name="paylas">Paylaş</string>
     <string name="user_nick">Kullanıcı Adi</string>
-    <string name="user_not">User Not</string>
+    <string name="user_not">Kullanıcı Notu</string>
     <string name="cihazlar">Cihazlar</string>
     <string name="agdakiler">Ağdakiler</string>
     <string name="gun_efekti">Gün Efekti</string>
@@ -29,8 +33,8 @@
     <string name="bulut_efekti">Bulut Efekti</string>
     <string name="disko_efekti">Disko Efekti</string>
     <string name="favorites">Favorites</string>
-    <string name="manual">Manual</string>
-    <string name="auto">Auto</string>
+    <string name="manual">El ile</string>
+    <string name="auto">Otomatik</string>
     <string name="k_rm_z_660nm">Kırmızı(660nm)</string>
     <string name="ye_il_530nm">Yeşil(530nm)</string>
     <string name="beyaz">Beyaz</string>
@@ -44,6 +48,10 @@
     <string name="ayarlar">Ayarlar</string>
     <string name="aquareef_sat_n_al">AquaReef Satın Al</string>
     <string name="time">time</string>
+    <string name="farkli_kaydet">Farklı Kaydet</string>
+    <string name="default_yap">Varsayılan Yap</string>
+    <string name="secenekler">Seçenekler</string>
+    <string name="lutfen_isim_girin">Lütfen bir isim giriniz.</string>
     <string name="acik">Açık</string>
     <string name="kapali">Kapalı</string>
     <string name="emin_misiniz">Emin misiniz?</string>
@@ -60,8 +68,10 @@
     <string name="kirmizi">Kırmızı</string>
     <string name="yesil">Yeşil</string>
     <string name="r_blue">K.Mavi</string>
+    <string name="moon">Ay</string>
     <string name="saat_tipi">sa</string>
     <string name="yuklendi">Yüklendi</string>
     <string name="islem_basarisiz">İşlem Başarısız</string>
     <string name="islem_basarili">İşlem Başarılı</string>
+    <string name="aqulink">Aqualink</string>
 </resources>
