@@ -57,7 +57,7 @@ public class DeviceFragment extends _baseGroupFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Akvaryumlarım");
+        setActionBarText(getString(R.string.akvaryumlarim));
         View view = inflater.inflate(R.layout.fragment_device_list, container, false);
         if (getArguments() != null) {
             groupDevice = (GrupDevice) getArguments().getSerializable(ARG_PARAM1);
@@ -97,7 +97,7 @@ public class DeviceFragment extends _baseGroupFragment {
     public void addDevice() {
         final String[] m_Text = {""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Akvaryum Ekle");
+        builder.setTitle(getString(R.string.akvaryum_ekle));
         builder.setIcon(R.mipmap.cloud);
 
         LinearLayout layout = new LinearLayout(getContext());
@@ -105,20 +105,20 @@ public class DeviceFragment extends _baseGroupFragment {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText input = new EditText(getContext());
-        input.setHint("IP");
+        input.setHint(getString(R.string.ip));
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         IpHelper ipHelper = new IpHelper(getContext());
         input.setText(ipHelper.getIPstart());
         layout.addView(input);
         builder.setView(layout);
 
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.tamam), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
 
                 if (groupDevice.getDevices().contains(m_Text[0])) {
-                    Toast.makeText(getContext(), "Bu isimde bir grup mevcut", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.bu_isimde_grup_mevcut), Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     groupDevice.addDevice(m_Text[0]);
@@ -126,7 +126,7 @@ public class DeviceFragment extends _baseGroupFragment {
                 }
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.iptal), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

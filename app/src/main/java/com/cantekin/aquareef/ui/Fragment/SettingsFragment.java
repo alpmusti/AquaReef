@@ -51,7 +51,7 @@ public class SettingsFragment extends _baseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Settings");
+        setActionBarText(getString(R.string.ayarlar));
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
@@ -146,13 +146,13 @@ public class SettingsFragment extends _baseFragment {
     private void initToggle() {
         toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.settings_toggle);
         ArrayList<String> labels = new ArrayList<>();
-        labels.add("1 sa");
-        labels.add("2 sa");
-        labels.add("3 sa");
-        labels.add("4 sa");
-        labels.add("5 sa");
-        labels.add("6 sa");
-        labels.add("7 sa");
+        labels.add("1 "+getString(R.string.saat_tipi));
+        labels.add("2 "+getString(R.string.saat_tipi));
+        labels.add("3 "+getString(R.string.saat_tipi));
+        labels.add("4 "+getString(R.string.saat_tipi));
+        labels.add("5 "+getString(R.string.saat_tipi));
+        labels.add("6 "+getString(R.string.saat_tipi));
+        labels.add("7 "+getString(R.string.saat_tipi));
         toggleSwitchOne.setLabels(labels);
         toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
             @Override

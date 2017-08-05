@@ -86,16 +86,16 @@ public class ArraySwipeAdapterSample extends ArraySwipeAdapter {
     public void removeQuation(final GrupDevice device) {
         final String[] m_Text = {"", ""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Emin misiniz?");
+        builder.setMessage(fragment.getString(R.string.emin_misiniz));
 
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(fragment.getString(R.string.tamam), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 fragment.removeGrup(device);
 
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(fragment.getString(R.string.iptal), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

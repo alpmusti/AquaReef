@@ -73,7 +73,7 @@ public class TemplateListActivity extends AppCompatActivity {
 
     private void questionsDialog(final String value) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Emin misiniz?");
+        builder.setTitle(getString(R.string.emin_misiniz));
         Schedule scheduleData = null;
         for (Schedule item : favorites)
             if (item.getName().equals(value))
@@ -84,7 +84,7 @@ public class TemplateListActivity extends AppCompatActivity {
                     scheduleData = item;
         Log.d("questionsDialog", value);
         final Schedule finalScheduleData = scheduleData;
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.tamam), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -92,7 +92,7 @@ public class TemplateListActivity extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.iptal), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

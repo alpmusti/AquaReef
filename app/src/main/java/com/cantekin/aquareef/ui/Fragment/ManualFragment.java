@@ -188,14 +188,14 @@ public class ManualFragment extends _baseFragment {
     public void addFavorit() {
         final String[] m_Text = {""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Favori");
+        builder.setTitle(getString(R.string.favori));
         builder.setIcon(R.mipmap.aqua_favorites);
 
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setPadding(70, 30, 50, 0);
         layout.setOrientation(LinearLayout.VERTICAL);
         TextView txt = new TextView(getActivity());
-        txt.setText("Lütfen favori ayarınıza bir isim verin");
+        txt.setText(getString(R.string.favori_kayit));
         layout.addView(txt);
 
         final EditText input = new EditText(getActivity());
@@ -204,7 +204,7 @@ public class ManualFragment extends _baseFragment {
         builder.setView(layout);
 
 
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.tamam), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
@@ -219,7 +219,7 @@ public class ManualFragment extends _baseFragment {
                 MyPreference.getPreference(getContext()).setData(MyPreference.FAVORITES, favorites);
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.iptal), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

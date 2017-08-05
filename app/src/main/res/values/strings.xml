@@ -48,5 +48,31 @@
     <string name="ayarlar">Ayarlar</string>
     <string name="aquareef_sat_n_al">AquaReef Satın Al</string>
     <string name="time">time</string>
+    <string name="farkli_kaydet">Farklı Kaydet</string>
+    <string name="default_yap">Default Yap</string>
+    <string name="secenekler">Seçenekler</string>
+    <string name="lutfen_isim_girin">Lütfen bir isim giriniz.</string>
+    <string name="acik">Açık</string>
+    <string name="kapali">Kapalı</string>
+    <string name="emin_misiniz">Emin misiniz?</string>
+    <string name="akvaryumlarim">Akvaryumlarım</string>
+    <string name="akvaryum_ekle">Akvaryum Ekle</string>
+    <string name="ip">IP</string>
+    <string name="bu_isimde_grup_mevcut">Bu isimde bir grup mevcut</string>
+    <string name="ad">Ad</string>
+    <string name="acikilama">Açıklama</string>
+    <string name="efektler">Efektler</string>
+    <string name="favori">Favori</string>
+    <string name="favori_kayit">Lütfen favori ayarınıza bir isim verin</string>
+    <string name="schedule">Gün Similasyonu</string>
+    <string name="kirmizi">Kırmızı</string>
+    <string name="yesil">Yeşil</string>
+    <string name="r_blue">K.Mavi</string>
+    <string name="moon">Ay</string>
+    <string name="saat_tipi">sa</string>
+    <string name="yuklendi">Yüklendi</string>
+    <string name="islem_basarisiz">İşlem Başarısız</string>
+    <string name="islem_basarili">İşlem Başarılı</string>
+
 
 </resources>

@@ -42,7 +42,7 @@ public class FavoritFragment extends _baseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Favorites");
+        setActionBarText(getString(R.string.favorites));
         View view = inflater.inflate(R.layout.fragment_favorit, container, false);
         return view;
     }

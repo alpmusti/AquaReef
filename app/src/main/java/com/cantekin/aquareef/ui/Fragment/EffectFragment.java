@@ -22,7 +22,7 @@ public class EffectFragment extends _baseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Effect");
+        setActionBarText(getString(R.string.efektler));
         View view = inflater.inflate(R.layout.fragment_effect, container, false);
         return view;
     }

@@ -5,27 +5,27 @@
         <item
             android:id="@+id/fragment_manual"
             android:icon="@mipmap/aqua_manuel"
-            android:title="Manual" />
+            android:title="@string/manual" />
         <item
             android:id="@+id/fragment_schedule"
             android:icon="@mipmap/aqua_schedule"
-            android:title="Schedule" />
+            android:title="@string/schedule" />
         <item
             android:id="@+id/fragment_effects"
             android:icon="@mipmap/aqua_effects"
-            android:title="Effects" />
+            android:title="@string/efektler" />
         <item
             android:id="@+id/fragment_fav"
             android:icon="@mipmap/aqua_favorites"
-            android:title="Favorites" />
+            android:title="@string/favorites" />
         <item
             android:id="@+id/fragment_aqualink"
             android:icon="@mipmap/aqualink"
-            android:title="AquaLink" />
+            android:title="@string/aqulink" />
         <item
             android:id="@+id/fragment_settings"
             android:icon="@mipmap/aqua_settings"
-            android:title="Settings" />
+            android:title="@string/ayarlar" />
 
     </group>
 

@@ -38,7 +38,7 @@ public class GroupFragment extends _baseGroupFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Akvaryumlarım");
+        setActionBarText(getString(R.string.akvaryumlarim));
         View view = inflater.inflate(R.layout.fragment_group, container, false);
         return view;
     }
@@ -107,7 +107,7 @@ public class GroupFragment extends _baseGroupFragment {
     public void addGrup() {
         final String[] m_Text = {"", ""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Akvaryum Ekle");
+        builder.setTitle(getString(R.string.akvaryum_ekle));
         builder.setIcon(R.mipmap.cloud);
 
         LinearLayout layout = new LinearLayout(getContext());
@@ -115,17 +115,17 @@ public class GroupFragment extends _baseGroupFragment {
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText input = new EditText(getContext());
-        input.setHint("Ad");
+        input.setHint(getString(R.string.ad));
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         layout.addView(input);
 
         final EditText inputDesc = new EditText(getContext());
-        inputDesc.setHint("Açıklama");
+        inputDesc.setHint(getString(R.string.acikilama));
         inputDesc.setInputType(InputType.TYPE_CLASS_TEXT);
         layout.addView(inputDesc);
         builder.setView(layout);
 
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.tamam), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
@@ -134,7 +134,7 @@ public class GroupFragment extends _baseGroupFragment {
                 device.setName(m_Text[0]);
                 device.setDescription(m_Text[1]);
                 if (getAct().isContainsItem(getAct().allGroup, device) != -1) {
-                    Toast.makeText(getContext(), "Bu isimde bir grup mevcut", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.bu_isimde_grup_mevcut), Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     getAct().allGroup.add(device);
@@ -143,7 +143,7 @@ public class GroupFragment extends _baseGroupFragment {
                 }
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.iptal), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

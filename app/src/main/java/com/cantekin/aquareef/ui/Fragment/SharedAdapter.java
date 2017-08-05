@@ -107,7 +107,7 @@ public class SharedAdapter extends ArrayAdapter<Posts> {
                 public void onClick(View v) {
                     Schedule sch = convertSchedule(object);
                     MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVESCHEDULE, sch);
-                    Toast.makeText(getContext(), "Yüklendi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),getContext().getString(R.string.yuklendi), Toast.LENGTH_SHORT).show();
                 }
             });
             likeBtn.setOnClickListener(new View.OnClickListener() {

@@ -53,7 +53,7 @@ public class GroupActivity extends ActionBarActivity {
 
     private void initToolBar() {
         TextView title = (TextView) findViewById(R.id.deviceTitle);
-        title.setText("Aquariums");
+        title.setText(getString(R.string.akvaryumlarim));
     }
 
     /*

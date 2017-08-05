@@ -51,7 +51,7 @@ public class ScheduleFragment extends _baseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Schedule");
+        setActionBarText(getString(R.string.schedule));
         return inflater.inflate(R.layout.fragment_schedule, container, false);
     }
 
@@ -235,10 +235,10 @@ public class ScheduleFragment extends _baseFragment {
     private void initToggle() {
         toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_one);
         ArrayList<String> labels = new ArrayList<>();
-        labels.add("Kırmızı");
-        labels.add("Yeşil");
-        labels.add("K.Mavi");
-        labels.add("Mavi");
+        labels.add(getString(R.string.kirmizi));
+        labels.add(getString(R.string.yesil));
+        labels.add(getString(R.string.r_blue));
+        labels.add(getString(R.string.mavi));
         toggleSwitchOne.setLabels(labels);
         toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
 
@@ -267,10 +267,10 @@ public class ScheduleFragment extends _baseFragment {
 
         toggleSwitchTwo = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_two);
         labels = new ArrayList<>();
-        labels.add("Beyaz");
-        labels.add("Gün Işığı");
-        labels.add("UV");
-        labels.add("Ay");
+        labels.add(getString(R.string.beyaz));
+        labels.add(getString(R.string.gunisigi));
+        labels.add(getString(R.string.uv));
+        labels.add(getString(R.string.moon));
         toggleSwitchTwo.setLabels(labels);
 
         toggleSwitchTwo.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {

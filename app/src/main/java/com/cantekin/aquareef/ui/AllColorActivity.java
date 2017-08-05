@@ -94,9 +94,9 @@ public class AllColorActivity extends AppCompatActivity {
     }
 
     private void saveDialog() {
-        String[] quastion = new String[]{"Kaydet", "Farklı Kaydet", "Default Yap"};
+        String[] quastion = new String[]{getString(R.string.kaydet), getString(R.string.farkli_kaydet), getString(R.string.default_yap)};
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
-        builderSingle.setTitle("Seçenekler");
+        builderSingle.setTitle(getString(R.string.secenekler));
         builderSingle.setItems(quastion, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int position) {
                 if (position == 1) {
@@ -111,7 +111,7 @@ public class AllColorActivity extends AppCompatActivity {
     private void saveAs() {
         final String[] m_Text = {""};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Lütfen bir isim giriniz.");
+        builder.setTitle(getString(R.string.lutfen_isim_girin));
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -119,7 +119,7 @@ public class AllColorActivity extends AppCompatActivity {
         builder.setView(input);
 
 
-        builder.setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.tamam), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
@@ -136,7 +136,7 @@ public class AllColorActivity extends AppCompatActivity {
                 MyPreference.getPreference(getApplicationContext()).setData(MyPreference.FAVORITESCHEDULE, favorites);
             }
         });
-        builder.setNegativeButton("İptal", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.iptal), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -167,14 +167,14 @@ public class AllColorActivity extends AppCompatActivity {
         mainRow.addView(preperToItemRow(item.getLevel() + "", R.mipmap.icon_level));
         if (item.getCode() == 'h') {
             if (item.getBlue() == 0)
-                mainRow.addView(preperToItemRow("Royal Blue", R.mipmap.icon_blue));
+                mainRow.addView(preperToItemRow(getString(R.string.royalBlue), R.mipmap.icon_blue));
             else
-                mainRow.addView(preperToItemRow("Blue", R.mipmap.icon_blue));
+                mainRow.addView(preperToItemRow(getString(R.string.mavi), R.mipmap.icon_blue));
 
             if (item.isMoon())
-                mainRow.addView(preperToItemRow("Açık", R.mipmap.icon_moon));
+                mainRow.addView(preperToItemRow(getString(R.string.acik), R.mipmap.icon_moon));
             else
-                mainRow.addView(preperToItemRow("Kapalı", R.mipmap.icon_moon));
+                mainRow.addView(preperToItemRow(getString(R.string.kapali), R.mipmap.icon_moon));
 
         }
         mainLayout.addView(mainRow);

@@ -68,7 +68,7 @@ public class ShareFragment extends _baseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setActionBarText("Templates");
+        setActionBarText(getString(R.string.templates));
         View view = inflater.inflate(R.layout.fragment_shared, container, false);
         return view;
     }
@@ -183,7 +183,7 @@ public class ShareFragment extends _baseFragment {
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
                         // ...
-                        Toast.makeText(getContext(), "İşlem Başarısız", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.islem_basarisiz), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -197,7 +197,7 @@ public class ShareFragment extends _baseFragment {
         String ID = mDatabase.push().getKey();
         Log.i("ID", ID);
         mDatabase.child("posts").child(ID).setValue(ss);
-        Toast.makeText(getContext(), "İşlem Başarılı", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),getString(R.string.islem_basarili), Toast.LENGTH_SHORT).show();
 
     }
 
