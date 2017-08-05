@@ -36,8 +36,8 @@
                     custom:inactiveBgColor="@android:color/black"
                     custom:inactiveTextColor="@android:color/white"
                     custom:separatorColor="@android:color/darker_gray"
-                    custom:textToggleLeft="Manual"
-                    custom:textToggleRight="Auto"
+                    custom:textToggleLeft="@string/manual"
+                    custom:textToggleRight="@string/auto"
                     custom:toggleWidth="82dp">
 
                 </belka.us.androidtoggleswitch.widgets.ToggleSwitch>
@@ -74,7 +74,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Kırmızı(660nm)"
+                        android:text="@string/k_rm_z_660nm"
                         android:textColor="@android:color/holo_red_dark"
                         android:theme="@style/leftLabelThema" />
 
@@ -99,7 +99,6 @@
                         android:id="@+id/redValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -117,8 +116,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
 
@@ -143,7 +142,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Yeşil(530nm)"
+                        android:text="@string/ye_il_530nm"
                         android:textColor="@android:color/holo_green_dark"
                         android:theme="@style/leftLabelThema" />
 
@@ -168,7 +167,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -185,8 +183,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -209,7 +207,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Royal Blue"
+                        android:text="@string/royalBlue"
                         android:textColor="@color/blue"
                         android:theme="@style/leftLabelThema" />
 
@@ -234,7 +232,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -251,8 +248,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -275,7 +272,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Mavi"
+                        android:text="@string/mavi"
                         android:textColor="@android:color/holo_blue_dark"
                         android:theme="@style/leftLabelThema" />
 
@@ -300,7 +297,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -317,8 +313,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -341,7 +337,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Beyaz"
+                        android:text="@string/beyaz"
                         android:textColor="@android:color/background_light"
                         android:theme="@style/leftLabelThema" />
 
@@ -366,7 +362,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -383,8 +378,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
 
@@ -408,7 +403,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Gün Işığı"
+                        android:text="@string/gunisigi"
                         android:textColor="@android:color/holo_orange_light"
                         android:theme="@style/leftLabelThema" />
 
@@ -433,7 +428,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -450,8 +444,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -474,7 +468,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="UV"
+                        android:text="@string/uv"
                         android:textColor="@color/colorAccent"
                         android:theme="@style/leftLabelThema" />
 
@@ -499,7 +493,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
@@ -517,8 +510,8 @@
                         custom:inactiveBgColor="@android:color/darker_gray"
                         custom:inactiveTextColor="@android:color/black"
                         custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="-"
-                        custom:textToggleRight="+"
+                        custom:textToggleLeft="@string/eski"
+                        custom:textToggleRight="@string/arti"
                         custom:toggleWidth="40dp" />
                 </LinearLayout>
 

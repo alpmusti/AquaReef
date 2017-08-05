@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Fragment.ManualFragment">
+    tools:context=".ui.Fragment.ScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +22,6 @@
                 android:id="@+id/schedule_txt_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Efsane Renkler"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -41,7 +39,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="20dp"
                 android:background="@android:color/holo_blue_dark"
-                android:text="Default"
+                android:text="@string/varsayilan"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
@@ -96,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Paylaşım"
+            android:text="@string/paylas"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
 
@@ -105,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cihazdan AL"
+            android:text="@string/cihazdan_al"
             android:textColor="@android:color/background_light"
             android:textStyle="bold" />
 

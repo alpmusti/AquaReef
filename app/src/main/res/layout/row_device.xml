@@ -15,14 +15,16 @@
         android:gravity="center"
         android:tag="Bottom3"
         android:weightSum="10">
+
         <ImageView
             android:id="@+id/row_btn_delete"
             android:layout_width="27dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_delete"/>
+            android:src="@android:drawable/ic_menu_delete" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -57,8 +58,7 @@
                 android:id="@+id/row_txt_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <ImageButton

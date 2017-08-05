@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="90"
-                android:text="Cihazlar"
+                android:text="@string/cihazlar"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Ağdakiler"
+            android:text="@string/agdakiler"
             android:textSize="18sp"
             android:textStyle="bold" />
 

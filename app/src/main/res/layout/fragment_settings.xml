@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Fragment.ManualFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".ui.Fragment.SettingsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +20,7 @@
             android:background="@color/gray_very_light"
             android:gravity="center_vertical|center_horizontal"
             android:paddingLeft="5dp"
-            android:text="Gün Similasyon Saati İleri Al"
+            android:text="@string/g_n_similasyon_saati_leri_al"
             android:textAlignment="textStart"
             android:textStyle="bold" />
 
@@ -31,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="Saat:"
+            android:text="@string/saat"
             android:textStyle="bold" />
 
         <belka.us.androidtoggleswitch.widgets.ToggleSwitch
@@ -65,14 +63,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Saat Bilgisi Gönder" />
+                android:text="@string/saat_bilgisi_g_nder" />
 
             <Button
                 android:id="@+id/settings_btn_clock"
                 android:layout_width="103dp"
                 android:layout_height="22dp"
                 android:background="@android:color/holo_blue_dark"
-                android:text="Gönder"
+                android:text="@string/gonder"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -84,7 +82,7 @@
             android:background="@color/gray_very_light"
             android:gravity="center_vertical|center_horizontal"
             android:paddingLeft="5dp"
-            android:text="Akvaryum Sistem Saatini Güncelle"
+            android:text="@string/akvaryum_sistem_saatini_g_ncelle"
             android:textAlignment="textStart"
             android:textStyle="bold" />
 
@@ -108,7 +106,7 @@
                 android:layout_width="103dp"
                 android:layout_height="22dp"
                 android:background="@android:color/holo_blue_dark"
-                android:text="Gönder"
+                android:text="@string/gonder"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -120,7 +118,7 @@
             android:background="@color/gray_very_light"
             android:gravity="center_vertical|center_horizontal"
             android:paddingLeft="5dp"
-            android:text="Ayarlar"
+            android:text="@string/ayarlar"
             android:textAlignment="textStart"
             android:textStyle="bold" />
 
@@ -129,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="AquaReef Satın Al"
+            android:text="@string/aquareef_sat_n_al"
             android:textStyle="bold" />
 
     </LinearLayout>

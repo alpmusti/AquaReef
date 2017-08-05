@@ -1,11 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".ui.Fragment.ManualFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,12 +12,11 @@
         android:gravity="clip_horizontal"
         android:orientation="vertical">
 
-
         <TextView
             android:id="@+id/schedule_txt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Paylaş"
+            android:text="@string/paylas"
             android:textAlignment="center"
             android:textStyle="bold" />
 
@@ -35,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="User Nick"
+            android:hint="@string/user_nick"
             android:inputType="textPersonName" />
 
         <EditText
@@ -43,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="User Not"
+            android:hint="@string/user_not"
             android:inputType="textPersonName" />
 
         <Button
@@ -51,9 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_blue_dark"
-            android:text="Shared"
+            android:text="@string/paylas"
             android:textColor="@android:color/white" />
-
     </LinearLayout>
 
 </FrameLayout>
