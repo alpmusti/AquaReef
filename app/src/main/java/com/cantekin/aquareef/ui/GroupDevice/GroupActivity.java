@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.network.IDataService;
+import com.cantekin.aquareef.network.NetworkDevice;
+import com.cantekin.aquareef.network.UdpDataService;
 
 import java.util.List;
 
@@ -44,6 +47,14 @@ public class GroupActivity extends ActionBarActivity {
 
     private void init() {
 
+    }
+
+    public void sendStrom(String IP) {
+        NetworkDevice d = new NetworkDevice();
+        d.setIP(IP);
+        d.setPort("8899");
+        IDataService dataService = new UdpDataService();
+        dataService.send(d, new String("jjjjjjjjjjjjjjj").getBytes());
     }
 
     public void tik(View v) {

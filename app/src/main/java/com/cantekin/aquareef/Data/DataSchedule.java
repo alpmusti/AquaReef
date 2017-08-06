@@ -1,5 +1,7 @@
 package com.cantekin.aquareef.Data;
 
+import android.util.Log;
+
 /**
  * Created by Cantekin on 19.7.2017.
  */
@@ -33,24 +35,47 @@ public class DataSchedule {
         else return stringToArrayBufferSchedule();
     }
 
+    public void setProperties(byte[] buffer) {
+        code = (char) buffer[0];
+        Log.d("setProperties", "code" + code);
+        start = DataHelper.convert(buffer[1], buffer[2]);
+        name = DefaultData.getNameForKey(code);
+        color = DefaultData.getColorForKey(code);
+        Log.d("setProperties", "color" + color);
+
+        if (code != 'h') {
+            up = DataHelper.convert(buffer[3], buffer[4]);
+            down = DataHelper.convert(buffer[5], buffer[6]);
+            stop = DataHelper.convert(buffer[7], buffer[8]);
+            level = buffer[10];
+
+        } else {
+            stop = DataHelper.convert(buffer[3], buffer[4]);
+            level = buffer[6];
+            blue = buffer[8];
+            moon = buffer[10] == 1;
+        }
+    }
 
     private byte[] stringToArrayBufferSchedule() {
         byte[] buffer = new byte[15];
         buffer[0] = (byte) code;
-        buffer[1] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(start.replace(":", "")));
-        buffer[2] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(start.replace(":", "")));
-        buffer[3] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(up.replace(":", "")));
-        buffer[4] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(up.replace(":", "")));
-        buffer[5] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(down.replace(":", "")));
-        buffer[6] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(down.replace(":", "")));
-        buffer[7] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(stop.replace(":", "")));
-        buffer[8] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(stop.replace(":", "")));
-        buffer[9] = 0;
-        buffer[10] = (byte) this.level;
-        buffer[11] = 0;
-        buffer[12] = 0;
-        buffer[13] = 0;
-        buffer[14] = 0;
+        if (code != 'h') {
+            buffer[1] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(start.replace(":", "")));
+            buffer[2] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(start.replace(":", "")));
+            buffer[3] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(up.replace(":", "")));
+            buffer[4] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(up.replace(":", "")));
+            buffer[5] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(down.replace(":", "")));
+            buffer[6] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(down.replace(":", "")));
+            buffer[7] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(stop.replace(":", "")));
+            buffer[8] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(stop.replace(":", "")));
+            buffer[9] = 0;
+            this.level = buffer[10];
+            buffer[11] = 0;
+            buffer[12] = 0;
+            buffer[13] = 0;
+            buffer[14] = 0;
+        }
         return buffer;
     }
 

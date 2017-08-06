@@ -48,6 +48,7 @@ public class NetworkDeviceListAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     fragment.groupDevice.addDevice(ip);
                     fragment.updateAllDevice();
+                    ((GroupActivity)getContext()).sendStrom(ip);
 
                 }
             });

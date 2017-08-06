@@ -1,10 +1,12 @@
 package com.cantekin.aquareef.network;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.Data.MyPreference;
+import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -62,26 +64,50 @@ public class SendDataToClient {
 
     public void send(final String data) {
         Log.i("SendDataToClient", " Message:" + data);
-
-        //   if (activeGroup == null)
         loadActiveDevices();
-        new Thread(new Runnable() {
-            public void run() {
-                dataService.send(devices, data);
-            }
-        }).start();
-
-
+        dataService.send(devices, data);
     }
 
     public void send(final byte[] data) {
         Log.i("SendDataToClient", " Message:" + data);
         //  if (activeGroup == null)
         loadActiveDevices();
-        new Thread(new Runnable() {
-            public void run() {
-                dataService.send(devices, data);
-            }
-        }).start();
+        dataService.send(devices, data);
     }
+
+    public void receive() {
+        Log.i("receive", " Message:");
+        //  if (activeGroup == null)
+        loadActiveDevices();
+        new BackgroundTask().execute((Void) null);
+    }
+
+    public class BackgroundTask extends AsyncTask<Void, Void, Void> {
+        byte[] data;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            data = dataService.receive(devices);
+            Log.e("cihazdan data al", data.toString());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            ((MainActivity) context).updateSchedulefromDevice(data);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+    }
+
 }

@@ -17,7 +17,6 @@ public class Ping {
 
     public static void doPing(String host) {
         try {
-            // TODO: Use ProcessBuilder ?
             Runtime.getRuntime().exec(String.format(CMD, host));
         } catch (Exception e) {
             Log.e(TAG, "Can't use native ping: " + e.getMessage());

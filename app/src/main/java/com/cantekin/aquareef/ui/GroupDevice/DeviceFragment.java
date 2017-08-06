@@ -1,6 +1,9 @@
 package com.cantekin.aquareef.ui.GroupDevice;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
@@ -21,16 +24,21 @@ import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.IpHelper;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DeviceFragment extends _baseGroupFragment {
     GrupDevice groupDevice;
@@ -89,7 +97,6 @@ public class DeviceFragment extends _baseGroupFragment {
         netwokAdapter = new NetworkDeviceListAdapter(getAct(), R.layout.row_network_device, networkDevices, this);
         networkList.setAdapter(netwokAdapter);
 
-
         getIpFromArpCache();
 
     }
@@ -146,13 +153,29 @@ public class DeviceFragment extends _baseGroupFragment {
     }
 
 
+    private final static String MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$";
+
     private void getIpFromArpCache() {
         BufferedReader br = null;
         char buffer[] = new char[65000];
+        String ips = "192.168.0.38";
         String currentLine;
         try {
-            br = new BufferedReader(new FileReader("/proc/net/arp"));
+            String ptrn = String.format(MAC_RE, ips.replace(".", "\\."));
+            Pattern pattern = Pattern.compile(ptrn);
+            br = new BufferedReader(new FileReader(new File("/proc/net/arp")),8*1024);
+            br.close();
+            Thread.sleep(1000);
+            br = new BufferedReader(new FileReader(new File("/proc/net/arp")),8*1024);
+            Matcher matcher;
             while ((currentLine = br.readLine()) != null) {
+                matcher = pattern.matcher(currentLine);
+                if (matcher.matches()) {
+                    //hw = matcher.group(1);
+                    Log.i("matcher", matcher.group(1));
+
+                    //break;
+                }
                 String[] splitted = currentLine.split(" +");
                 if (splitted != null && splitted.length >= 4) {
                     String ip = splitted[0];

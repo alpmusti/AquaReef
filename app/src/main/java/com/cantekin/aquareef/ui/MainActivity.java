@@ -1,7 +1,9 @@
 package com.cantekin.aquareef.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,12 +13,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.network.Ping;
 import com.cantekin.aquareef.network.SendDataToClient;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
@@ -39,6 +43,21 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initActivity();
         replaceFragment(new ManualFragment());
+        initNetwork();
+    }
+
+    private void initNetwork() {
+        //arp güncellensin diye yapıyoruz bu işlemi
+        @SuppressLint("WifiManagerLeak") WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        String IP = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+        final String subIP = IP.substring(0, IP.lastIndexOf("."));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 1; i < 255; i++)
+                    Ping.doPing(subIP + "." + i);
+            }
+        }).start();
     }
 
     @Override
@@ -54,6 +73,16 @@ public class MainActivity extends AppCompatActivity
 
     public void sendDataDevice(byte[] data) {
         clinetAdapter.send(data);
+    }
+
+    public void takeDevice() {
+        clinetAdapter.receive();
+    }
+
+    public void updateSchedulefromDevice(byte[] data) {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
+        if (currentFragment instanceof ScheduleFragment)
+            ((ScheduleFragment) currentFragment).updateScheduleFromDevice(data);
     }
 
     public void replaceFragment(_baseFragment fragment) {

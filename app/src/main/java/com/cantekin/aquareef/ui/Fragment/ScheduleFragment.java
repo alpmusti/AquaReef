@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,15 @@ public class ScheduleFragment extends _baseFragment {
                 loadDefault();
             }
         });
+
+
+        TextView txtTakeDevice = (TextView) getActivity().findViewById(R.id.schedule_txt_takedevice);
+        txtTakeDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).takeDevice();
+            }
+        });
         initToggle();
 
         loadSchedule();
@@ -106,7 +116,6 @@ public class ScheduleFragment extends _baseFragment {
             loadDefault();
         else {
             Gson gson = new Gson();
-            // loadDefault();
             scheduleData = gson.fromJson(data, Schedule.class);
         }
         txtTitle.setText(scheduleData.getName());
@@ -119,10 +128,29 @@ public class ScheduleFragment extends _baseFragment {
         loadChart();
     }
 
+    public void updateScheduleFromDevice(byte[] data) {
+        scheduleData = new Schedule();
+        scheduleData.setName(getString(R.string.cihazdan_gelen));
+        List<DataSchedule> dataSchedules = new ArrayList<>();
+        Log.i("cihazdan Gelen", "Toplam Uzunluk" + data.length);
+        for (int i = 0; i < data.length; i += 15) {
+            byte[] temp = new byte[15];
+            for (int t = 0; t < 15; t++)
+                temp[t] = data[i + t];
+            DataSchedule d = new DataSchedule();
+            d.setProperties(temp);
+            dataSchedules.add(d);
+        }
+        scheduleData.setData(dataSchedules);
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVESCHEDULE, scheduleData);
+        txtTitle.setText(scheduleData.getName());
+        loadChart();
+    }
+
     private void sendSchedule() {
-//        for (DataSchedule item : scheduleData.getData()) {
-//            ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
-//        }
+        for (DataSchedule item : scheduleData.getData()) {
+            // ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
+        }
     }
 
     private void loadChart() {

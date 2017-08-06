@@ -20,6 +20,15 @@ public class DefaultData {
     public static final String colorUV = "UV";
     public static final String colorMoon = "Moon";
 
+    public static final String colorRedC = "#ef473a";
+    public static final String colorGreenC = "#33cd5f";
+    public static final String colorRoyalC = "#11c1f3";
+    public static final String colorBlueC = "#387ef5";
+    public static final String colorWhiteC = "#b2b2b2";
+    public static final String colorDWhiteC = "#ffc900";
+    public static final String colorUVC = "#886aea";
+    public static final String colorMoonC = "#040404";
+
     public DefaultData() {
     }
 
@@ -58,18 +67,83 @@ public class DefaultData {
         return favorites;
     }
 
+    public static String getNameForKey(char key) {
+        String result = null;
+        switch (key) {
+            case 'a':
+                result = colorRed;
+                break;
+            case 'b':
+                result = colorGreen;
+                break;
+            case 'c':
+                result = colorRoyal;
+                break;
+            case 'd':
+                result = colorBlue;
+                break;
+            case 'e':
+                result = colorWhite;
+                break;
+            case 'f':
+                result = colorDWhite;
+                break;
+            case 'g':
+                result = colorUV;
+                break;
+            case 'h':
+                result = colorMoon;
+                break;
+        }
+        return result;
+    }
+
+    public static String getColorForKey(char key) {
+        String result = null;
+        switch (key) {
+            case 'a':
+                result = colorRedC;
+                break;
+            case 'b':
+                result = colorGreenC;
+                break;
+            case 'c':
+                result = colorRoyalC;
+                break;
+            case 'd':
+                result = colorBlueC;
+                break;
+            case 'e':
+                result = colorWhiteC;
+                break;
+            case 'f':
+                result = colorDWhiteC;
+                break;
+            case 'g':
+                result = colorUVC;
+                break;
+            case 'h':
+                result = colorMoonC;
+                break;
+            default:
+                result = colorBlue;
+                break;
+        }
+        return result;
+    }
+
     public Schedule getSchedule() {
         Schedule sch = new Schedule();
         sch.setName("Default");
         List<DataSchedule> result = new ArrayList<>();
-        DataSchedule red = new DataSchedule(colorRed, 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 50);
-        DataSchedule green = new DataSchedule(colorGreen, 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 40);
-        DataSchedule rBlue = new DataSchedule(colorRoyal, 'c', "#11c1f3", "09:00", "10:30", "20:30", "22:00", 100);
-        DataSchedule blue = new DataSchedule(colorBlue, 'd', "#387ef5", "09:30", "11:00", "20:00", "21:30", 100);
-        DataSchedule white = new DataSchedule(colorWhite, 'e', "#b2b2b2", "10:00", "11:00", "17:00", "19:00", 75);
-        DataSchedule dWhite = new DataSchedule(colorDWhite, 'f', "#ffc900", "10:30", "11:30", "17:00", "19:00", 60);
-        DataSchedule uv = new DataSchedule(colorUV, 'g', "#886aea", "10:30", "11:30", "18:00", "20:00", 80);
-        DataSchedule moon = new DataSchedule(colorMoon, 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 0);
+        DataSchedule red = new DataSchedule(colorRed, 'a', colorRedC, "11:00", "12:00", "17:00", "18:00", 50);
+        DataSchedule green = new DataSchedule(colorGreen, 'b', colorGreenC, "11:00", "12:00", "17:00", "18:00", 40);
+        DataSchedule rBlue = new DataSchedule(colorRoyal, 'c', colorRoyalC, "09:00", "10:30", "20:30", "22:00", 100);
+        DataSchedule blue = new DataSchedule(colorBlue, 'd', colorBlueC, "09:30", "11:00", "20:00", "21:30", 100);
+        DataSchedule white = new DataSchedule(colorWhite, 'e', colorWhiteC, "10:00", "11:00", "17:00", "19:00", 75);
+        DataSchedule dWhite = new DataSchedule(colorDWhite, 'f', colorDWhiteC, "10:30", "11:30", "17:00", "19:00", 60);
+        DataSchedule uv = new DataSchedule(colorUV, 'g', colorUVC, "10:30", "11:30", "18:00", "20:00", 80);
+        DataSchedule moon = new DataSchedule(colorMoon, 'h', colorMoonC, "01:00", "00:00", "00:00", "07:00", 0);
 
         result.add(red);
         result.add(green);
@@ -102,7 +176,7 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        Schedule schedule=new Schedule();
+        Schedule schedule = new Schedule();
         schedule.setName("SPS Sert Mercan");
         schedule.setData(item);
         resultList.add(schedule);
@@ -124,7 +198,7 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        Schedule schedule1=new Schedule();
+        Schedule schedule1 = new Schedule();
         schedule1.setName("Marine");
         schedule1.setData(item);
         resultList.add(schedule1);
@@ -148,7 +222,7 @@ public class DefaultData {
         item.add(uv);
         item.add(moon);
 
-        Schedule schedule2=new Schedule();
+        Schedule schedule2 = new Schedule();
         schedule2.setName("LPS+SPS Mix");
         schedule2.setData(item);
         resultList.add(schedule2);
@@ -171,7 +245,7 @@ public class DefaultData {
         item.add(dWhite);
         item.add(uv);
         item.add(moon);
-        Schedule schedule3=new Schedule();
+        Schedule schedule3 = new Schedule();
         schedule3.setName("Erkan Akvaryum");
         schedule3.setData(item);
         resultList.add(schedule3);

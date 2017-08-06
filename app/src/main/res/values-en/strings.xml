@@ -75,5 +75,6 @@
     <string name="islem_basarisiz">Unsuccessfull</string>
     <string name="islem_basarili">Successfull</string>
     <string name="aqulink">Aqualink</string>
+    <string name="cihazdan_gelen">Cihazdan Gelen</string>
 
 </resources>

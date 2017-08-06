@@ -74,5 +74,6 @@
     <string name="islem_basarisiz">İşlem Başarısız</string>
     <string name="islem_basarili">İşlem Başarılı</string>
     <string name="aqulink">Aqualink</string>
+    <string name="cihazdan_gelen">Cihazdan Gelen</string>
 
 </resources>

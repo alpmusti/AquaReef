@@ -18,31 +18,46 @@ import java.util.List;
 public class UdpDataService implements IDataService {
 
     @Override
-    public void send(List<NetworkDevice> devices, byte[] message) {
-        for (NetworkDevice device : devices) {
-            sendDevice(device, message);
+    public void send(List<NetworkDevice> devices, final byte[] message) {
+        for (final NetworkDevice device : devices) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    sendDevice(device, message);
+                }
+            }).start();
         }
     }
 
     @Override
-    public void send(NetworkDevice device, byte[] message) {
+    public void send(final NetworkDevice device, final byte[] message) {
         //TODO data gönderme yapılacak
-        sendDevice(device, message);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sendDevice(device, message);
+            }
+        }).start();
     }
 
+//    @Override
+//    public void send(NetworkDevice device, String message) {
+//        Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
+//
+//        sendDevice(device, message.getBytes());
+//    }
+
     @Override
-    public void send(NetworkDevice device, String message) {
-        Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
+    public void send(List<NetworkDevice> devices, final String message) {
 
-        sendDevice(device, message.getBytes());
-    }
-
-    @Override
-    public void send(List<NetworkDevice> devices, String message) {
-        for (NetworkDevice device : devices) {
-            Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
-
-            sendDevice(device, message.getBytes());
+        for (final NetworkDevice device : devices) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
+                    sendDevice(device, message.getBytes());
+                }
+            }).start();
         }
     }
 
@@ -63,21 +78,33 @@ public class UdpDataService implements IDataService {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public byte[] receive(List<NetworkDevice> device) {
+        InetAddress addr = null;
+        byte[] messageReceive = new byte[1500];
+        byte[] message = new String("zzzzzzzzzzzzzzz").getBytes();
 
-//    @TargetApi(Build.VERSION_CODES.KITKAT)
-//    private void sendDevice(NetworkDevice device, String message) {
-//        InetAddress addr = null;
-//        try {
-//            addr = InetAddress.getByName(device.getIP());
-//            DatagramSocket serverSocket = new DatagramSocket();
-//            DatagramPacket msgPacket = new DatagramPacket(message.getBytes(),
-//                    message.getBytes().length, addr, Integer.parseInt(device.getPort()));
-//            serverSocket.send(msgPacket);
-//
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+        try {
+            Log.i("OKUMwewA===", "wsedwe");
+
+            addr = InetAddress.getByName(device.get(0).getIP());
+            DatagramSocket serverSocket = new DatagramSocket();
+            DatagramPacket msgPacket = new DatagramPacket(message,
+                    message.length, addr, Integer.parseInt(device.get(0).getPort()));
+            serverSocket.send(msgPacket);
+            msgPacket = new DatagramPacket(messageReceive,
+                    messageReceive.length);
+            serverSocket.receive(msgPacket);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
+        }
+        return messageReceive;
+    }
+
+
 }

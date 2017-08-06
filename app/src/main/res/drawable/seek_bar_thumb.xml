@@ -4,10 +4,10 @@
     <item android:top="3dp">
         <shape android:shape="oval" >
             <gradient
-                android:centerColor="#99000000"
+                android:centerColor="#e9e4e4"
                 android:endColor="#e9e4e4"
                 android:gradientRadius="10"
-                android:startColor="#99a3a0a0"
+                android:startColor="#e9e4e4"
                 android:type="radial" />
         </shape>
     </item>
