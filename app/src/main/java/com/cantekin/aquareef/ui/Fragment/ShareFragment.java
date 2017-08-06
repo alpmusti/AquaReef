@@ -2,8 +2,11 @@ package com.cantekin.aquareef.ui.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +42,7 @@ import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,13 +82,16 @@ public class ShareFragment extends _baseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // this.view = view;
+
         initFragment();
 
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -105,6 +113,12 @@ public class ShareFragment extends _baseFragment {
         });
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity) getActivity()).getSupportActionBar().show();
+    }
+
     private void initFragment() {
         lst = (ListView) getActivity().findViewById(R.id.lst_shared);
         sharedAdapter = new SharedAdapter(getActivity(), R.layout.row_shared, postList, mDatabase);
@@ -117,25 +131,30 @@ public class ShareFragment extends _baseFragment {
                 sharedAlert();
             }
         });
-        //FireBaseHelper hlper=new FireBaseHelper();
-//        Posts ss = new Posts();
-//        ss.setUser("sdfsdfds");
-//        Log.i("sda", "swd");
-//        String ID = mDatabase.push().getKey();
-//        Log.i("ID", ID);
-//
-//        mDatabase.child("posts").child(ID).setValue(ss);
+
+        ImageButton myShared = (ImageButton) getActivity().findViewById(R.id.btnMyShared);
+        myShared.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).replaceFragment(new MyShareFragment());
+            }
+        });
+
     }
 
     private void sharedAlert() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.alert_shared, null);
+        final View dialogView = inflater.inflate(R.layout.alert_shared, null);
 
         userNick = (TextView) dialogView.findViewById(R.id.aler_txt_usernick);
         userNote = (TextView) dialogView.findViewById(R.id.alert_txt_usernote);
         image = (ImageView) dialogView.findViewById(R.id.alert_img);
         Button send = (Button) dialogView.findViewById(R.id.alert_btn_shared);
+
+        builder.setView(dialogView);
+        final AlertDialog ad = builder.show();
+
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,37 +166,43 @@ public class ShareFragment extends _baseFragment {
             @Override
             public void onClick(View v) {
                 upload();
+                ad.dismiss();
             }
         });
-        builder.setView(dialogView);
-        builder.show();
+
     }
 
     public void setImage(Uri uri) {
         Log.i("setImage", "fds");
         _uri = uri;
-        Picasso.with(getContext()).load(uri).placeholder(R.mipmap.profilebackground).into(image);
-        //   image.setImageBitmap(bmp);
+        Picasso.with(getContext()).load(uri).placeholder(R.drawable.profileback).into(image);
     }
 
     public void upload() {
         // Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
         UUID uuid = UUID.randomUUID();
-
         String randomUUIDString = uuid.toString();
         StorageReference riversRef = mStorageRef.child(randomUUIDString + ".jpeg");
-
-        riversRef.putFile(_uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        @SuppressWarnings("VisibleForTests")
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Log.d("downloadUrl", downloadUrl.toString());
-                        insertFirebase(downloadUrl.toString());
-                    }
-                })
+        UploadTask uploadTask;
+        if (_uri == null) {
+            Bitmap d = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.profileback);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            d.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+            uploadTask = riversRef.putBytes(data);
+        } else {
+            uploadTask = riversRef.putFile(_uri);
+        }
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // Get a URL to the uploaded content
+                @SuppressWarnings("VisibleForTests")
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Log.d("downloadUrl", downloadUrl.toString());
+                insertFirebase(downloadUrl.toString());
+            }
+        })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
@@ -193,11 +218,11 @@ public class ShareFragment extends _baseFragment {
         Posts ss = getData();
         ss.setDownloadURL(s);
         ss.setLike(0l);
-        //ss.setDeviceID(0);
+        ss.setDeviceID(android_id);
         String ID = mDatabase.push().getKey();
         Log.i("ID", ID);
         mDatabase.child("posts").child(ID).setValue(ss);
-        Toast.makeText(getContext(),getString(R.string.islem_basarili), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(R.string.islem_basarili), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -210,14 +235,14 @@ public class ShareFragment extends _baseFragment {
         d.setUserNote(userNote.getText().toString());
         d.setSharedDate(String.valueOf(new Date().getTime()));
         DateAll dateAll = new DateAll();
-        dateAll.setAy(setObjects(findColor(scheduleData.getData(),"Moon")));
-        dateAll.setBlue(setObjects(findColor(scheduleData.getData(),"Blue")));
-        dateAll.setDwhite(setObjects(findColor(scheduleData.getData(),"D.White")));
-        dateAll.setGreen(setObjects(findColor(scheduleData.getData(),"Green")));
-        dateAll.setRed(setObjects(findColor(scheduleData.getData(),"Red")));
-        dateAll.setRoyalBlue(setObjects(findColor(scheduleData.getData(),"Royal Blue")));
-        dateAll.setUv(setObjects(findColor(scheduleData.getData(),"UV")));
-        dateAll.setWhite(setObjects(findColor(scheduleData.getData(),"White")));
+        dateAll.setAy(setObjects(findColor(scheduleData.getData(), "Moon")));
+        dateAll.setBlue(setObjects(findColor(scheduleData.getData(), "Blue")));
+        dateAll.setDwhite(setObjects(findColor(scheduleData.getData(), "D.White")));
+        dateAll.setGreen(setObjects(findColor(scheduleData.getData(), "Green")));
+        dateAll.setRed(setObjects(findColor(scheduleData.getData(), "Red")));
+        dateAll.setRoyalBlue(setObjects(findColor(scheduleData.getData(), "Royal Blue")));
+        dateAll.setUv(setObjects(findColor(scheduleData.getData(), "UV")));
+        dateAll.setWhite(setObjects(findColor(scheduleData.getData(), "White")));
         d.setAllDate(dateAll);
         return d;
     }
@@ -227,7 +252,7 @@ public class ShareFragment extends _baseFragment {
             if (item.getName().equals(Color))
                 return item;
         }
-        return new  DataSchedule();
+        return new DataSchedule();
     }
 
     @NonNull

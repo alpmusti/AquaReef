@@ -18,8 +18,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/gray_very_light"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/textView11"
@@ -41,13 +43,15 @@
         <ListView
             android:id="@+id/devListInserted"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="200dp" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:background="@color/gray_very_light"
+            android:padding="5dp"
             android:text="@string/agdakiler"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -57,4 +61,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 </LinearLayout>

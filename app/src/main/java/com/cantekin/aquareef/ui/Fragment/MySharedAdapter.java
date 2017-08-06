@@ -6,28 +6,22 @@ import android.content.DialogInterface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DataSchedule;
-import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.FireBase.Model.Posts;
 import com.cantekin.aquareef.R;
+import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,11 +29,8 @@ import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import lecho.lib.hellocharts.view.LineChartView;
 
@@ -47,11 +38,11 @@ import lecho.lib.hellocharts.view.LineChartView;
  * Created by Cantekin on 26.7.2017.
  */
 
-public class SharedAdapter extends ArrayAdapter<Posts> {
+public class MySharedAdapter extends ArraySwipeAdapter {
     List<String> myFavorits;
     DatabaseReference mDatabase;
 
-    public SharedAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<Posts> objects, DatabaseReference _mDatabase) {
+    public MySharedAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<Posts> objects, DatabaseReference _mDatabase) {
         super(context, resource, objects);
         mDatabase = _mDatabase;
         String likes = MyPreference.getPreference(context).getData(MyPreference.LIKES);
@@ -71,9 +62,9 @@ public class SharedAdapter extends ArrayAdapter<Posts> {
         if (v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.row_shared, null);
+            v = vi.inflate(R.layout.row_myshared, null);
         }
-        final Posts object = getItem(position);
+        final Posts object = (Posts) getItem(position);
         if (object != null) {
             TextView title = (TextView) v.findViewById(R.id.row_shrade_title);
             TextView time = (TextView) v.findViewById(R.id.row_shrade_time);
@@ -99,6 +90,15 @@ public class SharedAdapter extends ArrayAdapter<Posts> {
 //                        ((ImageView) v).setImageAlpha(85);
                 }
             });
+
+            ImageView btnDelete = (ImageView) v.findViewById(R.id.row_btn_delete);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeQuation(object.getKey());
+                }
+            });
+
             if (myFavorits.contains(object.getKey())) {
                 likeBtn.setBackgroundResource(R.mipmap.like);
             } else
@@ -110,7 +110,7 @@ public class SharedAdapter extends ArrayAdapter<Posts> {
                     try {
                         showChart(object);
                     } catch (Exception e) {
-                        Log.e("SharedAdapter","not convert data for chart");
+                        Log.e("SharedAdapter", "not convert data for chart");
                     }
                 }
             });
@@ -153,6 +153,29 @@ public class SharedAdapter extends ArrayAdapter<Posts> {
         return v;
     }
 
+    private void removeQuation(final String key) {
+        final String[] m_Text = {"", ""};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getContext().getString(R.string.emin_misiniz));
+
+        builder.setPositiveButton(getContext().getString(R.string.tamam), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //getContext().deleteItem(ip);
+                mDatabase.child("posts").child(key).removeValue();
+            }
+        });
+        builder.setNegativeButton(getContext().getString(R.string.iptal), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+
     @NonNull
     private Schedule convertSchedule(Posts object) {
         Schedule sch = new Schedule();
@@ -191,5 +214,10 @@ public class SharedAdapter extends ArrayAdapter<Posts> {
                 data.get(2).toString(),
                 data.get(3).toString(),
                 Integer.parseInt(data.get(4).toString()));
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe;
     }
 }

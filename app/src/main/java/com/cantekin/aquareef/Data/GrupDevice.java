@@ -42,7 +42,8 @@ public class GrupDevice implements Serializable {
     }
 
     public void addDevice(String device) {
-        this.devices.add(device);
+        if (!this.devices.contains(device))
+            this.devices.add(device);
     }
 
     public void removeDevice(String device) {
