@@ -133,12 +133,18 @@ public class ScheduleFragment extends _baseFragment {
         scheduleData.setName(getString(R.string.cihazdan_gelen));
         List<DataSchedule> dataSchedules = new ArrayList<>();
         Log.i("cihazdan Gelen", "Toplam Uzunluk" + data.length);
-        for (int i = 0; i < data.length; i += 15) {
-            byte[] temp = new byte[15];
-            for (int t = 0; t < 15; t++)
+        int l = 9;//ay kısmı gelen data boktan
+        for (int i = 1; i < data.length; i += 9) {
+            byte[] temp = new byte[10];
+
+            if (i + 9 > 80)
+                break;
+            for (int t = 0; t < 9; t++) {
                 temp[t] = data[i + t];
+
+            }
             DataSchedule d = new DataSchedule();
-            d.setProperties(temp);
+            d.setProperties(temp, i);
             dataSchedules.add(d);
         }
         scheduleData.setData(dataSchedules);

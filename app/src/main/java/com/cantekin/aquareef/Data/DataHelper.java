@@ -20,9 +20,9 @@ public class DataHelper {
     }
 
     public static String convert(byte value1, byte value2) {
-        int val = (value1 * 256) + value2;
-        String res=String.format("%04d",val);
-        res=res.substring(0,2)+":"+res.substring(2,4);
+        //int val = (value1 * 256) + value2;
+        String res = String.format("%02d", value1) + ":" + String.format("%02d", value2);
+        //res = res.substring(0, 2) + ":" + res.substring(2, 4);
         return res;
     }
 

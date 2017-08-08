@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void takeDevice() {
+        Log.i("Cihazdan","alma başlatıldı");
         clinetAdapter.receive();
     }
 

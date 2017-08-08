@@ -79,6 +79,7 @@ public class SendDataToClient {
         Log.i("receive", " Message:");
         //  if (activeGroup == null)
         loadActiveDevices();
+        System.gc();
         new BackgroundTask().execute((Void) null);
     }
 

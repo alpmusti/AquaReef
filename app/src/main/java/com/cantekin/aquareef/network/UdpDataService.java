@@ -64,9 +64,11 @@ public class UdpDataService implements IDataService {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void sendDevice(NetworkDevice device, byte[] message) {
         InetAddress addr = null;
+        DatagramSocket serverSocket = null;
         try {
             addr = InetAddress.getByName(device.getIP());
-            DatagramSocket serverSocket = new DatagramSocket();
+            serverSocket = new DatagramSocket();
+            //serverSocket.setSoTimeout(1000);
             DatagramPacket msgPacket = new DatagramPacket(message,
                     message.length, addr, Integer.parseInt(device.getPort()));
             serverSocket.send(msgPacket);
@@ -75,6 +77,8 @@ public class UdpDataService implements IDataService {
             e.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
+        } finally {
+            serverSocket.close();
         }
     }
 
@@ -83,17 +87,17 @@ public class UdpDataService implements IDataService {
         InetAddress addr = null;
         byte[] messageReceive = new byte[1500];
         byte[] message = new String("zzzzzzzzzzzzzzz").getBytes();
-
+        DatagramSocket serverSocket = null;
         try {
-            Log.i("OKUMwewA===", "wsedwe");
-
+            Log.i("OKUMA", "data gönderiliyor");
+            Log.i("OKUMA", "data zzzzzzzzzzzzzzz");
             addr = InetAddress.getByName(device.get(0).getIP());
-            DatagramSocket serverSocket = new DatagramSocket();
+            serverSocket = new DatagramSocket();
             DatagramPacket msgPacket = new DatagramPacket(message,
                     message.length, addr, Integer.parseInt(device.get(0).getPort()));
             serverSocket.send(msgPacket);
-            msgPacket = new DatagramPacket(messageReceive,
-                    messageReceive.length);
+            msgPacket = new DatagramPacket(messageReceive, messageReceive.length);
+            serverSocket.setSoTimeout(1000);
             serverSocket.receive(msgPacket);
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -102,6 +106,8 @@ public class UdpDataService implements IDataService {
 
         } catch (RuntimeException ex) {
             ex.printStackTrace();
+        } finally {
+            serverSocket.close();
         }
         return messageReceive;
     }

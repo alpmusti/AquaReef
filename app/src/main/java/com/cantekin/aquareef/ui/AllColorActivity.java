@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DataSchedule;
@@ -87,8 +88,18 @@ public class AllColorActivity extends AppCompatActivity {
 
     private void sendData() {
         SendDataToClient clinetAdapter = new SendDataToClient(this);
+        Toast.makeText(this, R.string.gonderiliyor, Toast.LENGTH_LONG).show();
         for (DataSchedule item : scheduleData.getData()) {
-            clinetAdapter.send(item.getByte());
+            try {
+                clinetAdapter.send(item.getByte());
+                for (int i = 0; i < item.getByte().length; i++)
+                    Log.d("Gonderim", "=" + item.getByte()[i]);
+
+                Log.w("Gonderim", item.getName());
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         finish();
     }

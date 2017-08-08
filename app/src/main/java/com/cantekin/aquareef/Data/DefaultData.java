@@ -29,6 +29,15 @@ public class DefaultData {
     public static final String colorUVC = "#886aea";
     public static final String colorMoonC = "#040404";
 
+    public static final char codeRedC = 'a';
+    public static final char codeGreenC = 'b';
+    public static final char codeRoyalC = 'c';
+    public static final char codeBlueC = 'd';
+    public static final char codeWhiteC = 'e';
+    public static final char codeDWhiteC = 'f';
+    public static final char codeUVC = 'g';
+    public static final char codeMoonC = 'h';
+
     public DefaultData() {
     }
 

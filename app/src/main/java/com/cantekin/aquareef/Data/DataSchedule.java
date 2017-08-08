@@ -35,25 +35,69 @@ public class DataSchedule {
         else return stringToArrayBufferSchedule();
     }
 
-    public void setProperties(byte[] buffer) {
-        code = (char) buffer[0];
-        Log.d("setProperties", "code" + code);
-        start = DataHelper.convert(buffer[1], buffer[2]);
+    public void setProperties(byte[] buffer, int index) {
+
+        setCode(index);
+        if (code == '!')
+            return;
         name = DefaultData.getNameForKey(code);
         color = DefaultData.getColorForKey(code);
-        Log.d("setProperties", "color" + color);
+        Log.d("setProperties", "code :" + name);
+
 
         if (code != 'h') {
-            up = DataHelper.convert(buffer[3], buffer[4]);
-            down = DataHelper.convert(buffer[5], buffer[6]);
-            stop = DataHelper.convert(buffer[7], buffer[8]);
-            level = buffer[10];
+            start = DataHelper.convert(buffer[0], buffer[1]);
+            stop = DataHelper.convert(buffer[2], buffer[3]);
+            up = DataHelper.convert(buffer[4], buffer[5]);
+            down = DataHelper.convert(buffer[6], buffer[7]);
+            level = buffer[8];
 
         } else {
-            stop = DataHelper.convert(buffer[3], buffer[4]);
-            level = buffer[6];
-            blue = buffer[8];
-            moon = buffer[10] == 1;
+            start = DataHelper.convert(buffer[3], buffer[4]);
+            stop = DataHelper.convert(buffer[5], buffer[6]);
+
+            level = buffer[7];
+            blue = buffer[0];
+            moon = buffer[1] == 1;
+        }
+        Log.d("setProperties", "level=" + level);
+
+        for (int i = 0; i < buffer.length; i++) {
+            Log.i("setProperties", "buffer[" + i + "]=" + buffer[i]);
+
+        }
+
+    }
+
+    private void setCode(int index) {
+        switch (index) {
+            case 1:
+                code = DefaultData.codeBlueC;
+                break;
+            case 10:
+                code = DefaultData.codeWhiteC;
+                break;
+            case 19:
+                code = DefaultData.codeRoyalC;
+                break;
+            case 28:
+                code = DefaultData.codeRedC;
+                break;
+            case 37:
+                code = DefaultData.codeGreenC;
+                break;
+            case 46:
+                code = DefaultData.codeDWhiteC;
+                break;
+            case 55:
+                code = DefaultData.codeUVC;
+                break;
+            case 64:
+                code = DefaultData.codeMoonC;
+                break;
+            default:
+                code = '!';
+                break;
         }
     }
 
