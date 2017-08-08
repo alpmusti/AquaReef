@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.MainActivity;
 
+/**
+ * cihaza varsayılan efectlerin
+ * gönderildiği arayüz
+ */
 
 public class EffectFragment extends _baseFragment {
 

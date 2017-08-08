@@ -1,14 +1,10 @@
 package com.cantekin.aquareef.ui;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -26,6 +22,10 @@ import java.util.Calendar;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
+/**
+ * tekrenk üzerinde değişiklik yapılabilinen ekran
+ * TODO: fragmente çevrilinebilinir
+ */
 public class ColorSetActivity extends AppCompatActivity {
 
     private String color;

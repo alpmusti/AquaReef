@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by Cantekin on 21.7.2017.
+ * network te bulunan cihazların adapteri
  */
 
 public class NetworkDeviceListAdapter extends ArrayAdapter<String> {

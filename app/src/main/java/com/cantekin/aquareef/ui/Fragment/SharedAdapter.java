@@ -45,6 +45,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * Created by Cantekin on 26.7.2017.
+ * firebasede paylaşılan data için adapter
  */
 
 public class SharedAdapter extends ArrayAdapter<Posts> {

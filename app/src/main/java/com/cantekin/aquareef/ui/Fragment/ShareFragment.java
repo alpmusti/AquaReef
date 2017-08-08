@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -48,6 +47,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * başka kullanıcıların paylaşımlarının olduğu liste
+ */
 
 public class ShareFragment extends _baseFragment {
 

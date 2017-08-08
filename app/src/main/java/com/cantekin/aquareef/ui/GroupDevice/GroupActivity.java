@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.Data.GrupDevice;
-import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.IDataService;
 import com.cantekin.aquareef.network.NetworkDevice;
@@ -17,7 +16,9 @@ import com.cantekin.aquareef.network.UdpDataService;
 
 import java.util.List;
 
-
+/**
+ * grupların olduğu ana activity
+ */
 public class GroupActivity extends ActionBarActivity {
 
     public List<GrupDevice> allGroup;

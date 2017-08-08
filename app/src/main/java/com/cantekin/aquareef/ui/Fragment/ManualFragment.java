@@ -22,20 +22,16 @@ import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 
-
+/**
+ * kaydırma çubukları ile
+ * cihadaki ışıkların kontrol edildiği fragment
+ */
 public class ManualFragment extends _baseFragment {
     Data data;
     private SeekBar seekBarBlue;

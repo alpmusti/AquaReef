@@ -4,7 +4,6 @@ import android.graphics.Color;
 
 import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.Data.Schedule;
-import com.cantekin.aquareef.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,8 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * Created by Cantekin on 26.7.2017.
+ * data yaı grafik te gösterilmek üzere
+ * gerekli işlemler yapılır
  */
 
 public class ChartHelper {

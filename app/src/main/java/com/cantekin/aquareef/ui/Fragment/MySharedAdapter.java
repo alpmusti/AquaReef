@@ -36,6 +36,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * Created by Cantekin on 26.7.2017.
+ * kullanıcının paylaşmış olduğu dataların adapteri listesi
  */
 
 public class MySharedAdapter extends ArraySwipeAdapter {

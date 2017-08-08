@@ -2,8 +2,6 @@ package com.cantekin.aquareef.ui.Fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -11,27 +9,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.cantekin.aquareef.Data.DataSchedule;
-import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.ui.ColorSetActivity;
-import com.cantekin.aquareef.ui.MainActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
-import lecho.lib.hellocharts.model.Axis;
-import lecho.lib.hellocharts.model.AxisValue;
-import lecho.lib.hellocharts.model.Line;
-import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.model.Viewport;
-import lecho.lib.hellocharts.view.LineChartView;
-
-
+/**
+ * cihazı networke bağlamak
+ * üzere tasarlanımıştır
+ */
 public class AquaLinkFragment extends _baseFragment {
 
     private WifiManager wifiManager;

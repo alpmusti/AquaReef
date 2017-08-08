@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Cantekin on 27.6.2017.
+ * dataları göndermek için arayüz
  */
 
 public interface IDataService {

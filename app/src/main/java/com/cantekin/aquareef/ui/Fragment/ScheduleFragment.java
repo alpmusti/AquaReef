@@ -20,9 +20,7 @@ import com.cantekin.aquareef.ui.AllColorActivity;
 import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +33,9 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
+/**
+ * gün simülasyonunun gerçekleştiği fragment
+ */
 
 public class ScheduleFragment extends _baseFragment {
 

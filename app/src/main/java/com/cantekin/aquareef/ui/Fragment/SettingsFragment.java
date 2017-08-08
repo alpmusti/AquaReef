@@ -1,7 +1,6 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,32 +10,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cantekin.aquareef.Data.DataHelper;
-import com.cantekin.aquareef.Data.DataSchedule;
-import com.cantekin.aquareef.Data.DefaultData;
-import com.cantekin.aquareef.Data.MyPreference;
-import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.SendDataToClient;
-import com.cantekin.aquareef.ui.AllColorActivity;
-import com.cantekin.aquareef.ui.ColorSetActivity;
-import com.cantekin.aquareef.ui.MainActivity;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
-import lecho.lib.hellocharts.model.Axis;
-import lecho.lib.hellocharts.model.AxisValue;
-import lecho.lib.hellocharts.model.Line;
-import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-
+/**
+ * ayarlar fragmenti
+ */
 public class SettingsFragment extends _baseFragment {
 
     LineChartView chart;

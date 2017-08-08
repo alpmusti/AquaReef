@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Created by Cantekin on 5.8.2017.
+ * cihaz gruplarının adapteri kaydırmalı silmeli
  */
 
 public class ArraySwipeAdapterSample extends ArraySwipeAdapter {

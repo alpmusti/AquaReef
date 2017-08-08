@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,15 @@ import android.widget.Toast;
 import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
+/**
+ * Cihaz gruplarının listelendiği fragment
+ */
 public class GroupFragment extends _baseGroupFragment {
 
     private ListView lstGrups;

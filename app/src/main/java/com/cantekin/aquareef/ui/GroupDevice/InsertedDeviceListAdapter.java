@@ -9,14 +9,9 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
@@ -25,6 +20,7 @@ import java.util.List;
 
 /**
  * Created by Cantekin on 21.7.2017.
+ * grupa eklenmiş cihazlar dapteri silmeli
  */
 
 public class InsertedDeviceListAdapter extends ArraySwipeAdapter {

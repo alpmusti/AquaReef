@@ -1,19 +1,15 @@
 package com.cantekin.aquareef.ui;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 
-import com.cantekin.aquareef.Data.Data;
-import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.Data.Schedule;
@@ -23,9 +19,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+/**
+ * templatlerin listesi
+ * TODO: burası fragment yapılabiniri
+ */
 
 public class TemplateListActivity extends AppCompatActivity {
 

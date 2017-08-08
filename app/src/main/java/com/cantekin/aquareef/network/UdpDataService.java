@@ -40,12 +40,6 @@ public class UdpDataService implements IDataService {
         }).start();
     }
 
-//    @Override
-//    public void send(NetworkDevice device, String message) {
-//        Log.i("sendData==>", "IP:" + device.getIP() + " Port:" + device.getPort() + " Message:" + message);
-//
-//        sendDevice(device, message.getBytes());
-//    }
 
     @Override
     public void send(List<NetworkDevice> devices, final String message) {

@@ -31,6 +31,10 @@ import com.cantekin.aquareef.ui.Fragment.ShareFragment;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
 import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 
+/**
+ * uygulamanın ana activitesi
+ */
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static final int RESULT_LOAD_IMAGE = 10001;
