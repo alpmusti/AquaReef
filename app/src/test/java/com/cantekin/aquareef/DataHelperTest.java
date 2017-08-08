@@ -31,4 +31,25 @@ public class DataHelperTest {
         Assert.assertEquals("04:96", result);
 
     }
+
+    @Test
+    public void StringToBynariTest() throws Exception {
+        String start = "12:00";
+        byte a = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(start.replace(":", "")));
+        byte b = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(start.replace(":", "")));
+        System.out.println(a);
+        System.out.println(b);
+//        System.out.println("------------------");
+//        start = "12:00";
+//        System.out.println(start);
+//
+//        a = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(start.replace(":", "")));
+//        System.out.println(start);
+//
+//        b = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(start.replace(":", "")));
+//        System.out.println(a);
+//        System.out.println(b);
+        //Assert.assertEquals("04:96", result);
+
+    }
 }

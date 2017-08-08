@@ -1,5 +1,8 @@
 package com.cantekin.aquareef.Data;
 
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+
 /**
  * Created by Cantekin on 19.7.2017.
  */
@@ -27,6 +30,35 @@ public class DataHelper {
     }
 
     public static byte ByteTranslateSecondNoCost(int value) {
-        return (byte) (value % 256);
+        int res = (value % 256);
+        char cdd = (char) res;
+        byte a = (byte) res;
+        System.out.println("--------------");
+
+        System.out.println(cdd);
+        System.out.println(res);
+
+        // byte[] bytes = ByteBuffer.allocate(4).putInt(176).array();
+        byte[] bytes = BigInteger.valueOf(300).toByteArray();
+        for (byte b : bytes) {
+            System.out.println(b);
+        }
+//        System.out.println((byte) a);
+//        System.out.println(new Integer("176").byteValue());
+
+        System.out.println("--------------");
+        return (byte) (cdd & 0XFF);
     }
+
+    public static byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i + 1), 16));
+        }
+        return data;
+    }
+
+
 }
