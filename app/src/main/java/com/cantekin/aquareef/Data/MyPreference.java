@@ -61,11 +61,9 @@ public class MyPreference {
 
     //endregion
     //region Set
-    public void setData(@NonNull String name, @NonNull String value) throws NullPointerException {
+    public void setData(@NonNull String name, String value) throws NullPointerException {
         SharedPreferences.Editor editor = data.edit();
-        if (value != null && name != null) editor.putString(name, value);
-        else
-            throw new NullPointerException("paramtreler null olamaz");
+        editor.putString(name, value);
         editor.commit();
     }
 

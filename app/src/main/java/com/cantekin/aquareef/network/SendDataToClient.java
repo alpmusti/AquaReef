@@ -41,6 +41,7 @@ public class SendDataToClient {
             activeGroup = gson.fromJson(all, type);
         }
         preperToProp();
+        System.gc();
     }
 
     private void preperToProp() {

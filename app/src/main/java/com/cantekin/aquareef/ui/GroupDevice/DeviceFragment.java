@@ -150,6 +150,9 @@ public class DeviceFragment extends _baseGroupFragment {
     public void updateAllDevice() {
         MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getAct().allGroup);
         insertedAdapter.notifyDataSetChanged();
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, null);
+
+
     }
 
 
@@ -163,10 +166,10 @@ public class DeviceFragment extends _baseGroupFragment {
         try {
             String ptrn = String.format(MAC_RE, ips.replace(".", "\\."));
             Pattern pattern = Pattern.compile(ptrn);
-            br = new BufferedReader(new FileReader(new File("/proc/net/arp")),8*1024);
+            br = new BufferedReader(new FileReader(new File("/proc/net/arp")), 8 * 1024);
             br.close();
             Thread.sleep(1000);
-            br = new BufferedReader(new FileReader(new File("/proc/net/arp")),8*1024);
+            br = new BufferedReader(new FileReader(new File("/proc/net/arp")), 8 * 1024);
             Matcher matcher;
             while ((currentLine = br.readLine()) != null) {
                 matcher = pattern.matcher(currentLine);
