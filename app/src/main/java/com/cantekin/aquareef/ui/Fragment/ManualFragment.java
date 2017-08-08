@@ -45,6 +45,7 @@ public class ManualFragment extends _baseFragment {
     private SeekBar seekBarLight;
     private SeekBar seekBarRoyal;
     private SeekBar seekBarUV;
+    private ToggleSwitch toggleSwitchManuel;
 
     public ManualFragment() {
     }
@@ -62,101 +63,6 @@ public class ManualFragment extends _baseFragment {
         super.onViewCreated(view, savedInstanceState);
         data = new Data();
         initFragment();
-     //   scanSubNet("192.168.0.");
-//        try {
-//            printReachableHosts();
-//        } catch (SocketException e) {
-//            e.printStackTrace();
-//        }
-
-
-    }
-
-    private void ping(String ip) {
-
-
-        try {
-            InetAddress inetAddress = InetAddress.getByName(ip);
-            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 " + ip);
-            int returnVal = p1.waitFor();
-            if (returnVal == 0) {
-                Log.d("dsd", "Trying: " + ip);
-                //  hosts.add(inetAddress.getHostName());
-//                NetworkInterface network = NetworkInterface.getByInetAddress(inetAddress);
-//                byte[] mac = network.getHardwareAddress();
-//                StringBuilder sb = new StringBuilder();
-//                for (int j = 0; j < mac.length; j++) {
-//
-//                    sb.append(String.format("%02X%s", mac[j],
-//                            (j < mac.length - 1) ? "-" : ""));
-//                }
-//                Log.i("qwq", sb.toString() + "-" + inetAddress.getHostName());
-                //  getIpFromArpCache();
-
-            }
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            Log.d("dsd", "NullPointerException: " + ip);
-        }
-    }
-
-    public void printReachableHosts() throws SocketException {
-        String ipAddress = "192.168.0.1";
-        Log.e("aaIPPP", ipAddress);
-
-        ipAddress = ipAddress.substring(0, ipAddress.lastIndexOf('.')) + ".";
-        for (int i = 0; i < 256; i++) {
-            final String otherAddress = ipAddress + String.valueOf(i);
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    ping(otherAddress.toString());
-                }
-            }).start();
-        }
-    }
-
-    private void scanSubNet(final String subnet) {
-
-        int processors = Runtime.getRuntime().availableProcessors();
-        ExecutorService executor = Executors.newFixedThreadPool(processors);
-        for (int i = 1; i < 255; i++) {
-            final int finalI = i;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d("dsd", "Trying: " + subnet + String.valueOf(finalI));
-                    try {
-                        InetAddress inetAddress = InetAddress.getByName(subnet + String.valueOf(finalI));
-                        if (inetAddress.isReachable(1000)) {
-                            NetworkInterface network = NetworkInterface.getByInetAddress(inetAddress);
-                            byte[] mac = network.getHardwareAddress();
-                            StringBuilder sb = new StringBuilder();
-                            for (int j = 0; j < mac.length; j++) {
-
-                                sb.append(String.format("%02X%s", mac[j],
-                                        (j < mac.length - 1) ? "-" : ""));
-                            }
-                            Log.i("qwq", sb.toString() + "-" + inetAddress.getHostName());
-                        } else {
-                            Log.e("qwq", inetAddress.getHostName());
-                        }
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-
-        }
     }
 
     private void initFragment() {
@@ -230,6 +136,7 @@ public class ManualFragment extends _baseFragment {
     }
 
     private void changeColorListener() {
+        toggleSwitchManuel.setCheckedTogglePosition(0);
         data.setRed(seekBarRed.getProgress());
         data.setBlue(seekBarBlue.getProgress());
         data.setGreen(seekBarGree.getProgress());
@@ -260,7 +167,8 @@ public class ManualFragment extends _baseFragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                valueText.setText(String.valueOf(progress));
+                changeColorListener();
             }
 
             @Override
@@ -269,15 +177,15 @@ public class ManualFragment extends _baseFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                valueText.setText(String.valueOf(seekBar.getProgress()));
-                changeColorListener();
+                // valueText.setText(String.valueOf(seekBar.getProgress()));
+                // changeColorListener();
             }
         });
     }
 
     private void initToggle() {
-        ToggleSwitch toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.toggle_manual);
-        toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
+        toggleSwitchManuel = (ToggleSwitch) getActivity().findViewById(R.id.toggle_manual);
+        toggleSwitchManuel.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
             @Override
             public void onToggleSwitchChangeListener(int position, boolean isChecked) {
                 if (position == 1) {//Auto

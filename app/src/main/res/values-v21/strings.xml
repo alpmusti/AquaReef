@@ -77,4 +77,5 @@
     <string name="cihazdan_gelen">Cihazdan Gelen</string>
     <string name="mytemplates">Şablonlarım</string>
     <string name="gonderiliyor">Gönderiliyor</string>
+    <string name="sifir">0</string>
 </resources>

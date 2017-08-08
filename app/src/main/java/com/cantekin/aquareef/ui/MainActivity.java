@@ -165,6 +165,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.fragment_fav) {
             replaceFragment(new FavoritFragment());
 
+        }else if (id == R.id.fragment_aqualink) {
+            //replaceFragment(new SettingsFragment());
         } else if (id == R.id.fragment_settings) {
             replaceFragment(new SettingsFragment());
         }
