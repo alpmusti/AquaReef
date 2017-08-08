@@ -1,6 +1,9 @@
 package com.cantekin.aquareef;
 
 import com.cantekin.aquareef.Data.DataHelper;
+import com.cantekin.aquareef.Data.DefaultData;
+import com.cantekin.aquareef.network.NetworkDevice;
+import com.cantekin.aquareef.network.UdpDataService;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -51,5 +54,21 @@ public class DataHelperTest {
 //        System.out.println(b);
         //Assert.assertEquals("04:96", result);
 
+    }
+
+
+    @Test
+    public void ByteTest() throws Exception {
+        byte x = -80;
+        int a = ((int) x) & 0xff;
+        System.out.println(a);
+        UdpDataService d = new UdpDataService();
+        NetworkDevice device = new NetworkDevice();
+        //System.out.println(b);
+        device.setIP("192.168.0.14");
+        device.setPort("8899");
+
+        for (int i = 0; i < 5; i++)
+            d.send(device, new DefaultData().getScheduleFavorites().get(0).getData().get(0).getByte());
     }
 }

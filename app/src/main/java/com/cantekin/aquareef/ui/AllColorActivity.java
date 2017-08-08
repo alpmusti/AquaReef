@@ -1,8 +1,10 @@
 package com.cantekin.aquareef.ui;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +42,7 @@ public class AllColorActivity extends AppCompatActivity {
     private Schedule scheduleData;
     private LinearLayout mainLayout;
     private int paddingLeft = 20;
+    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,21 +90,9 @@ public class AllColorActivity extends AppCompatActivity {
     }
 
     private void sendData() {
-        SendDataToClient clinetAdapter = new SendDataToClient(this);
-        Toast.makeText(this, R.string.gonderiliyor, Toast.LENGTH_LONG).show();
-        for (DataSchedule item : scheduleData.getData()) {
-            try {
-                clinetAdapter.send(item.getByte());
-                for (int i = 0; i < item.getByte().length; i++)
-                    Log.d("Gonderim", "=" + item.getByte()[i]);
-
-                Log.w("Gonderim", item.getName());
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        finish();
+        progress = ProgressDialog.show(this, getString(R.string.schedule),
+                getString(R.string.gonderiliyor), true);
+        new BackgroundTask().execute((Void) null);
     }
 
     private void saveDialog() {
@@ -215,5 +206,40 @@ public class AllColorActivity extends AppCompatActivity {
         String data = MyPreference.getPreference(this).getData(MyPreference.ACTIVESCHEDULE);
         Gson gson = new Gson();
         scheduleData = gson.fromJson(data, Schedule.class);
+    }
+
+    public class BackgroundTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            SendDataToClient clinetAdapter = new SendDataToClient(getApplicationContext());
+            for (DataSchedule item : scheduleData.getData()) {
+                try {
+                    for (int j = 0; j < 5; j++)
+                        clinetAdapter.send(item.getByte());
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            progress.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
     }
 }

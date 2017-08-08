@@ -114,7 +114,7 @@ public class DataSchedule {
             buffer[7] = DataHelper.ByteTranslateFirstNoCost(Integer.parseInt(stop.replace(":", "")));
             buffer[8] = DataHelper.ByteTranslateSecondNoCost(Integer.parseInt(stop.replace(":", "")));
             buffer[9] = 0;
-            this.level = buffer[10];
+            buffer[10] = (byte) this.level;
             buffer[11] = 0;
             buffer[12] = 0;
             buffer[13] = 0;
