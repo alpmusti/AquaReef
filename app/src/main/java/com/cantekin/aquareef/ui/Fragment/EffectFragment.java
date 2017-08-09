@@ -1,5 +1,7 @@
 package com.cantekin.aquareef.ui.Fragment;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -8,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.network.SendDataToClient;
 import com.cantekin.aquareef.ui.MainActivity;
 
 /**
@@ -17,6 +21,7 @@ import com.cantekin.aquareef.ui.MainActivity;
  */
 
 public class EffectFragment extends _baseFragment {
+    private ProgressDialog progress;
 
 
     public EffectFragment() {
@@ -70,10 +75,62 @@ public class EffectFragment extends _baseFragment {
         });
     }
 
+    public int sleepTime = 0;
+
     public void sendEffect(View v) {
         Log.i("Image", "sendEffect");
-        String data=v.getTag().toString();
+        String data = v.getTag().toString();
         ((MainActivity) getActivity()).sendDataDevice(data);
+        progress = ProgressDialog.show(getContext(), getString(R.string.efektler),
+                getString(R.string.gonderiliyor), true);
+        switch (data) {
+            case "iiiiiiiiiiiiiii":
+                sleepTime = 60 * 1000;
+                break;
+
+            case "jjjjjjjjjjjjjjj":
+                sleepTime = 2 * 1000;
+                break;
+
+            case "kkkkkkkkkkkkkkk":
+                sleepTime = 5 * 1000;
+                break;
+
+            case "lllllllllllllll":
+                sleepTime = 5 * 1000;
+                break;
+        }
+        new BackgroundTask().execute((Void) null);
+    }
+
+    public class BackgroundTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            progress.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
 
     }
 }

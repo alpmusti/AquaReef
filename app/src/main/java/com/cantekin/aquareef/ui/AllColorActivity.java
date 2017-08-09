@@ -47,7 +47,6 @@ public class AllColorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_color);
-        init();
     }
 
     private void init() {
@@ -55,12 +54,19 @@ public class AllColorActivity extends AppCompatActivity {
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+    }
+
     private void initView() {
         mainLayout = (LinearLayout) findViewById(R.id.allColor_MainLayout);
+        mainLayout.removeAllViews();
         for (DataSchedule item : scheduleData.getData()) {
             addItem(item);
         }
-
+        getSupportActionBar().setTitle(scheduleData.getName());
         TextView save = (TextView) findViewById(R.id.allColor_save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,9 +225,10 @@ public class AllColorActivity extends AppCompatActivity {
             SendDataToClient clinetAdapter = new SendDataToClient(getApplicationContext());
             for (DataSchedule item : scheduleData.getData()) {
                 try {
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < 5; j++) {
                         clinetAdapter.send(item.getByte());
-                    Thread.sleep(300);
+                        Thread.sleep(300);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

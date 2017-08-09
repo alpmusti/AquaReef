@@ -1,14 +1,21 @@
 package com.cantekin.aquareef.ui.GroupDevice;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +26,7 @@ import com.cantekin.aquareef.Data.GrupDevice;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.IpHelper;
+import com.cantekin.aquareef.network.Ping;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.content.Context.WIFI_SERVICE;
 
 /**
  * networkte ki ve grup içindeki cihazlarını listesi
@@ -41,6 +51,7 @@ public class DeviceFragment extends _baseGroupFragment {
     final List<String> networkDevices = new ArrayList<>();
 
     private NetworkDeviceListAdapter netwokAdapter;
+    private ImageView btnSearch;
 
     public DeviceFragment() {
         // Required empty public constructor
@@ -81,6 +92,15 @@ public class DeviceFragment extends _baseGroupFragment {
             }
         });
 
+        btnSearch = (ImageView) getActivity().findViewById(R.id.seaarch);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                search();
+            }
+        });
+
         insertedList = (ListView) getActivity().findViewById(R.id.devListInserted);
         insertedAdapter = new InsertedDeviceListAdapter(getAct(), R.layout.row_register_device, groupDevice.getDevices(), this);
         insertedList.setAdapter(insertedAdapter);
@@ -92,6 +112,22 @@ public class DeviceFragment extends _baseGroupFragment {
         getIpFromArpCache();
 
     }
+
+    private void search() {
+      //  LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        ImageView iv = (ImageView)inflater.inflate(R.layout.iv_refresh, null);
+        Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_refresh);
+        rotation.setRepeatCount(Animation.INFINITE);
+        btnSearch.startAnimation(rotation);
+      //  item.setActionView(btnSearch);
+        new BackgroundTask().execute((Void) null);
+    }
+
+    public void updateList() {
+        networkDevices.clear();
+        getIpFromArpCache();
+    }
+
 
     public void addDevice() {
         final String[] m_Text = {""};
@@ -143,34 +179,19 @@ public class DeviceFragment extends _baseGroupFragment {
         MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getAct().allGroup);
         insertedAdapter.notifyDataSetChanged();
         MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, null);
-
-
     }
-
-
-    private final static String MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$";
 
     private void getIpFromArpCache() {
         BufferedReader br = null;
         char buffer[] = new char[65000];
-        String ips = "192.168.0.38";
         String currentLine;
         try {
-            String ptrn = String.format(MAC_RE, ips.replace(".", "\\."));
-            Pattern pattern = Pattern.compile(ptrn);
+
             br = new BufferedReader(new FileReader(new File("/proc/net/arp")), 8 * 1024);
             br.close();
             Thread.sleep(1000);
             br = new BufferedReader(new FileReader(new File("/proc/net/arp")), 8 * 1024);
-            Matcher matcher;
             while ((currentLine = br.readLine()) != null) {
-                matcher = pattern.matcher(currentLine);
-                if (matcher.matches()) {
-                    //hw = matcher.group(1);
-                    Log.i("matcher", matcher.group(1));
-
-                    //break;
-                }
                 String[] splitted = currentLine.split(" +");
                 if (splitted != null && splitted.length >= 4) {
                     String ip = splitted[0];
@@ -183,8 +204,11 @@ public class DeviceFragment extends _baseGroupFragment {
                             //                          mac = mac.substring(0,remove) + mac.substring(remove+1);
                             //   mac = mac.replace(":", "");
                             Log.i("ds", "getIpFromArpCache() :: ip : " + ip + " mac : " + mac);
-                            networkDevices.add(ip);
-                            netwokAdapter.notifyDataSetChanged();
+
+                            if (filter(mac.substring(0, 8).toUpperCase())) {
+                                networkDevices.add(ip);
+                                netwokAdapter.notifyDataSetChanged();
+                            }
                             //mIpAddressesList.add(new IpAddress(ip, mac));
                         }
                     }
@@ -204,6 +228,47 @@ public class DeviceFragment extends _baseGroupFragment {
         }
     }
 
+    private boolean filter(String mac) {
+        Log.d("mac", mac);
+        List<String> filter = new ArrayList<>();
+        filter.add("F0:FE:6B");
+        filter.add("AC:CF:23");
+        return filter.contains(mac);
+    }
 
+    public class BackgroundTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            @SuppressLint("WifiManagerLeak") WifiManager wm = (WifiManager) getContext().getSystemService(WIFI_SERVICE);
+            String IP = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+            final String subIP = IP.substring(0, IP.lastIndexOf("."));
+            for (int i = 1; i < 255; i++) {
+                Ping.doPing(subIP + "." + i);
+                if (i % 50 == 0)
+                    publishProgress((Void) null);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+            updateList();
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            updateList();
+            btnSearch.animate().cancel();
+        }
+
+    }
 }
 

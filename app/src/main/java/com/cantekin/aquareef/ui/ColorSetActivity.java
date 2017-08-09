@@ -2,10 +2,12 @@ package com.cantekin.aquareef.ui;
 
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -210,24 +212,29 @@ public class ColorSetActivity extends AppCompatActivity {
 
     private void setListener(final SeekBar seekBar, int redValue, int toggle) {
         final TextView valueText = (TextView) findViewById(redValue);
-        ToggleSwitch toggleSwitch = (ToggleSwitch) findViewById(toggle);
-        toggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
+
+        RadioGroup toggleSwitch = (RadioGroup) findViewById(toggle);
+
+        toggleSwitch.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (seekBar.getProgress() >= 0 && seekBar.getProgress() <= 100) {//Auto
-                    if (position == 0 && seekBar.getProgress() > 0) {//-
+                    if (checkedId == R.id.redPlus && seekBar.getProgress() > 0) {//-
                         seekBar.setProgress(seekBar.getProgress() - 1);
-                    } else if (position == 1 && seekBar.getProgress() < 100) {//+
+                        valueText.setText(String.valueOf(seekBar.getProgress()));
+                        group.clearCheck();
+                    } else if (checkedId == R.id.minus && seekBar.getProgress() < 100) {//+
                         seekBar.setProgress(seekBar.getProgress() + 1);
+                        valueText.setText(String.valueOf(seekBar.getProgress()));
+                        group.clearCheck();
                     }
-                    valueText.setText(String.valueOf(seekBar.getProgress()));
                 }
             }
         });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                valueText.setText(String.valueOf(seekBar.getProgress()));
             }
 
             @Override

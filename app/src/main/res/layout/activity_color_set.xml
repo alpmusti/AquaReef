@@ -169,20 +169,43 @@
                 android:layout_weight="1"
                 android:textSize="24sp" />
 
-            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+
+            <RadioGroup
                 android:id="@+id/color_toggle_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10sp"
-                custom:activeBgColor="@color/lightGray"
-                custom:activeTextColor="@android:color/darker_gray"
-                custom:cornerRadius="5dp"
-                custom:inactiveBgColor="@color/lightGray"
-                custom:inactiveTextColor="@android:color/darker_gray"
-                custom:separatorColor="@android:color/black"
-                custom:textToggleLeft="@string/eski"
-                custom:textToggleRight="@string/arti"
-                custom:toggleWidth="40dp" />
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/toggle_out_line_light"
+                android:divider="@drawable/toggle_divider_light"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <RadioButton
+                    android:id="@+id/redPlus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/eski"
+                    android:textColor="@android:color/black" />
+
+                <RadioButton
+                    android:id="@+id/minus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/arti"
+                    android:textColor="@android:color/black" />
+            </RadioGroup>
+
 
         </LinearLayout>
 

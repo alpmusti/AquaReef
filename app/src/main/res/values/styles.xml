@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -15,9 +15,13 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <!--<style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">-->
+        <!--//<item name="colorAccent">@color/colorAccent</item>-->
+    <!--</style>-->
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_activity</item>
+        <item name="android:windowBackground">@drawable/launch</item>
     </style>
     <style name="seekBarThema" parent="android:Widget.SeekBar">
         <item name="android:layout_weight">1</item>

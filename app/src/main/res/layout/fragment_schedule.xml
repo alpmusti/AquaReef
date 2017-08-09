@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="clip_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="2dp">
 
 
             <TextView
@@ -43,39 +44,115 @@
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
-            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-                android:id="@+id/toggle_schedule_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+            <RadioGroup
+                android:id="@+id/toggleGroupOne"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/toggle_out_line_light"
+                android:divider="@drawable/toggle_divider_light"
+                android:orientation="horizontal"
+                android:showDividers="middle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="30dp"
-                android:textSize="10sp"
-                custom:activeBgColor="@android:color/darker_gray"
-                custom:activeTextColor="@android:color/black"
-                custom:cornerRadius="7dp"
-                custom:inactiveBgColor="@android:color/darker_gray"
-                custom:inactiveTextColor="@android:color/black"
-                custom:separatorColor="@android:color/black"
-                custom:toggleWidth="80dp" />
+                android:layout_marginTop="20dp">
 
-            <belka.us.androidtoggleswitch.widgets.ToggleSwitch
-                android:id="@+id/toggle_schedule_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                <RadioButton
+                    android:id="@+id/redToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/kirmizi" />
+
+                <RadioButton
+                    android:id="@+id/greenToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+
+                    android:text="@string/yesil" />
+
+                <RadioButton
+                    android:id="@+id/royalBToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+
+                    android:text="@string/royalBlue" />
+
+                <RadioButton
+                    android:id="@+id/blueToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+
+                    android:gravity="center"
+                    android:text="@string/mavi" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/toggleGroupTwo"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/toggle_out_line_light"
+                android:divider="@drawable/toggle_divider_light"
+                android:orientation="horizontal"
+                android:showDividers="middle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="30dp"
-                android:textSize="10sp"
-                custom:activeBgColor="@android:color/darker_gray"
-                custom:activeTextColor="@android:color/black"
-                custom:cornerRadius="7dp"
-                custom:inactiveBgColor="@android:color/darker_gray"
-                custom:inactiveTextColor="@android:color/black"
-                custom:separatorColor="@android:color/black"
-                custom:toggleWidth="80dp" />
+                android:layout_marginTop="20dp">
+
+                <RadioButton
+                    android:id="@+id/whiteToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/beyaz" />
+
+                <RadioButton
+                    android:id="@+id/dWhiteToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/gunisigi" />
+
+                <RadioButton
+                    android:id="@+id/UVToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/uv" />
+
+                <RadioButton
+                    android:id="@+id/moonToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background_light"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/moon" />
+            </RadioGroup>
+
         </LinearLayout>
 
     </ScrollView>

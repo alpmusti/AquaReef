@@ -47,28 +47,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initActivity();
         replaceFragment(new ManualFragment());
-        initNetwork();
-    }
-
-    private void initNetwork() {
-        //arp güncellensin diye yapıyoruz bu işlemi
-        @SuppressLint("WifiManagerLeak") WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
-        String IP = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-        final String subIP = IP.substring(0, IP.lastIndexOf("."));
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 1; i < 255; i++)
-                    Ping.doPing(subIP + "." + i);
-            }
-        }).start();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         clinetAdapter = new SendDataToClient(this);
-
+        sendDataDevice("!!!!!!!!!!!!!!!");
     }
 
     public void sendDataDevice(String data) {
@@ -80,7 +65,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void takeDevice() {
-        Log.i("Cihazdan","alma başlatıldı");
+        Log.i("Cihazdan", "alma başlatıldı");
         clinetAdapter.receive();
     }
 
@@ -129,11 +114,20 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
-            if (currentFragment instanceof ManualFragment)
-                finish();
-            else
+            if (currentFragment instanceof ManualFragment) {
+                exit();
+            } else
                 super.onBackPressed();
         }
+    }
+
+    private void exit() {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+        finish();
+        System.exit(0);
     }
 
     @Override
@@ -169,7 +163,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.fragment_fav) {
             replaceFragment(new FavoritFragment());
 
-        }else if (id == R.id.fragment_aqualink) {
+        } else if (id == R.id.fragment_aqualink) {
             //replaceFragment(new SettingsFragment());
         } else if (id == R.id.fragment_settings) {
             replaceFragment(new SettingsFragment());

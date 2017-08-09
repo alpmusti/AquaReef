@@ -1,7 +1,9 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -12,12 +14,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.Data.Data;
+import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,7 +55,7 @@ public class ManualFragment extends _baseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        setActionBarText("Manual");
+        setActionBarText(getString(R.string.manual));
         return inflater.inflate(R.layout.fragment_manual, container, false);
     }
 
@@ -143,20 +148,27 @@ public class ManualFragment extends _baseFragment {
         ((MainActivity) getActivity()).sendDataDevice(data.stringToSimpleArrayBufferFavorite());
     }
 
-    private void setListener(final SeekBar seekBar, int redValue, int toggle) {
+    private void setListener(final SeekBar seekBar, int redValue, int toggleId) {
         final TextView valueText = (TextView) getActivity().findViewById(redValue);
-        ToggleSwitch toggleSwitch = (ToggleSwitch) getActivity().findViewById(toggle);
-        toggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
+        RadioGroup toggle = (RadioGroup) getActivity().findViewById(toggleId);
+
+        toggle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (seekBar.getProgress() >= 0 && seekBar.getProgress() <= 100) {//Auto
-                    if (position == 0 && seekBar.getProgress() > 0) {//-
+                    if (checkedId == R.id.redPlus && seekBar.getProgress() > 0) {//-
                         seekBar.setProgress(seekBar.getProgress() - 1);
-                    } else if (position == 1 && seekBar.getProgress() < 100) {//+
+                        valueText.setText(String.valueOf(seekBar.getProgress()));
+                        changeColorListener();
+                        group.clearCheck();
+                    } else if (checkedId == R.id.minus && seekBar.getProgress() < 100) {//+
                         seekBar.setProgress(seekBar.getProgress() + 1);
+                        valueText.setText(String.valueOf(seekBar.getProgress()));
+                        changeColorListener();
+                        group.clearCheck();
                     }
-                    valueText.setText(String.valueOf(seekBar.getProgress()));
-                    changeColorListener();
+
+
                 }
             }
         });

@@ -68,7 +68,7 @@
             <Button
                 android:id="@+id/settings_btn_clock"
                 android:layout_width="103dp"
-                android:layout_height="22dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_dark"
                 android:text="@string/gonder"
                 android:textColor="@android:color/background_light"
@@ -104,7 +104,7 @@
             <Button
                 android:id="@+id/settings_btn_time"
                 android:layout_width="103dp"
-                android:layout_height="22dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_dark"
                 android:text="@string/gonder"
                 android:textColor="@android:color/background_light"
@@ -126,6 +126,7 @@
             android:id="@+id/settings_txt_buy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_marginLeft="5dp"
             android:text="@string/aquareef_sat_n_al"
             android:textStyle="bold" />

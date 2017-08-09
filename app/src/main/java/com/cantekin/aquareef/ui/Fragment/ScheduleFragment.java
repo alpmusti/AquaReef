@@ -3,12 +3,14 @@ package com.cantekin.aquareef.ui.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.Data.DataSchedule;
@@ -24,7 +26,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
@@ -40,8 +41,8 @@ import lecho.lib.hellocharts.view.LineChartView;
 public class ScheduleFragment extends _baseFragment {
 
     LineChartView chart;
-    ToggleSwitch toggleSwitchOne;
-    ToggleSwitch toggleSwitchTwo;
+    RadioGroup toggleSwitchOne;
+    RadioGroup toggleSwitchTwo;
     private Schedule scheduleData;
     private TextView txtTitle;
 
@@ -102,7 +103,11 @@ public class ScheduleFragment extends _baseFragment {
         txtTakeDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).takeDevice();
+                try {
+                    ((MainActivity) getActivity()).takeDevice();
+                }
+                catch (Exception e) {
+                }
             }
         });
         initToggle();
@@ -204,40 +209,6 @@ public class ScheduleFragment extends _baseFragment {
         }
 
 
-//        List<PointValue> values = new ArrayList<PointValue>();
-//        values.add(new PointValue(0, 20));
-//        values.add(new PointValue(5, 40));
-//        values.add(new PointValue(12, 80));
-//        values.add(new PointValue(24, 50));
-//
-//
-//        List<PointValue> values2 = new ArrayList<PointValue>();
-//        values2.add(new PointValue(2, 0));
-//        values2.add(new PointValue(3, 80));
-//        values2.add(new PointValue(18, 80));
-//        values2.add(new PointValue(20, 15));
-//        values2.add(new PointValue(24, 0));
-//
-//        //In most cased you can call data model methods in builder-pattern-like manner.
-//        Line line = new Line(values).setColor(Color.BLUE).setCubic(false);
-//        List<Line> lines = new ArrayList<Line>();
-//
-//        line.setHasLabels(true);
-//        //line.setHasLabelsOnlyForSelected(hasLabelForSelected);
-//        line.setHasLines(true);
-//        line.setHasPoints(false);
-//        //    line.setHasGradientToTransparent(hasGradientToTransparent);
-//        lines.add(line);
-//
-//        Line line2 = new Line(values2).setColor(Color.GREEN).setCubic(false);
-//        //line.setShape(ValueShape.);
-//
-//        line2.setHasLabels(true);
-//        line.setHasLabelsOnlyForSelected(true);
-//        line2.setHasLines(true);
-//        line2.setHasPoints(false);
-//
-//        lines.add(line2);
 
         LineChartData data = new LineChartData();
 
@@ -268,30 +239,23 @@ public class ScheduleFragment extends _baseFragment {
     }
 
     private void initToggle() {
-        toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_one);
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add(getString(R.string.kirmizi));
-        labels.add(getString(R.string.yesil));
-        labels.add(getString(R.string.r_blue));
-        labels.add(getString(R.string.mavi));
-        toggleSwitchOne.setLabels(labels);
-        toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
-
+        toggleSwitchOne = (RadioGroup) getActivity().findViewById(R.id.toggleGroupOne);
+        toggleSwitchOne.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 Intent intent = new Intent(getActivity(), ColorSetActivity.class);
                 String colorData = "";
-                switch (position) {
-                    case 0:
+                switch (checkedId) {
+                    case R.id.redToggle:
                         colorData = DefaultData.colorRed;
                         break;
-                    case 1:
+                    case R.id.greenToggle:
                         colorData = DefaultData.colorGreen;
                         break;
-                    case 2:
+                    case R.id.royalBToggle:
                         colorData = DefaultData.colorRoyal;
                         break;
-                    case 3:
+                    case R.id.blueToggle:
                         colorData = DefaultData.colorBlue;
                         break;
                 }
@@ -300,31 +264,25 @@ public class ScheduleFragment extends _baseFragment {
             }
         });
 
-        toggleSwitchTwo = (ToggleSwitch) getActivity().findViewById(R.id.toggle_schedule_two);
-        labels = new ArrayList<>();
-        labels.add(getString(R.string.beyaz));
-        labels.add(getString(R.string.gunisigi));
-        labels.add(getString(R.string.uv));
-        labels.add(getString(R.string.moon));
-        toggleSwitchTwo.setLabels(labels);
 
-        toggleSwitchTwo.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
 
+        toggleSwitchTwo = (RadioGroup) getActivity().findViewById(R.id.toggleGroupTwo);
+        toggleSwitchTwo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onToggleSwitchChangeListener(int position, boolean isChecked) {
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 Intent intent = new Intent(getActivity(), ColorSetActivity.class);
                 String colorData = "";
-                switch (position) {
-                    case 0:
+                switch (checkedId) {
+                    case R.id.whiteToggle:
                         colorData = DefaultData.colorWhite;
                         break;
-                    case 1:
+                    case R.id.dWhiteToggle:
                         colorData = DefaultData.colorDWhite;
                         break;
-                    case 2:
+                    case R.id.UVToggle:
                         colorData = DefaultData.colorUV;
                         break;
-                    case 3:
+                    case R.id.moonToggle:
                         colorData = DefaultData.colorMoon;
                         break;
                 }
@@ -332,6 +290,7 @@ public class ScheduleFragment extends _baseFragment {
                 getActivity().startActivity(intent);
             }
         });
+
     }
 
     private void resetViewport() {
@@ -340,7 +299,7 @@ public class ScheduleFragment extends _baseFragment {
         v.bottom = 0;
         v.top = 110;
         v.left = 0;
-        v.right = 25;
+        v.right = 25.2f;
         chart.setMaximumViewport(v);
         chart.setCurrentViewport(v);
     }

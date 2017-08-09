@@ -16,13 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/varsayilan"
+
+            android:background="@color/gray_very_light"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <ListView
             android:id="@+id/fvrDefaultlists"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textView12"
@@ -30,6 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/favorites"
+            android:background="@color/gray_very_light"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
             android:textSize="18sp"
             android:textStyle="bold" />
 

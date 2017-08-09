@@ -99,27 +99,47 @@
                         android:id="@+id/redValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/sifir"
                         android:textAlignment="center"
                         android:textColor="@color/gray_very_light"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:text="@string/sifir"
                         tools:ignore="NestedWeights" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_red"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            android:textColor="@android:color/white" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            android:textColor="@android:color/white" />
+                    </RadioGroup>
                 </LinearLayout>
 
             </LinearLayout>
@@ -174,20 +194,42 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_green"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            android:textColor="@android:color/white"
+                            tools:ignore="DuplicateIds" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            android:textColor="@android:color/white"
+                            tools:ignore="DuplicateIds" />
+                    </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
 
@@ -210,7 +252,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="@string/royalBlue"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/colorPrimaryDark"
                         android:theme="@style/leftLabelThema" />
 
                     <SeekBar
@@ -240,20 +282,42 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_royal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+                    </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
 
@@ -306,20 +370,43 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_blue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            tools:ignore="DuplicateIds"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            android:textColor="@android:color/white" />
+                    </RadioGroup>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -372,20 +459,43 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+                    </RadioGroup>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -439,20 +549,43 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+                    </RadioGroup>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -506,20 +639,43 @@
                         android:textStyle="bold"
                         tools:ignore="InefficientWeight" />
 
-                    <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                    <RadioGroup
                         android:id="@+id/toggle_uv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="10sp"
-                        custom:activeBgColor="@android:color/darker_gray"
-                        custom:activeTextColor="@android:color/black"
-                        custom:cornerRadius="5dp"
-                        custom:inactiveBgColor="@android:color/darker_gray"
-                        custom:inactiveTextColor="@android:color/black"
-                        custom:separatorColor="@android:color/black"
-                        custom:textToggleLeft="@string/eski"
-                        custom:textToggleRight="@string/arti"
-                        custom:toggleWidth="40dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/toggle_out_line_dark"
+                        android:divider="@drawable/toggle_divider_dark"
+                        android:orientation="horizontal"
+                        android:showDividers="middle">
+
+                        <RadioButton
+                            android:id="@+id/redPlus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/eski"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+
+                        <RadioButton
+                            android:id="@+id/minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/toggle_background_dark"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="@string/arti"
+                            tools:ignore="DuplicateIds"
+                            android:textColor="@android:color/white" />
+                    </RadioGroup>
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -33,14 +33,14 @@
     <string name="bulut_efekti">Bulut Efekti</string>
     <string name="disko_efekti">Disko Efekti</string>
     <string name="favorites">Favorites</string>
-    <string name="manual">El ile</string>
+    <string name="manual">Manuel</string>
     <string name="auto">Otomatik</string>
     <string name="k_rm_z_660nm">Kırmızı(660nm)</string>
     <string name="ye_il_530nm">Yeşil(530nm)</string>
     <string name="beyaz">Beyaz</string>
     <string name="gunisigi">Gün Işığı</string>
     <string name="uv">UV</string>
-    <string name="cihazdan_al">Cihazdan AL</string>
+    <string name="cihazdan_al">Cihazdan Al</string>
     <string name="g_n_similasyon_saati_leri_al">Gün Similasyon Saati İleri Al</string>
     <string name="saat">Saat:</string>
     <string name="saat_bilgisi_g_nder">Saat Bilgisi Gönder</string>
