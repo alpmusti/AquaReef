@@ -34,7 +34,7 @@
                     android:cropToPadding="false"
                     android:scaleType="fitCenter"
                     android:tag="iiiiiiiiiiiiiii"
-                    custom:srcCompat="@mipmap/aqua_sunset" />
+                    custom:srcCompat="@drawable/sunset" />
 
                 <ImageView
                     android:id="@+id/imgFlash"
@@ -46,7 +46,7 @@
                     android:cropToPadding="false"
                     android:scaleType="fitCenter"
                     android:tag="jjjjjjjjjjjjjjj"
-                    custom:srcCompat="@mipmap/aqua_strom" />
+                    custom:srcCompat="@drawable/storm" />
 
             </TableRow>
 
@@ -88,7 +88,7 @@
                     android:cropToPadding="false"
                     android:scaleType="fitCenter"
                     android:tag="kkkkkkkkkkkkkkk"
-                    custom:srcCompat="@mipmap/aqua_cloud" />
+                    custom:srcCompat="@drawable/cloud" />
 
                 <ImageView
                     android:id="@+id/imgDisco"
@@ -100,7 +100,7 @@
                     android:cropToPadding="false"
                     android:scaleType="fitCenter"
                     android:tag="lllllllllllllll"
-                    custom:srcCompat="@mipmap/aqua_disco" />
+                    custom:srcCompat="@drawable/disco" />
 
             </TableRow>
 

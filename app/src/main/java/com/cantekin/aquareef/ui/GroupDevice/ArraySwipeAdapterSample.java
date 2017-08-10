@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.Data.GrupDevice;
@@ -67,7 +69,7 @@ public class ArraySwipeAdapterSample extends ArraySwipeAdapter {
                     ((GroupActivity) getContext()).replaceFragment(DeviceFragment.newInstance(device));
                 }
             });
-            CheckBox checkBox = (CheckBox) v.findViewById(R.id.row_chk_item);
+            final CheckBox checkBox = (CheckBox) v.findViewById(R.id.row_chk_item);
             checkBox.setChecked(((GroupActivity) getContext()).isContainsItem(device) != -1);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -77,6 +79,24 @@ public class ArraySwipeAdapterSample extends ArraySwipeAdapter {
                     else
                         fragment.removeAcitiveGrup(device);
 
+                }
+            });
+            LinearLayout ly=(LinearLayout) v.findViewById(R.id.row_layout);
+            ly.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("dsds","dsadas");
+                    boolean isChecked=checkBox.isChecked();
+                    Log.d("dsds",isChecked+"");
+
+                    if (!isChecked) {
+                        fragment.addAcitiveGrup(device);
+                        checkBox.setChecked(true);
+                    }
+                    else {
+                        checkBox.setChecked(false);
+                        fragment.removeAcitiveGrup(device);
+                    }
                 }
             });
         }

@@ -158,8 +158,10 @@ public class AllColorActivity extends AppCompatActivity {
         mainRow.setOrientation(LinearLayout.VERTICAL);
 
         TextView title = new TextView(this);
+        title.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110));
+        title.setGravity(Gravity.CENTER_VERTICAL);
         title.setText(item.getName());
-        title.setPadding(paddingLeft, 0, 0, 0);
+        title.setPadding(paddingLeft, 5, 0, 5);
         title.setTextColor(Color.WHITE);
         title.setBackgroundColor(Color.parseColor(item.getColor()));
         mainRow.addView(title);

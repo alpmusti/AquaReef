@@ -114,12 +114,9 @@ public class DeviceFragment extends _baseGroupFragment {
     }
 
     private void search() {
-      //  LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        ImageView iv = (ImageView)inflater.inflate(R.layout.iv_refresh, null);
         Animation rotation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_refresh);
         rotation.setRepeatCount(Animation.INFINITE);
         btnSearch.startAnimation(rotation);
-      //  item.setActionView(btnSearch);
         new BackgroundTask().execute((Void) null);
     }
 
@@ -250,16 +247,8 @@ public class DeviceFragment extends _baseGroupFragment {
             final String subIP = IP.substring(0, IP.lastIndexOf("."));
             for (int i = 1; i < 255; i++) {
                 Ping.doPing(subIP + "." + i);
-                if (i % 50 == 0)
-                    publishProgress((Void) null);
             }
             return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            updateList();
         }
 
         @Override

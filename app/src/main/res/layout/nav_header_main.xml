@@ -15,12 +15,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:layout_weight="0.39"
+        android:adjustViewBounds="true"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@mipmap/logo" />
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/aquareeflogo" />
 
     <TextView
         android:layout_width="match_parent"

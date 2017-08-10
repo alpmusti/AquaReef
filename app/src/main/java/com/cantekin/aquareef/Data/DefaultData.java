@@ -286,52 +286,6 @@ public class DefaultData {
 
 
 
-        //"AquaReef Marine
-        item = new ArrayList<>();
-        red = new DataSchedule("Red", 'a', "#ef473a", "14:00", "15:00", "19:00", "20:00", 25);
-        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 20);
-        rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "11:30", "12:30", "21:30", "22:30",100);
-        blue = new DataSchedule("Blue", 'd', "#387ef5", "11:30", "12:30", "21:30", "23:30",100);
-        white = new DataSchedule("White", 'e', "#b2b2b2", "12:00", "13:00", "21:00", "22:00",100);
-        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "12:00", "13:00", "16:00", "16:30", 50);
-        uv = new DataSchedule("UV", 'g', "#886aea", "11:00", "12:00", "16:00", "17:30", 80);
-        moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
-        item.add(red);
-        item.add(green);
-        item.add(rBlue);
-        item.add(blue);
-        item.add(white);
-        item.add(dWhite);
-        item.add(uv);
-        item.add(moon);
-        Schedule schedule5 = new Schedule();
-        schedule5.setName("AquaReef Marine");
-        schedule5.setData(item);
-        resultList.add(schedule5);
-
-
-        //"AquaReef Musteri
-        item = new ArrayList<>();
-        red = new DataSchedule("Red", 'a', "#ef473a", "15:00", "16:00", "21:00", "22:00", 30);
-        green = new DataSchedule("Green", 'b', "#33cd5f", "14:00", "15:00", "19:00", "20:00", 20);
-        rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "12:00", "13:30", "21:30", "23:30",100);
-        blue = new DataSchedule("Blue", 'd', "#387ef5", "12:30", "13:30", "21:30", "23:30",100);
-        white = new DataSchedule("White", 'e', "#b2b2b2", "14:00", "15:00", "20:00", "22:00",70);
-        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "15:00", "16:00", "19:00", "20:30", 50);
-        uv = new DataSchedule("UV", 'g', "#886aea", "13:00", "14:00", "19:00", "21:30", 70);
-        moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
-        item.add(red);
-        item.add(green);
-        item.add(rBlue);
-        item.add(blue);
-        item.add(white);
-        item.add(dWhite);
-        item.add(uv);
-        item.add(moon);
-        Schedule schedule6 = new Schedule();
-        schedule6.setName("AquaReef Musteri");
-        schedule6.setData(item);
-        resultList.add(schedule5);
         return resultList;
     }
 }

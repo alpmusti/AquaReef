@@ -44,6 +44,12 @@ public class InsertedDeviceListAdapter extends ArraySwipeAdapter {
         if (ip != null) {
             TextView txtName = (TextView) v.findViewById(R.id.row_txt_name);
             txtName.setText(ip);
+            txtName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((GroupActivity) getContext()).sendStrom(ip);
+                }
+            });
             ImageView btnDelete = (ImageView) v.findViewById(R.id.row_btn_delete);
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override

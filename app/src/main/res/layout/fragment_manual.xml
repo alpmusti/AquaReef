@@ -28,8 +28,6 @@
                     android:id="@+id/toggle_manual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
                     custom:activeBgColor="@android:color/holo_blue_dark"
                     custom:activeTextColor="@android:color/white"
                     custom:cornerRadius="5dp"
@@ -38,18 +36,28 @@
                     custom:separatorColor="@android:color/darker_gray"
                     custom:textToggleLeft="@string/manual"
                     custom:textToggleRight="@string/auto"
-                    custom:toggleWidth="82dp">
+                    custom:toggleWidth="82dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/btnAddFavorite"
+                    android:layout_toStartOf="@+id/btnAddFavorite"
+                    android:layout_marginRight="61dp"
+                    android:layout_marginEnd="61dp">
 
                 </belka.us.androidtoggleswitch.widgets.ToggleSwitch>
 
                 <ImageButton
                     android:id="@+id/btnAddFavorite"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_weight="1"
-                    android:background="@mipmap/aqua_favorites"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/round_button"
+                    android:cropToPadding="true"
+                    android:foregroundGravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/aqua_favorites"
                     android:text="Button" />
 
 

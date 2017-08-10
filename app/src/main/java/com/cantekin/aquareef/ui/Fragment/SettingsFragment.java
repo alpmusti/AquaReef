@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.SendDataToClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
@@ -26,7 +28,7 @@ public class SettingsFragment extends _baseFragment {
 
     LineChartView chart;
     ToggleSwitch toggleSwitchOne;
-    int pushTime = 0;
+    int pushTime = 1;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -79,15 +81,22 @@ public class SettingsFragment extends _baseFragment {
 
     private void sendTime() {
         char code = 'y';
-        Date d = new Date();
+        Calendar cal = Calendar.getInstance();
+        Date d = cal.getTime();
+        int year = cal.get(Calendar.YEAR);
+        Log.d("Tarih", d.toString());
+        Log.d("Ay", year + "");
+        Log.d("Ay", cal.get(Calendar.MONTH) + "");
+
         byte[] buffer = new byte[15];
         buffer[0] = (byte) code;
         buffer[1] = 0;
         buffer[2] = (byte) d.getDate();
         buffer[3] = 0;
-        buffer[4] = (byte) d.getMonth();
+        buffer[4] = (byte) (d.getMonth() + 1);
         buffer[5] = 0;
-        buffer[6] = (byte) (d.getYear() % 2000);
+        buffer[6] = (byte) (year % 2000);
+        Log.d("Ay", buffer[6] + "");
         buffer[7] = 0;
         buffer[8] = (byte) d.getHours();
         buffer[9] = 0;
@@ -106,7 +115,8 @@ public class SettingsFragment extends _baseFragment {
 
     private void pushTimeSend() {
         char code = 's';
-        Date d = new Date();
+        Calendar cal = Calendar.getInstance();
+        Date d = cal.getTime();
         byte[] buffer = new byte[15];
         buffer[0] = (byte) code;
         buffer[1] = 0;
@@ -131,13 +141,13 @@ public class SettingsFragment extends _baseFragment {
     private void initToggle() {
         toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.settings_toggle);
         ArrayList<String> labels = new ArrayList<>();
-        labels.add("1 "+getString(R.string.saat_tipi));
-        labels.add("2 "+getString(R.string.saat_tipi));
-        labels.add("3 "+getString(R.string.saat_tipi));
-        labels.add("4 "+getString(R.string.saat_tipi));
-        labels.add("5 "+getString(R.string.saat_tipi));
-        labels.add("6 "+getString(R.string.saat_tipi));
-        labels.add("7 "+getString(R.string.saat_tipi));
+        labels.add("1 " + getString(R.string.saat_tipi));
+        labels.add("2 " + getString(R.string.saat_tipi));
+        labels.add("3 " + getString(R.string.saat_tipi));
+        labels.add("4 " + getString(R.string.saat_tipi));
+        labels.add("5 " + getString(R.string.saat_tipi));
+        labels.add("6 " + getString(R.string.saat_tipi));
+        labels.add("7 " + getString(R.string.saat_tipi));
         toggleSwitchOne.setLabels(labels);
         toggleSwitchOne.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener() {
             @Override
