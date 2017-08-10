@@ -25,7 +25,9 @@
         <ListView
             android:id="@+id/lst_grups"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:divider="#ffffff"
+            android:dividerHeight="4px"/>
 
     </LinearLayout>
 
