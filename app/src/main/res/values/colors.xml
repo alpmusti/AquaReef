@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#1837fb</color>
     <color name="colorAccent">#d446fb</color>
     <color name="lightGray">#d2d1d2</color>
+    <color name="righMenuTransparant">#5afdfdfd</color>
 </resources>
