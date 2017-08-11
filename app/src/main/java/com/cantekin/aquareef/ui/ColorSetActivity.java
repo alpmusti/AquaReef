@@ -150,6 +150,8 @@ public class ColorSetActivity extends AppCompatActivity {
         else
             moon.setVisibility(View.GONE);
 
+        getSupportActionBar().setTitle(color);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -207,6 +209,11 @@ public class ColorSetActivity extends AppCompatActivity {
                 }, mHour, mMinute, true);
         timePickerDialog.show();
 
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 

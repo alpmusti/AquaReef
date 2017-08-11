@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,6 +131,10 @@ public class GroupFragment extends _baseGroupFragment {
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
                 m_Text[1] = inputDesc.getText().toString();
+                if (TextUtils.isEmpty(m_Text[0])) {
+                    Toast.makeText(getContext(), getString(R.string.lutfen_isim_girin), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 GrupDevice device = new GrupDevice();
                 device.setName(m_Text[0]);
                 device.setDescription(m_Text[1]);

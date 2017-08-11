@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DefaultData;
@@ -66,7 +68,7 @@ public class FavoritFragment extends _baseFragment {
         favorites = new HashMap<>();
         if (fav != null)
             favorites = gson.fromJson(fav, type);
-        setList(favorites, R.id.fvrFavoritLists);
+        setListDeleted(favorites, R.id.fvrFavoritLists);
 
     }
 
@@ -76,8 +78,26 @@ public class FavoritFragment extends _baseFragment {
             defaultList.add(entry.getKey());
         }
         ListView defaultListView = (ListView) getView().findViewById(listView);
-        InsertedDeviceListAdapter dfltAdapter = new InsertedDeviceListAdapter(getActivity(), R.layout.row_register_device, defaultList, this);
-      //  ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
+        //   InsertedDeviceListAdapter dfltAdapter = new InsertedDeviceListAdapter(getActivity(), R.layout.row_register_device, defaultList, this);
+        ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
+        defaultListView.setAdapter(dfltAdapter);
+        defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String value = (String) parent.getItemAtPosition(position);
+                sendFavorites(favoriList.get(value).stringToSimpleArrayBufferFavorite());
+            }
+        });
+    }
+
+    private void setListDeleted(final Map<String, Data> favoriList, int listView) {
+        List<String> defaultList = new ArrayList<>();
+        for (Map.Entry<String, Data> entry : favoriList.entrySet()) {
+            defaultList.add(entry.getKey());
+        }
+        ListView defaultListView = (ListView) getView().findViewById(listView);
+        FavoritesListAdapter dfltAdapter = new FavoritesListAdapter(getActivity(), R.layout.row_register_device, defaultList, this);
+       // ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
         defaultListView.setAdapter(dfltAdapter);
         defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,6 +116,7 @@ public class FavoritFragment extends _baseFragment {
     }
 
     public void sendFavorites(byte[] data) {
+        Toast.makeText(getContext(), getString(R.string.gonderiliyor), Toast.LENGTH_SHORT).show();
         ((MainActivity) getActivity()).sendDataDevice(data);
     }
 }

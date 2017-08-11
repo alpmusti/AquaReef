@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.Data.MyPreference;
@@ -67,6 +69,7 @@ public class AllColorActivity extends AppCompatActivity {
             addItem(item);
         }
         getSupportActionBar().setTitle(scheduleData.getName());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView save = (TextView) findViewById(R.id.allColor_save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +91,11 @@ public class AllColorActivity extends AppCompatActivity {
                 showTemp();
             }
         });
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     private void showTemp() {
@@ -130,7 +138,10 @@ public class AllColorActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
-
+                if (TextUtils.isEmpty(m_Text[0])) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.lutfen_isim_girin), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String fav = MyPreference.getPreference(getApplicationContext()).getData(MyPreference.FAVORITESCHEDULE);
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<Schedule>>() {

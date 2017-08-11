@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DefaultData;
@@ -115,6 +117,10 @@ public class ManualFragment extends _baseFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text[0] = input.getText().toString();
+                if (TextUtils.isEmpty(m_Text[0])) {
+                    Toast.makeText(getContext(), getString(R.string.lutfen_isim_girin), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String fav = MyPreference.getPreference(getContext()).getData(MyPreference.FAVORITES);
                 Gson gson = new Gson();
                 Type type = new TypeToken<Map<String, Data>>() {

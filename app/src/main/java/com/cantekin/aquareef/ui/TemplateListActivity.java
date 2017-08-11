@@ -50,8 +50,16 @@ public class TemplateListActivity extends AppCompatActivity {
         if (fav != null)
             favorites = gson.fromJson(fav, type);
         setList(favorites, R.id.fvrFavoritLists);
+        getSupportActionBar().setTitle(getString(R.string.templates));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
     private void setList(final List<Schedule> favoriList, int listView) {
         List<String> defaultList = new ArrayList<>();

@@ -19,6 +19,13 @@
             android:weightSum="100">
 
 
+            <ImageButton
+                android:id="@+id/btnMySharardBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/back_arrow"
+                custom:srcCompat="@mipmap/back_arrow" />
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.FireBase.Model.DateAll;
 import com.cantekin.aquareef.FireBase.Model.Posts;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -89,7 +91,6 @@ public class ShareFragment extends _baseFragment {
 
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -139,6 +140,14 @@ public class ShareFragment extends _baseFragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity) getActivity()).replaceFragment(new MyShareFragment());
+            }
+        });
+
+        ImageButton back = (ImageButton) getActivity().findViewById(R.id.btnMySharardBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 

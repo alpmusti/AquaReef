@@ -99,6 +99,7 @@ public class MyShareFragment extends _baseFragment {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+
     }
 
 }

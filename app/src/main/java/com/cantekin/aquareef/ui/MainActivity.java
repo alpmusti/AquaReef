@@ -57,10 +57,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void sendDataDevice(String data) {
+        clinetAdapter.send("!!!!!!!!!!!!!!!");
         clinetAdapter.send(data);
     }
 
     public void sendDataDevice(byte[] data) {
+        clinetAdapter.send("!!!!!!!!!!!!!!!");
         clinetAdapter.send(data);
     }
 
