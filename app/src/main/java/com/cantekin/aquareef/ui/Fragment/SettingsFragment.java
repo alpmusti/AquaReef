@@ -1,7 +1,9 @@
 package com.cantekin.aquareef.ui.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -25,6 +27,7 @@ import lecho.lib.hellocharts.view.LineChartView;
  * ayarlar fragmenti
  */
 public class SettingsFragment extends _baseFragment {
+    private ProgressDialog progress;
 
     LineChartView chart;
     ToggleSwitch toggleSwitchOne;
@@ -111,6 +114,10 @@ public class SettingsFragment extends _baseFragment {
     private void send(byte[] buffer) {
         SendDataToClient clinetAdapter = new SendDataToClient(getContext());
         clinetAdapter.send(buffer);
+        progress = ProgressDialog.show(getContext(), getString(R.string.ayarlar),
+                getString(R.string.gonderiliyor), true);
+        new BackgroundTask().execute((Void) null);
+
     }
 
     private void pushTimeSend() {
@@ -157,5 +164,36 @@ public class SettingsFragment extends _baseFragment {
         });
     }
 
+    public class BackgroundTask extends AsyncTask<Void, Void, Void> {
 
+        int sleepTime = 1000;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            progress.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+    }
 }
