@@ -169,13 +169,13 @@ public class DefaultData {
     public List<Schedule> getScheduleFavorites() {
         List<Schedule> resultList = new ArrayList<>();
         List<DataSchedule> item = new ArrayList<>();
-        DataSchedule red = new DataSchedule("Red", 'a', "#ef473a", "10:00", "12:00", "17:00", "18:00", 30);
-        DataSchedule green = new DataSchedule("Green", 'b', "#33cd5f", "10:30", "12:00", "17:00", "18:00", 30);
+        DataSchedule red = new DataSchedule("Red", 'a', "#ef473a", "10:00", "12:00", "17:00", "18:00", 20);
+        DataSchedule green = new DataSchedule("Green", 'b', "#33cd5f", "10:30", "12:00", "17:00", "18:00", 20);
         DataSchedule rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "09:30", "10:30", "20:00", "21:30", 100);
         DataSchedule blue = new DataSchedule("Blue", 'd', "#387ef5", "09:30", "10:30", "20:30", "22:00", 100);
-        DataSchedule white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "19:30", 50);
-        DataSchedule dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "17:00", "18:30", 50);
-        DataSchedule uv = new DataSchedule("UV", 'g', "#886aea", "10:30", "11:30", "18:30", "20:00", 50);
+        DataSchedule white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "19:30", 70);
+        DataSchedule dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "17:00", "18:30", 40);
+        DataSchedule uv = new DataSchedule("UV", 'g', "#886aea", "10:30", "11:30", "18:30", "20:00", 80);
         DataSchedule moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
         item.add(red);
         item.add(green);
@@ -189,14 +189,15 @@ public class DefaultData {
         schedule.setName("SPS Sert Mercan");
         schedule.setData(item);
         resultList.add(schedule);
+
         //Marine
         item = new ArrayList<>();
-        red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 20);
-        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 20);
+        red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 5);
+        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 5);
         rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "09:30", "10:30", "20:00", "21:30", 100);
         blue = new DataSchedule("Blue", 'd', "#387ef5", "09:30", "10:30", "20:30", "22:00", 100);
-        white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "18:30", 60);
-        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "16:00", "17:30", 40);
+        white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "18:30", 40);
+        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "16:00", "17:30", 20);
         uv = new DataSchedule("UV", 'g', "#886aea", "10:30", "11:30", "18:30", "20:00", 40);
         moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
         item.add(red);
@@ -214,12 +215,12 @@ public class DefaultData {
 
         //LPS+SPS Mix
         item = new ArrayList<>();
-        red = new DataSchedule("Red", 'a', "#ef473a", "10:30", "12:00", "17:00", "18:00", 70);
-        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 40);
+        red = new DataSchedule("Red", 'a', "#ef473a", "10:30", "12:00", "17:00", "18:00", 10);
+        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 10);
         rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "09:30", "10:30", "20:00", "21:30", 100);
         blue = new DataSchedule("Blue", 'd', "#387ef5", "09:30", "10:30", "20:30", "22:00", 100);
-        white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "18:30", 80);
-        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "16:00", "17:30", 60);
+        white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "18:30", 50);
+        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "16:00", "17:30", 30);
         uv = new DataSchedule("UV", 'g', "#886aea", "10:30", "11:30", "18:30", "20:00", 80);
         moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
         item.add(red);
@@ -238,12 +239,12 @@ public class DefaultData {
 
         //"LPS Soft Mercan
         item = new ArrayList<>();
-        red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 30);
-        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 30);
+        red = new DataSchedule("Red", 'a', "#ef473a", "11:00", "12:00", "17:00", "18:00", 10);
+        green = new DataSchedule("Green", 'b', "#33cd5f", "11:00", "12:00", "17:00", "18:00", 10);
         rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "09:30", "10:30", "20:00", "21:30",100);
         blue = new DataSchedule("Blue", 'd', "#387ef5", "09:30", "10:30", "20:30", "22:00",100);
         white = new DataSchedule("White", 'e', "#b2b2b2", "10:30", "12:00", "17:00", "18:30", 50);
-        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "16:00", "17:30", 50);
+        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "11:00", "12:00", "16:00", "17:30", 30);
         uv = new DataSchedule("UV", 'g', "#886aea", "10:30", "11:30", "18:30", "20:00", 50);
         moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
         item.add(red);
@@ -263,12 +264,12 @@ public class DefaultData {
 
         //"AquaReef Bitkili
         item = new ArrayList<>();
-        red = new DataSchedule("Red", 'a', "#ef473a", "15:00", "16:00", "21:00", "22:00", 50);
-        green = new DataSchedule("Green", 'b', "#33cd5f", "14:00", "15:00", "19:00", "20:00", 20);
-        rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "14:00", "14:30", "22:30", "23:30",100);
-        blue = new DataSchedule("Blue", 'd', "#387ef5", "14:00", "14:30", "21:30", "23:30",100);
-        white = new DataSchedule("White", 'e', "#b2b2b2", "15:00", "16:00", "20:00", "22:00", 70);
-        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "15:00", "16:00", "19:00", "21:30", 50);
+        red = new DataSchedule("Red", 'a', "#ef473a", "15:00", "16:00", "21:00", "22:00", 10);
+        green = new DataSchedule("Green", 'b', "#33cd5f", "14:00", "15:00", "19:00", "20:00", 10);
+        rBlue = new DataSchedule("Royal Blue", 'c', "#11c1f3", "14:00", "14:30", "22:30", "23:30",60);
+        blue = new DataSchedule("Blue", 'd', "#387ef5", "14:00", "14:30", "21:30", "23:30",60);
+        white = new DataSchedule("White", 'e', "#b2b2b2", "15:00", "16:00", "20:00", "22:00", 80);
+        dWhite = new DataSchedule("D.White", 'f', "#ffc900", "15:00", "16:00", "19:00", "21:30", 40);
         uv = new DataSchedule("UV", 'g', "#886aea", "13:00", "14:00", "19:00", "21:30", 70);
         moon = new DataSchedule("Moon", 'h', "#040404", "01:00", "00:00", "00:00", "07:00", 5);
         item.add(red);
