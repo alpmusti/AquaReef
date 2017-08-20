@@ -186,32 +186,30 @@ public class ColorSetActivity extends AppCompatActivity {
         dataSchedule.setDown(txtDown.getText().toString());
         dataSchedule.setStop(txtStop.getText().toString());
         dataSchedule.setLevel(Integer.parseInt(txtLevel.getText().toString()));
-
         dataSchedule.setMoon(moon.isChecked());
         dataSchedule.setBlue(blue.getCheckedTogglePosition());
         MyPreference.getPreference(this).setData(MyPreference.ACTIVESCHEDULE, scheduleData);
     }
 
     private void showTimeDialog(final int txtId) {
-
+        txtTime = (TextView) findViewById(txtId);
         final Calendar c = Calendar.getInstance();
-        final int mHour = c.get(Calendar.HOUR_OF_DAY);
-        final int mMinute = c.get(Calendar.MINUTE);
+        final int mHour = Integer.parseInt(txtTime.getText().toString().substring(0, 2));
+        final int mMinute = Integer.parseInt(txtTime.getText().toString().substring(3));
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int selectedHour,
                                           int selectedMinute) {
-                        // setText(selectedHour, selectedMinute);
-                        txtTime = (TextView) findViewById(txtId);
                         txtTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute));
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();
 
     }
+
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
