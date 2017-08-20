@@ -79,5 +79,7 @@
     <string name="mytemplates">My Templates</string>
     <string name="gonderiliyor">Send Data</string>
     <string name="sifir">0</string>
+    <string name="yenile">Tara</string>
+    <string name="passhata">Hatalı Şifre</string>
 
 </resources>

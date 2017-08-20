@@ -1,13 +1,17 @@
 package com.cantekin.aquareef.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,9 +23,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cantekin.aquareef.Manifest;
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.Ping;
 import com.cantekin.aquareef.network.SendDataToClient;
+import com.cantekin.aquareef.ui.Fragment.AquaLinkFragment;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initActivity();
         replaceFragment(new ManualFragment());
+
     }
 
     @Override
@@ -166,7 +173,7 @@ public class MainActivity extends AppCompatActivity
             replaceFragment(new FavoritFragment());
 
         } else if (id == R.id.fragment_aqualink) {
-            //replaceFragment(new SettingsFragment());
+            replaceFragment(new AquaLinkFragment());
         } else if (id == R.id.fragment_settings) {
             replaceFragment(new SettingsFragment());
         }
@@ -190,5 +197,7 @@ public class MainActivity extends AppCompatActivity
         }
         //  }
     }
+
+
 
 }

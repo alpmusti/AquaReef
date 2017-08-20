@@ -70,6 +70,8 @@ public class ScheduleFragment extends _baseFragment {
         super.onResume();
         loadSchedule();
         loadChart();
+//        toggleSwitchOne.clearCheck();
+//        toggleSwitchTwo.clearCheck();
     }
 
     private void initFragment() {
@@ -248,6 +250,7 @@ public class ScheduleFragment extends _baseFragment {
                 switch (checkedId) {
                     case R.id.redToggle:
                         colorData = DefaultData.colorRed;
+
                         break;
                     case R.id.greenToggle:
                         colorData = DefaultData.colorGreen;
@@ -259,8 +262,11 @@ public class ScheduleFragment extends _baseFragment {
                         colorData = DefaultData.colorBlue;
                         break;
                 }
-                intent.putExtra("color", colorData);
-                getActivity().startActivity(intent);
+                if(checkedId>0) {
+                    intent.putExtra("color", colorData);
+                    getActivity().startActivity(intent);
+                    toggleSwitchOne.clearCheck();
+                }
             }
         });
 
@@ -286,8 +292,11 @@ public class ScheduleFragment extends _baseFragment {
                         colorData = DefaultData.colorMoon;
                         break;
                 }
-                intent.putExtra("color", colorData);
-                getActivity().startActivity(intent);
+                if(checkedId>0) {
+                    intent.putExtra("color", colorData);
+                    getActivity().startActivity(intent);
+                    toggleSwitchTwo.clearCheck();
+                }
             }
         });
 
