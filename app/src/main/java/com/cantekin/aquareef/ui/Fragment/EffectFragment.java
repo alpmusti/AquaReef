@@ -85,7 +85,7 @@ public class EffectFragment extends _baseFragment {
                 getString(R.string.gonderiliyor), true);
         switch (data) {
             case "iiiiiiiiiiiiiii":
-                sleepTime = 60 * 1000;
+                sleepTime = 15 * 1000;
                 break;
 
             case "jjjjjjjjjjjjjjj":
@@ -93,11 +93,11 @@ public class EffectFragment extends _baseFragment {
                 break;
 
             case "kkkkkkkkkkkkkkk":
-                sleepTime = 5 * 1000;
+                sleepTime = 4 * 1000;
                 break;
 
             case "lllllllllllllll":
-                sleepTime = 5 * 1000;
+                sleepTime = 4 * 1000;
                 break;
         }
         new BackgroundTask().execute((Void) null);
