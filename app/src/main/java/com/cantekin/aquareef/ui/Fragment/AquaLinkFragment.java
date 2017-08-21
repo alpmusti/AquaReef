@@ -1,6 +1,7 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.ScanResult;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import com.cantekin.aquareef.AquaLink.Constants;
 import com.cantekin.aquareef.AquaLink.UdpUnicast;
 import com.cantekin.aquareef.AquaLink.Utils;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.MainActivity;
 
 import java.util.List;
 
@@ -48,6 +51,7 @@ public class AquaLinkFragment extends _baseFragment {
 
     public AquaLinkFragment() {
     }
+
     @SuppressLint("WifiManagerLeak")
     private void init() {
         wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
@@ -76,6 +80,21 @@ public class AquaLinkFragment extends _baseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+        if (udp != null)
+            udp.close();
+        udp = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity) getActivity()).getSupportActionBar().show();
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // this.view = view;
@@ -101,6 +120,7 @@ public class AquaLinkFragment extends _baseFragment {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideSoftKeyboard();
                 btnOk.setEnabled(false);
                 prosess = new Thread(new Runnable() {
                     @Override
@@ -114,6 +134,11 @@ public class AquaLinkFragment extends _baseFragment {
         });
     }
 
+    public void hideSoftKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+    }
+
     private void handlerHazila() {
         mNetworkHandler = new Handler() {
             @Override
@@ -122,13 +147,19 @@ public class AquaLinkFragment extends _baseFragment {
 
                 switch (msg.what) {
                     case Constants.RESPONSE_ERROR:
-                        message.setText(R.string.passhata);
-                        //   Toast.makeText(getContext(), getString(R.string.passhata), Toast.LENGTH_SHORT).show();
+                        try {
+                            message.setText(R.string.passhata);
+                        } catch (Exception x) {
+                        }
                         btnOk.setEnabled(true);
                         break;
                     case Constants.RESPONSE_OKAY:
-                        Toast.makeText(getContext(), getString(R.string.islem_basarili), Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(getContext(), getString(R.string.islem_basarili), Toast.LENGTH_SHORT).show();
+                        } catch (Exception x) {
+                        }
                         getActivity().getSupportFragmentManager().popBackStack();
+
                         break;
                     default:
                         break;
