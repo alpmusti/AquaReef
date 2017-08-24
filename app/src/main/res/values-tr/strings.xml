@@ -80,5 +80,6 @@
     <string name="sifir">0</string>
     <string name="yenile">Tara</string>
     <string name="passhata">Hatalı Şifre</string>
+    <string name="aquareef_wifi">Lütfen AquaReef ağına dahil olun.</string>
 
 </resources>

@@ -58,10 +58,12 @@ public class AquaLinkFragment extends _baseFragment {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String ssid = wifiInfo.getSSID();
         Log.i("SSID", ssid);
-        if (!SSID.equals(ssid.replace("\"", "")))
+        if (!SSID.equals(ssid.replace("\"", ""))) {
+            Toast.makeText(getContext(), getString(R.string.aquareef_wifi), Toast.LENGTH_SHORT).show();
             getActivity().getSupportFragmentManager().popBackStack();
+            ((MainActivity)getActivity()).navigationView.getMenu().getItem(4).setChecked(false);
+        }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,15 +85,16 @@ public class AquaLinkFragment extends _baseFragment {
     public void onStart() {
         super.onStart();
         ((MainActivity) getActivity()).getSupportActionBar().hide();
-        if (udp != null)
-            udp.close();
-        udp = null;
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         ((MainActivity) getActivity()).getSupportActionBar().show();
+        if (udp != null)
+            udp.close();
+        udp = null;
     }
 
     @Override

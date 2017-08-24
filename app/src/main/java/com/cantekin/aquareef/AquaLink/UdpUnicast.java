@@ -86,6 +86,8 @@ public class UdpUnicast implements INetworkTransmission {
         if (socket != null) {
             socket.close();
         }
+        Log.e(TAG, "close");
+
     }
 
     /**
@@ -162,12 +164,13 @@ public class UdpUnicast implements INetworkTransmission {
         }
 
         void start() {
-            Log.d(TAG, "startstartstart");
+            Log.d(TAG, "start");
             if (!thread.isAlive())
                 thread.start();
         }
 
         void stop() {
+            Log.d(TAG, "stop");
             stop = true;
         }
 

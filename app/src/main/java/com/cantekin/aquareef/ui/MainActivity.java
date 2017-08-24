@@ -1,31 +1,21 @@
 package com.cantekin.aquareef.ui;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.cantekin.aquareef.Manifest;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.network.Ping;
 import com.cantekin.aquareef.network.SendDataToClient;
 import com.cantekin.aquareef.ui.Fragment.AquaLinkFragment;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
@@ -46,6 +36,8 @@ public class MainActivity extends AppCompatActivity
     public static final int RESULT_LOAD_IMAGE = 10001;
     public FragmentTransaction fmTr;
     private SendDataToClient clinetAdapter;
+    private DrawerLayout drawer;
+    public NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,21 +88,17 @@ public class MainActivity extends AppCompatActivity
         fmTr.commit();
     }
 
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
     private void initActivity() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
@@ -159,25 +147,21 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.fragment_manual) {
             replaceFragment(new ManualFragment());
         } else if (id == R.id.fragment_schedule) {
             replaceFragment(new ScheduleFragment());
         } else if (id == R.id.fragment_effects) {
             replaceFragment(new EffectFragment());
-
         } else if (id == R.id.fragment_fav) {
             replaceFragment(new FavoritFragment());
-
         } else if (id == R.id.fragment_aqualink) {
             replaceFragment(new AquaLinkFragment());
         } else if (id == R.id.fragment_settings) {
             replaceFragment(new SettingsFragment());
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -187,17 +171,11 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         Log.i("onActivityResult", RESULT_LOAD_IMAGE + "");
         Log.i("onActivityResult", requestCode + "");
-
-        // if (requestCode == RESULT_LOAD_IMAGE ) {
         Log.i("onActivityResult", "fds");
         if (data != null) {
             Uri selectedImage = data.getData();
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
             ((ShareFragment) currentFragment).setImage(selectedImage);
         }
-        //  }
     }
-
-
-
 }

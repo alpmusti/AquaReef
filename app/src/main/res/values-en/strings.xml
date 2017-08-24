@@ -81,5 +81,6 @@
     <string name="sifir">0</string>
     <string name="yenile">Refresh</string>
     <string name="passhata">Password is wrong!</string>
+    <string name="aquareef_wifi">Please, Join to AquaReef network.</string>
 
 </resources>
