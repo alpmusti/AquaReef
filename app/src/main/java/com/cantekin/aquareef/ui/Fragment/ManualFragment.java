@@ -1,15 +1,11 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableContainer;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -29,10 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cantekin.aquareef.Data.Data;
-import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.ui.ColorSetActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
