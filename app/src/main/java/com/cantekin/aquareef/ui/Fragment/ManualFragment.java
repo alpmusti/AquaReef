@@ -2,6 +2,14 @@ package com.cantekin.aquareef.ui.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -71,12 +79,25 @@ public class ManualFragment extends _baseFragment {
     private void initFragment() {
         initToggle();
         seekBarRed = (SeekBar) getActivity().findViewById(R.id.seekBarRed);
+
         seekBarBlue = (SeekBar) getActivity().findViewById(R.id.seekBarBlue);
+        setBackGroundColor(seekBarBlue,Color.parseColor("#ff0099cc"));
+
         seekBarGree = (SeekBar) getActivity().findViewById(R.id.seekBarGreen);
+        setBackGroundColor(seekBarGree,Color.parseColor("#ff669900"));
+
         seekBarLight = (SeekBar) getActivity().findViewById(R.id.seekBarLight);
+        setBackGroundColor(seekBarLight,Color.parseColor("#ffffbb33"));
+
         seekBarRoyal = (SeekBar) getActivity().findViewById(R.id.seekBarRoyal);
+        setBackGroundColor(seekBarRoyal,Color.parseColor("#1837fb"));
+
         seekBarUV = (SeekBar) getActivity().findViewById(R.id.seekBarUV);
+        setBackGroundColor(seekBarUV,Color.parseColor("#d446fb"));
+
         seekBarWhite = (SeekBar) getActivity().findViewById(R.id.seekBarWhite);
+        setBackGroundColor(seekBarWhite,Color.parseColor("#ffffffff"));
+
         setListener(seekBarRed, R.id.redValue, R.id.toggle_red);
         setListener(seekBarBlue, R.id.blueValue, R.id.toggle_blue);
         setListener(seekBarGree, R.id.greenValue, R.id.toggle_green);
@@ -92,6 +113,13 @@ public class ManualFragment extends _baseFragment {
                 addFavorit();
             }
         });
+    }
+
+    private void setBackGroundColor(SeekBar seekBar, int Color) {
+        LayerDrawable drawable = (LayerDrawable) seekBar.getProgressDrawable();
+        Drawable drawableItems = drawable.getDrawable(1);
+        ClipDrawable gradientDrawableUnChecked = (ClipDrawable) drawableItems;
+        gradientDrawableUnChecked.setColorFilter(Color, PorterDuff.Mode.SRC_OVER);
     }
 
     public void addFavorit() {
