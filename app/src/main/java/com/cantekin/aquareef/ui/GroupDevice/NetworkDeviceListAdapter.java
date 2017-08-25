@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
+import com.daimajia.swipe.SwipeLayout;
 
 import java.util.List;
 
@@ -41,6 +43,13 @@ public class NetworkDeviceListAdapter extends ArrayAdapter<String> {
         }
         final String ip = getItem(position);
         if (ip != null) {
+            LinearLayout root=(LinearLayout) v.findViewById(R.id.swipe);
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((GroupActivity) getContext()).sendStrom(ip);
+                }
+            });
             TextView txtName = (TextView) v.findViewById(R.id.row_txt_name);
             txtName.setText(ip);
             ImageButton btnAdd = (ImageButton) v.findViewById(R.id.row_btn_insert);

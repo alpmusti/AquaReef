@@ -58,6 +58,7 @@ public class AquaLinkFragment extends _baseFragment {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         String ssid = wifiInfo.getSSID();
         Log.i("SSID", ssid);
+        Log.i("SSID-getScanResults", wifiManager.getScanResults().size()+"");
         if (!SSID.equals(ssid.replace("\"", ""))) {
             Toast.makeText(getContext(), getString(R.string.aquareef_wifi), Toast.LENGTH_SHORT).show();
             getActivity().getSupportFragmentManager().popBackStack();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.ui.Fragment._baseFragment;
+import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 
 import java.util.List;
@@ -42,6 +43,13 @@ public class InsertedDeviceListAdapter extends ArraySwipeAdapter {
         }
         final String ip = (String) getItem(position);
         if (ip != null) {
+            SwipeLayout root=(SwipeLayout) v.findViewById(R.id.swipe);
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((GroupActivity) getContext()).sendStrom(ip);
+                }
+            });
             TextView txtName = (TextView) v.findViewById(R.id.row_txt_name);
             txtName.setText(ip);
             txtName.setOnClickListener(new View.OnClickListener() {
