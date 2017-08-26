@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void sendDataDevice(byte[] data) {
+        if (data == null)
+            return;
         clinetAdapter.send("!!!!!!!!!!!!!!!");
         clinetAdapter.send(data);
     }

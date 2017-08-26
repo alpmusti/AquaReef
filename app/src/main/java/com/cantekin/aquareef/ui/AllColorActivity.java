@@ -163,7 +163,16 @@ public class AllColorActivity extends AppCompatActivity {
 
         builder.show();
     }
-
+    private void dismissProgressDialog() {
+        if (progress != null && progress.isShowing()) {
+            progress.dismiss();
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        dismissProgressDialog();
+        super.onDestroy();
+    }
     private void addItem(DataSchedule item) {
         LinearLayout mainRow = new LinearLayout(this);
         mainRow.setOrientation(LinearLayout.VERTICAL);

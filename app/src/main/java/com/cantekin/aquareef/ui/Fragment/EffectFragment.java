@@ -1,5 +1,6 @@
 package com.cantekin.aquareef.ui.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -101,6 +102,19 @@ public class EffectFragment extends _baseFragment {
                 break;
         }
         new BackgroundTask().execute((Void) null);
+    }
+
+    private void dismissProgressDialog() {
+        if (progress != null && progress.isShowing()) {
+            progress.dismiss();
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onDestroyView() {
+        dismissProgressDialog();
+        super.onDestroy();
     }
 
     public class BackgroundTask extends AsyncTask<Void, Void, Void> {
