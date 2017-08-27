@@ -1,19 +1,15 @@
 package com.cantekin.aquareef.ui.Fragment;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.network.SendDataToClient;
 import com.cantekin.aquareef.ui.MainActivity;
 
 /**
@@ -22,11 +18,9 @@ import com.cantekin.aquareef.ui.MainActivity;
  */
 
 public class EffectFragment extends _baseFragment {
-    private ProgressDialog progress;
-
+    public int sleepTime = 0;
 
     public EffectFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -38,13 +32,7 @@ public class EffectFragment extends _baseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        initFragment();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
         ImageView imgDayLight = (ImageView) getActivity().findViewById(R.id.imgDayLight);
         imgDayLight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +64,11 @@ public class EffectFragment extends _baseFragment {
         });
     }
 
-    public int sleepTime = 0;
-
     public void sendEffect(View v) {
         Log.i("Image", "sendEffect");
         String data = v.getTag().toString();
         ((MainActivity) getActivity()).sendDataDevice(data);
-        progress = ProgressDialog.show(getContext(), getString(R.string.efektler),
+        ((MainActivity) getActivity()).progress = ProgressDialog.show(getContext(), getString(R.string.efektler),
                 getString(R.string.gonderiliyor), true);
         switch (data) {
             case "iiiiiiiiiiiiiii":
@@ -103,20 +89,6 @@ public class EffectFragment extends _baseFragment {
         }
         new BackgroundTask().execute((Void) null);
     }
-
-    private void dismissProgressDialog() {
-        if (progress != null && progress.isShowing()) {
-            progress.dismiss();
-        }
-    }
-
-    @SuppressLint("MissingSuperCall")
-    @Override
-    public void onDestroyView() {
-        dismissProgressDialog();
-        super.onDestroy();
-    }
-
     public class BackgroundTask extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -138,13 +110,7 @@ public class EffectFragment extends _baseFragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            progress.dismiss();
+            ((MainActivity) getActivity()).dismissProgressDialog();
         }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
     }
 }

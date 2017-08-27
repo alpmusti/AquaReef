@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -38,12 +37,10 @@ import java.util.List;
  * temlatlere ulaşılabiliniyor, gönderim yapılabiliniyor
  */
 
-public class AllColorActivity extends AppCompatActivity {
-
+public class AllColorActivity extends _baseActivity {
     private Schedule scheduleData;
     private LinearLayout mainLayout;
     private int paddingLeft = 20;
-    private ProgressDialog progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +48,11 @@ public class AllColorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_color);
     }
 
-    private void init() {
+    @Override
+    public void initActivity() {
+        super.initActivity();
         loadData();
         initView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        init();
     }
 
     private void initView() {
@@ -92,8 +85,9 @@ public class AllColorActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
@@ -163,16 +157,7 @@ public class AllColorActivity extends AppCompatActivity {
 
         builder.show();
     }
-    private void dismissProgressDialog() {
-        if (progress != null && progress.isShowing()) {
-            progress.dismiss();
-        }
-    }
-    @Override
-    protected void onDestroy() {
-        dismissProgressDialog();
-        super.onDestroy();
-    }
+
     private void addItem(DataSchedule item) {
         LinearLayout mainRow = new LinearLayout(this);
         mainRow.setOrientation(LinearLayout.VERTICAL);
@@ -261,7 +246,7 @@ public class AllColorActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            progress.dismiss();
+            dismissProgressDialog();
         }
 
         @Override

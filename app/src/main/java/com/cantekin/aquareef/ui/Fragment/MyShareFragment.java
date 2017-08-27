@@ -1,7 +1,7 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,12 +32,11 @@ public class MyShareFragment extends _baseFragment {
     private MySharedAdapter sharedAdapter;
     private ListView lst;
     private List<Posts> postList;
+    public String android_id;
 
     public MyShareFragment() {
-        // Required empty public constructor
         mDatabase = FirebaseDatabase.getInstance().getReference();
         postList = new ArrayList<>();
-
 
     }
 
@@ -49,12 +48,20 @@ public class MyShareFragment extends _baseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        initFragment();
+    protected void initFragment() {
+        lst = (ListView) getActivity().findViewById(R.id.lst_shared);
+        sharedAdapter = new MySharedAdapter(getActivity(), R.layout.row_myshared, postList, mDatabase);
+        lst.setAdapter(sharedAdapter);
+        ImageButton btnClose = (ImageButton) getActivity().findViewById(R.id.btnFragmentClose);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+        android_id = Settings.Secure.getString(getContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
-
 
     @Override
     public void onStart() {
@@ -73,7 +80,6 @@ public class MyShareFragment extends _baseFragment {
                 }
                 sharedAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -85,21 +91,7 @@ public class MyShareFragment extends _baseFragment {
     public void onPause() {
         super.onPause();
         ((MainActivity) getActivity()).getSupportActionBar().show();
-    }
-
-    private void initFragment() {
-        lst = (ListView) getActivity().findViewById(R.id.lst_shared);
-        sharedAdapter = new MySharedAdapter(getActivity(), R.layout.row_myshared, postList, mDatabase);
-        lst.setAdapter(sharedAdapter);
-
-        ImageButton btnClose = (ImageButton) getActivity().findViewById(R.id.btnFragmentClose);
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
-
+        clear();
     }
 
 }

@@ -6,13 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,7 +27,6 @@ import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.FireBase.Model.DateAll;
 import com.cantekin.aquareef.FireBase.Model.Posts;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,13 +63,12 @@ public class ShareFragment extends _baseFragment {
     private StorageReference mStorageRef;
     private TextView userNick;
     private TextView userNote;
+    public String android_id;
 
     public ShareFragment() {
-        // Required empty public constructor
         mDatabase = FirebaseDatabase.getInstance().getReference();
         postList = new ArrayList<>();
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
     }
 
     @Override
@@ -83,46 +80,9 @@ public class ShareFragment extends _baseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-
-        initFragment();
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        ((MainActivity) getActivity()).getSupportActionBar().hide();
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                postList.clear();
-                Log.d("item", dataSnapshot.child("posts").getChildrenCount() + "");
-
-                for (DataSnapshot data : dataSnapshot.child("posts").getChildren()) {
-                    Posts d = data.getValue(Posts.class);
-                    d.setKey(data.getKey());
-                    postList.add(d);
-                }
-                sharedAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        ((MainActivity) getActivity()).getSupportActionBar().show();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
+        android_id = Settings.Secure.getString(getContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         lst = (ListView) getActivity().findViewById(R.id.lst_shared);
         sharedAdapter = new SharedAdapter(getActivity(), R.layout.row_shared, postList, mDatabase);
         lst.setAdapter(sharedAdapter);
@@ -153,16 +113,50 @@ public class ShareFragment extends _baseFragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                postList.clear();
+                Log.d("item", dataSnapshot.child("posts").getChildrenCount() + "");
+
+                for (DataSnapshot data : dataSnapshot.child("posts").getChildren()) {
+                    Posts d = data.getValue(Posts.class);
+                    d.setKey(data.getKey());
+                    postList.add(d);
+                }
+                sharedAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity) getActivity()).getSupportActionBar().show();
+        if (mDatabase != null) {
+            mDatabase.onDisconnect();
+        }
+        if(mStorageRef!=null)
+            mStorageRef=null;
+        clear();
+    }
+
     private void sharedAlert() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.alert_shared, null);
-
         userNick = (TextView) dialogView.findViewById(R.id.aler_txt_usernick);
         userNote = (TextView) dialogView.findViewById(R.id.alert_txt_usernote);
         image = (ImageView) dialogView.findViewById(R.id.alert_img);
         Button send = (Button) dialogView.findViewById(R.id.alert_btn_shared);
-
         builder.setView(dialogView);
         final AlertDialog ad = builder.show();
 
@@ -190,7 +184,6 @@ public class ShareFragment extends _baseFragment {
     }
 
     public void upload() {
-        // Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
         StorageReference riversRef = mStorageRef.child(randomUUIDString + ".jpeg");
@@ -207,7 +200,6 @@ public class ShareFragment extends _baseFragment {
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // Get a URL to the uploaded content
                 @SuppressWarnings("VisibleForTests")
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Log.d("downloadUrl", downloadUrl.toString());
@@ -217,10 +209,8 @@ public class ShareFragment extends _baseFragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                        Toast.makeText(getContext(), getString(R.string.islem_basarisiz), Toast.LENGTH_SHORT).show();
 
+                        Toast.makeText(getContext(), getString(R.string.islem_basarisiz), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

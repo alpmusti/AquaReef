@@ -1,11 +1,9 @@
 package com.cantekin.aquareef.ui.GroupDevice;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
-import com.daimajia.swipe.SwipeLayout;
 
 import java.util.List;
 
@@ -43,7 +40,7 @@ public class NetworkDeviceListAdapter extends ArrayAdapter<String> {
         }
         final String ip = getItem(position);
         if (ip != null) {
-            LinearLayout root=(LinearLayout) v.findViewById(R.id.swipe);
+            LinearLayout root = (LinearLayout) v.findViewById(R.id.swipe);
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,7 +55,7 @@ public class NetworkDeviceListAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     fragment.groupDevice.addDevice(ip);
                     fragment.updateAllDevice();
-                    ((GroupActivity)getContext()).sendStrom(ip);
+                    ((GroupActivity) getContext()).sendStrom(ip);
 
                 }
             });

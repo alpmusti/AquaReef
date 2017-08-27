@@ -2,7 +2,6 @@ package com.cantekin.aquareef.ui.GroupDevice;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -33,7 +32,6 @@ public class GroupFragment extends _baseGroupFragment {
     private ArraySwipeAdapterSample groupAdapter;
 
     public GroupFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -45,13 +43,7 @@ public class GroupFragment extends _baseGroupFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        initFragment();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
         final ImageView addBtn = (ImageView) getActivity().findViewById(R.id.addDevice);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +57,12 @@ public class GroupFragment extends _baseGroupFragment {
     }
 
     private void createDefaultDevice() {
-        getAct().allGroup = new ArrayList<>();
+        getGroupActivity().allGroup = new ArrayList<>();
         GrupDevice aquarium = new GrupDevice();
         aquarium.setName("Aquarium");
         aquarium.setDescription("Default");
         aquarium.addDevice("10.10.100.254");
-        getAct().allGroup.add(aquarium);
+        getGroupActivity().allGroup.add(aquarium);
         updateAllDevice();
     }
 
@@ -80,7 +72,7 @@ public class GroupFragment extends _baseGroupFragment {
         String all = MyPreference.getPreference(getContext()).getData(MyPreference.GRUPS);
         if (all != null) {
             Gson gson = new Gson();
-            getAct().allGroup = gson.fromJson(all, type);
+            getGroupActivity().allGroup = gson.fromJson(all, type);
         } else
             createDefaultDevice();
     }
@@ -91,16 +83,15 @@ public class GroupFragment extends _baseGroupFragment {
         String all = MyPreference.getPreference(getContext()).getData(MyPreference.ACTIVEGRUPS);
         if (all != null) {
             Gson gson = new Gson();
-            getAct().activeGroup = gson.fromJson(all, type);
+            getGroupActivity().activeGroup = gson.fromJson(all, type);
         } else
-            getAct().activeGroup = new ArrayList<>();
+            getGroupActivity().activeGroup = new ArrayList<>();
     }
 
     private void loadList() {
-        ArraySwipeAdapterSample sd=new ArraySwipeAdapterSample(getAct(), R.layout.row_device, getAct().allGroup, this);
+        ArraySwipeAdapterSample sd = new ArraySwipeAdapterSample(getGroupActivity(), R.layout.row_device, getGroupActivity().allGroup, this);
         lstGrups = (ListView) getActivity().findViewById(R.id.lst_grups);
-//        groupAdapter = new DeviceListAdapter(getAct(), R.layout.row_device, getAct().allGroup, this);
-        groupAdapter = new ArraySwipeAdapterSample(getAct(), R.layout.row_device, getAct().allGroup, this);
+        groupAdapter = new ArraySwipeAdapterSample(getGroupActivity(), R.layout.row_device, getGroupActivity().allGroup, this);
 
         lstGrups.setAdapter(groupAdapter);
     }
@@ -109,7 +100,7 @@ public class GroupFragment extends _baseGroupFragment {
         final String[] m_Text = {"", ""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.akvaryum_ekle));
-        builder.setIcon(R.mipmap.cloud);
+        builder.setIcon(R.mipmap.aqua_favorites);
 
         LinearLayout layout = new LinearLayout(getContext());
         layout.setPadding(70, 30, 50, 0);
@@ -138,11 +129,11 @@ public class GroupFragment extends _baseGroupFragment {
                 GrupDevice device = new GrupDevice();
                 device.setName(m_Text[0]);
                 device.setDescription(m_Text[1]);
-                if (getAct().isContainsItem(getAct().allGroup, device) != -1) {
+                if (getGroupActivity().isContainsItem(getGroupActivity().allGroup, device) != -1) {
                     Toast.makeText(getContext(), getString(R.string.bu_isimde_grup_mevcut), Toast.LENGTH_LONG).show();
                     return;
                 } else {
-                    getAct().allGroup.add(device);
+                    getGroupActivity().allGroup.add(device);
                     updateAllDevice();
 
                 }
@@ -159,29 +150,29 @@ public class GroupFragment extends _baseGroupFragment {
     }
 
     public void addAcitiveGrup(GrupDevice gruop) {
-        if (getAct().isContainsItem(getAct().activeGroup, gruop) == -1)
-            getAct().activeGroup.add(gruop);
-        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, getAct().activeGroup);
+        if (getGroupActivity().isContainsItem(getGroupActivity().activeGroup, gruop) == -1)
+            getGroupActivity().activeGroup.add(gruop);
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, getGroupActivity().activeGroup);
 
     }
 
     public void removeAcitiveGrup(GrupDevice gruop) {
-        int index = getAct().isContainsItem(getAct().activeGroup, gruop);
+        int index = getGroupActivity().isContainsItem(getGroupActivity().activeGroup, gruop);
         if (index != -1)
-            getAct().activeGroup.remove(index);
-        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, getAct().activeGroup);
+            getGroupActivity().activeGroup.remove(index);
+        MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, getGroupActivity().activeGroup);
     }
 
 
     public void removeGrup(GrupDevice gruop) {
-        int index = getAct().isContainsItem(getAct().allGroup, gruop);
+        int index = getGroupActivity().isContainsItem(getGroupActivity().allGroup, gruop);
         if (index != -1)
-            getAct().allGroup.remove(index);
+            getGroupActivity().allGroup.remove(index);
         updateAllDevice();
     }
 
     private void updateAllDevice() {
-        MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getAct().allGroup);
+        MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getGroupActivity().allGroup);
         if (groupAdapter != null)
             groupAdapter.notifyDataSetChanged();
     }

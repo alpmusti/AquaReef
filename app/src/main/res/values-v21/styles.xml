@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="seekBarThema" parent="android:Widget.SeekBar">
+    <style name="seekBarTheme" parent="android:Widget.SeekBar">
         <item name="android:layout_weight">1</item>
         <item name="android:thumbTint">@android:color/white</item>
         <item name="android:progressBackgroundTint">@android:color/white</item>

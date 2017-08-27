@@ -3,7 +3,6 @@ package com.cantekin.aquareef.ui;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +25,7 @@ import java.util.List;
  * TODO: burası fragment yapılabiniri
  */
 
-public class TemplateListActivity extends AppCompatActivity {
+public class TemplateListActivity extends _baseActivity {
 
     private List<Schedule> favorites;
 
@@ -34,13 +33,12 @@ public class TemplateListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_template_list);
-        init();
     }
 
-    private void init() {
+    @Override
+    public void initActivity() {
         List<Schedule> defaultFavorites = new DefaultData().getScheduleFavorites();
         setList(defaultFavorites, R.id.fvrDefaultlists);
-
 
         String fav = MyPreference.getPreference(getApplicationContext()).getData(MyPreference.FAVORITESCHEDULE);
         Gson gson = new Gson();
@@ -108,8 +106,6 @@ public class TemplateListActivity extends AppCompatActivity {
         });
 
         builder.show();
-
     }
-
 
 }

@@ -1,6 +1,5 @@
 package com.cantekin.aquareef.ui.GroupDevice;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
@@ -13,23 +12,19 @@ import com.cantekin.aquareef.ui.Fragment._baseFragment;
 public abstract class _baseGroupFragment extends _baseFragment {
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     public void setActionBarText(String title) {
         TextView txtTitle = (TextView) getActivity().findViewById(R.id.deviceTitle);
         txtTitle.setText(title);
     }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
+    public GroupActivity getGroupActivity() {
+        return ((GroupActivity) super.getActivity());
     }
 
-    public GroupActivity getAct() {
-        return ((GroupActivity) super.getActivity());
+    @Override
+    public void clear() {
+        getGroupActivity().dismissProgressDialog();
+        System.gc();
+        Runtime.getRuntime().gc();
     }
 
 }

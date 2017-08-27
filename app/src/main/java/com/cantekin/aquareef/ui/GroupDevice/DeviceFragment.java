@@ -1,12 +1,10 @@
 package com.cantekin.aquareef.ui.GroupDevice;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.format.Formatter;
@@ -34,8 +32,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static android.content.Context.WIFI_SERVICE;
 
@@ -49,12 +45,10 @@ public class DeviceFragment extends _baseGroupFragment {
     private static final String ARG_PARAM1 = "Group";
     private InsertedDeviceListAdapter insertedAdapter;
     final List<String> networkDevices = new ArrayList<>();
-
     private NetworkDeviceListAdapter netwokAdapter;
     private ImageView btnSearch;
 
     public DeviceFragment() {
-        // Required empty public constructor
     }
 
     public static DeviceFragment newInstance(GrupDevice _groupDevice) {
@@ -77,13 +71,7 @@ public class DeviceFragment extends _baseGroupFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        initFragment();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
         ImageView btnAdd = (ImageView) getActivity().findViewById(R.id.addIP);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +90,11 @@ public class DeviceFragment extends _baseGroupFragment {
         });
 
         insertedList = (ListView) getActivity().findViewById(R.id.devListInserted);
-        insertedAdapter = new InsertedDeviceListAdapter(getAct(), R.layout.row_register_device, groupDevice.getDevices(), this);
+        insertedAdapter = new InsertedDeviceListAdapter(getGroupActivity(), R.layout.row_register_device, groupDevice.getDevices(), this);
         insertedList.setAdapter(insertedAdapter);
 
         networkList = (ListView) getActivity().findViewById(R.id.devListNetwork);
-        netwokAdapter = new NetworkDeviceListAdapter(getAct(), R.layout.row_network_device, networkDevices, this);
+        netwokAdapter = new NetworkDeviceListAdapter(getGroupActivity(), R.layout.row_network_device, networkDevices, this);
         networkList.setAdapter(netwokAdapter);
 
         getIpFromArpCache();
@@ -125,12 +113,11 @@ public class DeviceFragment extends _baseGroupFragment {
         getIpFromArpCache();
     }
 
-
     public void addDevice() {
         final String[] m_Text = {""};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.akvaryum_ekle));
-        builder.setIcon(R.mipmap.cloud);
+        builder.setIcon(R.mipmap.aqua_favorites);
 
         LinearLayout layout = new LinearLayout(getContext());
         layout.setPadding(70, 30, 50, 0);
@@ -173,14 +160,13 @@ public class DeviceFragment extends _baseGroupFragment {
     }
 
     public void updateAllDevice() {
-        MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getAct().allGroup);
+        MyPreference.getPreference(getContext()).setData(MyPreference.GRUPS, getGroupActivity().allGroup);
         insertedAdapter.notifyDataSetChanged();
         MyPreference.getPreference(getContext()).setData(MyPreference.ACTIVEGRUPS, null);
     }
 
     private void getIpFromArpCache() {
         BufferedReader br = null;
-        char buffer[] = new char[65000];
         String currentLine;
         try {
 
@@ -195,24 +181,17 @@ public class DeviceFragment extends _baseGroupFragment {
                     String mac = splitted[3];
                     if (!mac.trim().equals("00:00:00:00:00:00") && mac.length() == 17) {
                         {
-                            //   Log.d("sde", "getIpFromArpCache() :: " + currentLine);
-
-                            //                          int remove = mac.lastIndexOf(':');
-                            //                          mac = mac.substring(0,remove) + mac.substring(remove+1);
-                            //   mac = mac.replace(":", "");
                             Log.i("ds", "getIpFromArpCache() :: ip : " + ip + " mac : " + mac);
 
                             if (filter(mac.substring(0, 8).toUpperCase())) {
                                 networkDevices.add(ip);
                                 netwokAdapter.notifyDataSetChanged();
                             }
-                            //mIpAddressesList.add(new IpAddress(ip, mac));
                         }
                     }
                 }
 
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

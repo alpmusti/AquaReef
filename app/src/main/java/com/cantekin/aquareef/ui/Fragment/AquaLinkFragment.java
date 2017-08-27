@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -12,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,31 +41,16 @@ public class AquaLinkFragment extends _baseFragment {
 
     private UdpUnicast udp;
     private WifiManager wifiManager;
-    private String SSID = "AquaReefLed";
     private TextInputEditText pass;
     private TextView ssid;
     private TextView message;
-
     ArrayAdapter<String> arrayAdapter;
     private Button btnOk;
-
     private Handler mNetworkHandler;
+    Thread prosess;
+
 
     public AquaLinkFragment() {
-    }
-
-    @SuppressLint("WifiManagerLeak")
-    private void init() {
-        wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        String ssid = wifiInfo.getSSID();
-        Log.i("SSID", ssid);
-        Log.i("SSID-getScanResults", wifiManager.getScanResults().size()+"");
-        if (!SSID.equals(ssid.replace("\"", ""))) {
-            Toast.makeText(getContext(), getString(R.string.aquareef_wifi), Toast.LENGTH_SHORT).show();
-            getActivity().getSupportFragmentManager().popBackStack();
-            ((MainActivity)getActivity()).navigationView.getMenu().getItem(4).setChecked(false);
-        }
     }
 
     @Override
@@ -74,41 +61,14 @@ public class AquaLinkFragment extends _baseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        udp = new UdpUnicast();
-        udp.setIp("10.10.100.254");
-        udp.open();
-        handlerHazila();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        ((MainActivity) getActivity()).getSupportActionBar().hide();
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        ((MainActivity) getActivity()).getSupportActionBar().show();
-        if (udp != null)
-            udp.close();
-        udp = null;
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        init();
-        initFragment();
     }
 
-    Thread prosess;
-
-    private void initFragment() {
+    @Override
+    protected void initFragment() {
+        init();
+        checkPermisson();
         message = (TextView) getActivity().findViewById(R.id.message);
         ssid = (TextView) getActivity().findViewById(R.id.aquaLinkSSID);
         ssid.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +96,55 @@ public class AquaLinkFragment extends _baseFragment {
                 message.setText("");
             }
         });
+    }
+
+    @SuppressLint("WifiManagerLeak")
+    private void init() {
+        wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        String ssid = wifiInfo.getSSID();
+        Log.i("SSID", ssid);
+        Log.i("SSID-getScanResults", wifiManager.getScanResults().size() + "");
+        if (!((MainActivity)getActivity()).SSID.equals(ssid.replace("\"", ""))) {
+            Toast.makeText(getContext(), getString(R.string.aquareef_wifi), Toast.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    private void checkPermisson() {
+        int requestLocation = 165;
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+            }, requestLocation);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        udp = new UdpUnicast();
+        udp.setIp("10.10.100.254");
+        udp.open();
+        handlerHazila();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity) getActivity()).getSupportActionBar().show();
+        if (udp != null)
+            udp.close();
+        udp = null;
+        if (mNetworkHandler != null)
+            mNetworkHandler = null;
+        clear();
     }
 
     public void hideSoftKeyboard() {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,29 +13,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.network.SendDataToClient;
+import com.cantekin.aquareef.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
-import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * ayarlar fragmenti
  */
 public class SettingsFragment extends _baseFragment {
-    private ProgressDialog progress;
-
-    LineChartView chart;
     ToggleSwitch toggleSwitchOne;
     int pushTime = 1;
 
     public SettingsFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,13 +39,7 @@ public class SettingsFragment extends _baseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        initFragment();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
         initToggle();
         Button pushClock = (Button) getActivity().findViewById(R.id.settings_btn_clock);
         pushClock.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +99,8 @@ public class SettingsFragment extends _baseFragment {
     }
 
     private void send(byte[] buffer) {
-        SendDataToClient clinetAdapter = new SendDataToClient(getContext());
-        clinetAdapter.send(buffer);
-        progress = ProgressDialog.show(getContext(), getString(R.string.ayarlar),
+        ((MainActivity)getActivity()).sendDataDevice(buffer);
+        ((MainActivity)getActivity()).progress = ProgressDialog.show(getContext(), getString(R.string.ayarlar),
                 getString(R.string.gonderiliyor), true);
         new BackgroundTask().execute((Void) null);
 
@@ -141,9 +127,7 @@ public class SettingsFragment extends _baseFragment {
         buffer[13] = 0;
         buffer[14] = 0;
         send(buffer);
-
     }
-
 
     private void initToggle() {
         toggleSwitchOne = (ToggleSwitch) getActivity().findViewById(R.id.settings_toggle);
@@ -165,9 +149,7 @@ public class SettingsFragment extends _baseFragment {
     }
 
     public class BackgroundTask extends AsyncTask<Void, Void, Void> {
-
         int sleepTime = 1000;
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -180,20 +162,12 @@ public class SettingsFragment extends _baseFragment {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
-
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            progress.dismiss();
+            ((MainActivity)getActivity()).dismissProgressDialog();
         }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
     }
 }

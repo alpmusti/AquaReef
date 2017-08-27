@@ -85,8 +85,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/k_rm_z_660nm"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme"
+                        android:textColor="@android:color/holo_red_dark" />
 
                     <SeekBar
                         android:id="@+id/seekBarRed"
@@ -175,7 +175,7 @@
                         android:layout_weight="3"
                         android:text="@string/ye_il_530nm"
                         android:textColor="@android:color/holo_green_dark"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme" />
 
                     <SeekBar
                         android:id="@+id/seekBarGreen"
@@ -263,7 +263,7 @@
                         android:layout_weight="3"
                         android:text="@string/royalBlue"
                         android:textColor="@color/colorPrimaryDark"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme" />
 
                     <SeekBar
                         android:id="@+id/seekBarRoyal"
@@ -351,7 +351,7 @@
                         android:layout_weight="3"
                         android:text="@string/mavi"
                         android:textColor="@android:color/holo_blue_dark"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme" />
 
                     <SeekBar
                         android:id="@+id/seekBarBlue"
@@ -440,7 +440,7 @@
                         android:layout_weight="3"
                         android:text="@string/beyaz"
                         android:textColor="@android:color/background_light"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme" />
 
                     <SeekBar
                         android:id="@+id/seekBarWhite"
@@ -530,7 +530,7 @@
                         android:layout_weight="3"
                         android:text="@string/gunisigi"
                         android:textColor="@android:color/holo_orange_light"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme" />
 
                     <SeekBar
                         android:id="@+id/seekBarLight"
@@ -619,7 +619,7 @@
                         android:layout_weight="3"
                         android:text="@string/uv"
                         android:textColor="@color/colorAccent"
-                        android:theme="@style/leftLabelThema" />
+                        android:textAppearance="@style/leftLabelTheme" />
 
                     <SeekBar
                         android:id="@+id/seekBarUV"

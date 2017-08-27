@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,6 @@ public class ScheduleFragment extends _baseFragment {
     private TextView txtTitle;
 
     public ScheduleFragment() {
-        // Required empty public constructor
     }
 
 
@@ -59,22 +57,7 @@ public class ScheduleFragment extends _baseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // this.view = view;
-        initFragment();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadSchedule();
-        loadChart();
-//        toggleSwitchOne.clearCheck();
-//        toggleSwitchTwo.clearCheck();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
         txtTitle = (TextView) getActivity().findViewById(R.id.schedule_txt_title);
         TextView txtShared = (TextView) getActivity().findViewById(R.id.schedule_txt_shared);
         txtShared.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +96,11 @@ public class ScheduleFragment extends _baseFragment {
             }
         });
         initToggle();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         loadSchedule();
         loadChart();
     }
@@ -144,7 +131,6 @@ public class ScheduleFragment extends _baseFragment {
         int l = 9;//ay kısmı gelen data boktan
         for (int i = 1; i < data.length; i += 9) {
             byte[] temp = new byte[10];
-
             if (i + 9 > 80)
                 break;
             for (int t = 0; t < 9; t++) {
@@ -161,10 +147,66 @@ public class ScheduleFragment extends _baseFragment {
         loadChart();
     }
 
-    private void sendSchedule() {
-        for (DataSchedule item : scheduleData.getData()) {
-            // ((MainActivity) getActivity()).sendDataDevice(item.ToArrayBuffer());
-        }
+    private void initToggle() {
+        toggleSwitchOne = (RadioGroup) getActivity().findViewById(R.id.toggleGroupOne);
+        toggleSwitchOne.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                Intent intent = new Intent(getActivity(), ColorSetActivity.class);
+                String colorData = "";
+                switch (checkedId) {
+                    case R.id.redToggle:
+                        colorData = DefaultData.colorRed;
+
+                        break;
+                    case R.id.greenToggle:
+                        colorData = DefaultData.colorGreen;
+                        break;
+                    case R.id.royalBToggle:
+                        colorData = DefaultData.colorRoyal;
+                        break;
+                    case R.id.blueToggle:
+                        colorData = DefaultData.colorBlue;
+                        break;
+                }
+                if(checkedId>0) {
+                    intent.putExtra("color", colorData);
+                    getActivity().startActivity(intent);
+                    toggleSwitchOne.clearCheck();
+                }
+            }
+        });
+
+
+
+        toggleSwitchTwo = (RadioGroup) getActivity().findViewById(R.id.toggleGroupTwo);
+        toggleSwitchTwo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                Intent intent = new Intent(getActivity(), ColorSetActivity.class);
+                String colorData = "";
+                switch (checkedId) {
+                    case R.id.whiteToggle:
+                        colorData = DefaultData.colorWhite;
+                        break;
+                    case R.id.dWhiteToggle:
+                        colorData = DefaultData.colorDWhite;
+                        break;
+                    case R.id.UVToggle:
+                        colorData = DefaultData.colorUV;
+                        break;
+                    case R.id.moonToggle:
+                        colorData = DefaultData.colorMoon;
+                        break;
+                }
+                if(checkedId>0) {
+                    intent.putExtra("color", colorData);
+                    getActivity().startActivity(intent);
+                    toggleSwitchTwo.clearCheck();
+                }
+            }
+        });
+
     }
 
     private void loadChart() {
@@ -238,68 +280,6 @@ public class ScheduleFragment extends _baseFragment {
 
         chart.setLineChartData(data);
         resetViewport();
-    }
-
-    private void initToggle() {
-        toggleSwitchOne = (RadioGroup) getActivity().findViewById(R.id.toggleGroupOne);
-        toggleSwitchOne.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                Intent intent = new Intent(getActivity(), ColorSetActivity.class);
-                String colorData = "";
-                switch (checkedId) {
-                    case R.id.redToggle:
-                        colorData = DefaultData.colorRed;
-
-                        break;
-                    case R.id.greenToggle:
-                        colorData = DefaultData.colorGreen;
-                        break;
-                    case R.id.royalBToggle:
-                        colorData = DefaultData.colorRoyal;
-                        break;
-                    case R.id.blueToggle:
-                        colorData = DefaultData.colorBlue;
-                        break;
-                }
-                if(checkedId>0) {
-                    intent.putExtra("color", colorData);
-                    getActivity().startActivity(intent);
-                    toggleSwitchOne.clearCheck();
-                }
-            }
-        });
-
-
-
-        toggleSwitchTwo = (RadioGroup) getActivity().findViewById(R.id.toggleGroupTwo);
-        toggleSwitchTwo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                Intent intent = new Intent(getActivity(), ColorSetActivity.class);
-                String colorData = "";
-                switch (checkedId) {
-                    case R.id.whiteToggle:
-                        colorData = DefaultData.colorWhite;
-                        break;
-                    case R.id.dWhiteToggle:
-                        colorData = DefaultData.colorDWhite;
-                        break;
-                    case R.id.UVToggle:
-                        colorData = DefaultData.colorUV;
-                        break;
-                    case R.id.moonToggle:
-                        colorData = DefaultData.colorMoon;
-                        break;
-                }
-                if(checkedId>0) {
-                    intent.putExtra("color", colorData);
-                    getActivity().startActivity(intent);
-                    toggleSwitchTwo.clearCheck();
-                }
-            }
-        });
-
     }
 
     private void resetViewport() {

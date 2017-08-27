@@ -1,7 +1,6 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.ui.GroupDevice.InsertedDeviceListAdapter;
 import com.cantekin.aquareef.ui.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,18 +26,11 @@ import java.util.Map;
 /**
  * favori ayarların listelendiği fragment
  */
-public class FavoritFragment extends _baseFragment {
-
+public class FavoriteFragment extends _baseFragment {
 
     private Map<String, Data> favorites;
 
-    public FavoritFragment() {
-        // Required empty public constructor
-        setFavorites();
-    }
-
-    private void setFavorites() {
-
+    public FavoriteFragment() {
     }
 
     @Override
@@ -51,16 +42,9 @@ public class FavoritFragment extends _baseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initFragment();
-    }
-
-    private void initFragment() {
+    protected void initFragment() {
         Map<String, Data> defaultFavorites = new DefaultData().getFavorites();
         setList(defaultFavorites, R.id.fvrDefaultlists);
-
-
         String fav = MyPreference.getPreference(getContext()).getData(MyPreference.FAVORITES);
         Gson gson = new Gson();
         Type type = new TypeToken<Map<String, Data>>() {
@@ -69,7 +53,6 @@ public class FavoritFragment extends _baseFragment {
         if (fav != null)
             favorites = gson.fromJson(fav, type);
         setListDeleted(favorites, R.id.fvrFavoritLists);
-
     }
 
     private void setList(final Map<String, Data> favoriList, int listView) {
@@ -78,8 +61,7 @@ public class FavoritFragment extends _baseFragment {
             defaultList.add(entry.getKey());
         }
         ListView defaultListView = (ListView) getView().findViewById(listView);
-        //   InsertedDeviceListAdapter dfltAdapter = new InsertedDeviceListAdapter(getActivity(), R.layout.row_register_device, defaultList, this);
-        ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
+        ArrayAdapter<String> dfltAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, defaultList);
         defaultListView.setAdapter(dfltAdapter);
         defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,7 +79,6 @@ public class FavoritFragment extends _baseFragment {
         }
         ListView defaultListView = (ListView) getView().findViewById(listView);
         FavoritesListAdapter dfltAdapter = new FavoritesListAdapter(getActivity(), R.layout.row_register_device, defaultList, this);
-       // ArrayAdapter<String> dfltAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, defaultList);
         defaultListView.setAdapter(dfltAdapter);
         defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

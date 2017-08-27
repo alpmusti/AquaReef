@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -58,19 +57,13 @@ public class ManualFragment extends _baseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         setActionBarText(getString(R.string.manual));
         return inflater.inflate(R.layout.fragment_manual, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void initFragment() {
         data = new Data();
-        initFragment();
-    }
-
-    private void initFragment() {
         initToggle();
         seekBarRed = (SeekBar) getActivity().findViewById(R.id.seekBarRed);
 

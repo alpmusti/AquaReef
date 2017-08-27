@@ -3,8 +3,6 @@ package com.cantekin.aquareef.ui.GroupDevice;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,25 +11,36 @@ import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.IDataService;
 import com.cantekin.aquareef.network.NetworkDevice;
 import com.cantekin.aquareef.network.UdpDataService;
+import com.cantekin.aquareef.ui._baseActivity;
 
 import java.util.List;
 
 /**
  * grupların olduğu ana activity
  */
-public class GroupActivity extends ActionBarActivity {
+public class GroupActivity extends _baseActivity {
 
     public List<GrupDevice> allGroup;
     public List<GrupDevice> activeGroup;
-    public FragmentTransaction fmTr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device);
-        initToolBar();
-        init();
         replaceFragment(new GroupFragment());
+    }
+
+    @Override
+    public void initActivity() {
+        super.initActivity();
+        final TextView title = (TextView) findViewById(R.id.deviceTitle);
+        title.setText(getString(R.string.akvaryumlarim));
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tik(v);
+            }
+        });
     }
 
     public void replaceFragment(_baseGroupFragment fragment) {
@@ -46,9 +55,6 @@ public class GroupActivity extends ActionBarActivity {
         fmTr.commit();
     }
 
-    private void init() {
-
-    }
 
     public void sendStrom(String IP) {
         NetworkDevice d = new NetworkDevice();
@@ -63,10 +69,6 @@ public class GroupActivity extends ActionBarActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private void initToolBar() {
-        TextView title = (TextView) findViewById(R.id.deviceTitle);
-        title.setText(getString(R.string.akvaryumlarim));
-    }
 
     /*
     listede aktif görünüm yapılsın mı kontrolü

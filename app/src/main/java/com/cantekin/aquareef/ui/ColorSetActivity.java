@@ -3,7 +3,6 @@ package com.cantekin.aquareef.ui;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,7 +16,6 @@ import com.cantekin.aquareef.Data.DataSchedule;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.network.SendDataToClient;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
@@ -28,7 +26,7 @@ import belka.us.androidtoggleswitch.widgets.ToggleSwitch;
  * tekrenk üzerinde değişiklik yapılabilinen ekran
  * TODO: fragmente çevrilinebilinir
  */
-public class ColorSetActivity extends AppCompatActivity {
+public class ColorSetActivity extends _baseActivity {
 
     private String color;
     private TextView txtTime;
@@ -40,7 +38,6 @@ public class ColorSetActivity extends AppCompatActivity {
     private TextView txtStop;
     private TextView txtLevel;
     private SeekBar seekBar;
-    private SendDataToClient clinetAdapter;
     private Switch moon;
     private ToggleSwitch blue;
 
@@ -50,31 +47,25 @@ public class ColorSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_set);
         color = getIntent().getExtras().getString("color");
-        init();
     }
 
-    private void init() {
+    @Override
+    public void initActivity() {
         txtStart = (TextView) findViewById(R.id.color_txtStart);
         txtUp = (TextView) findViewById(R.id.color_txtUp);
         txtDown = (TextView) findViewById(R.id.color_txtDown);
         txtStop = (TextView) findViewById(R.id.color_txtStop);
         txtLevel = (TextView) findViewById(R.id.color_texLevel);
         seekBar = (SeekBar) findViewById(R.id.color_seek);
-        clinetAdapter = new SendDataToClient(this);
 
         blue = (ToggleSwitch) findViewById(R.id.color_toggle_blue);
         moon = (Switch) findViewById(R.id.color_sw_moon);
-
-
         loadData();
-
-
         int isMoon;
         if (dataSchedule.getCode() == 'h')
             isMoon = View.GONE;
         else
             isMoon = View.VISIBLE;
-
 
         TextView txtTitle = (TextView) findViewById(R.id.color_txtTitle);
         txtTitle.setText(color);
@@ -177,7 +168,7 @@ public class ColorSetActivity extends AppCompatActivity {
     }
 
     private void sendData() {
-        clinetAdapter.send(dataSchedule.getByte());
+        sendDataDevice(dataSchedule.getByte());
     }
 
     private void setProp() {

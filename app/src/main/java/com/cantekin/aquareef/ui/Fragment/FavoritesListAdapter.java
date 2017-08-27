@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
 import com.daimajia.swipe.adapters.ArraySwipeAdapter;
 
 import java.util.List;

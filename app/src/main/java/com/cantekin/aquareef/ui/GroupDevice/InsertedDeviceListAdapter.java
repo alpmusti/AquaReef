@@ -43,7 +43,7 @@ public class InsertedDeviceListAdapter extends ArraySwipeAdapter {
         }
         final String ip = (String) getItem(position);
         if (ip != null) {
-            SwipeLayout root=(SwipeLayout) v.findViewById(R.id.swipe);
+            SwipeLayout root = (SwipeLayout) v.findViewById(R.id.swipe);
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

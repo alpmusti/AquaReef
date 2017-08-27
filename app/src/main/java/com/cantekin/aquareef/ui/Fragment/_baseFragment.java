@@ -1,34 +1,81 @@
 package com.cantekin.aquareef.ui.Fragment;
 
 import android.os.Bundle;
-import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.cantekin.aquareef.ui.MainActivity;
 
 public abstract class _baseFragment extends Fragment {
-    public String android_id;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        android_id = Settings.Secure.getString(getContext().getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        Log.i("_baseFragment","androidId"+android_id);
     }
 
     public void setActionBarText(String title) {
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(title);
+        if (!TextUtils.isEmpty(title))
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(title);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        updateMenuSelect();
+        initFragment();
     }
 
+    private void updateMenuSelect() {
+        String fragment = this.getClass().getName();
+        Log.i("_baseFragment", fragment + "---->>");
+        switch (fragment) {
+            case "com.cantekin.aquareef.ui.Fragment.ManualFragment":
+                changeMenuSelect(0);
+                break;
+            case "com.cantekin.aquareef.ui.Fragment.ScheduleFragment":
+                changeMenuSelect(1);
+                break;
+            case "com.cantekin.aquareef.ui.Fragment.EffectFragment":
+                changeMenuSelect(2);
+                break;
+            case "com.cantekin.aquareef.ui.Fragment.FavoriteFragment":
+                changeMenuSelect(3);
+                break;
+            case "com.cantekin.aquareef.ui.Fragment.AquaLinkFragment":
+                changeMenuSelect(4);
+                break;
+            case "com.cantekin.aquareef.ui.Fragment.SettingsFragment":
+                changeMenuSelect(5);
+                break;
+        }
+    }
 
+    private void changeMenuSelect(int selector) {
+        ((MainActivity) getActivity()).navigationView.getMenu().getItem(selector).setChecked(true);
+    }
+
+    protected abstract void initFragment();
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        clear();
+    }
+
+    public void clear() {
+        ((MainActivity) getActivity()).dismissProgressDialog();
+//        System.gc();
+//        Runtime.getRuntime().gc();
+    }
+
+    /**
+     * abstrac metot
+     *
+     * @param ip
+     */
     public void deleteItem(String ip) {
     }
 }

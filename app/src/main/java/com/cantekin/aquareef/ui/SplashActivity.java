@@ -8,10 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Formatter;
 
-import com.cantekin.aquareef.Data.DataSchedule;
-import com.cantekin.aquareef.R;
 import com.cantekin.aquareef.network.Ping;
-import com.cantekin.aquareef.network.SendDataToClient;
 
 public class SplashActivity extends Activity {
 
@@ -40,6 +37,18 @@ public class SplashActivity extends Activity {
                     Ping.doPing(subIP + "." + i);
             }
         }).start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        clear();
+    }
+
+    public void clear() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
     }
 
     /**

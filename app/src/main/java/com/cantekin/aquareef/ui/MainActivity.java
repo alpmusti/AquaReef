@@ -5,21 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cantekin.aquareef.R;
-import com.cantekin.aquareef.network.SendDataToClient;
 import com.cantekin.aquareef.ui.Fragment.AquaLinkFragment;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
-import com.cantekin.aquareef.ui.Fragment.FavoritFragment;
+import com.cantekin.aquareef.ui.Fragment.FavoriteFragment;
 import com.cantekin.aquareef.ui.Fragment.ManualFragment;
 import com.cantekin.aquareef.ui.Fragment.ScheduleFragment;
 import com.cantekin.aquareef.ui.Fragment.SettingsFragment;
@@ -31,11 +28,9 @@ import com.cantekin.aquareef.ui.GroupDevice.GroupActivity;
  * uygulamanın ana activitesi
  */
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends _baseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static final int RESULT_LOAD_IMAGE = 10001;
-    public FragmentTransaction fmTr;
-    private SendDataToClient clinetAdapter;
     private DrawerLayout drawer;
     public NavigationView navigationView;
 
@@ -43,32 +38,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initActivity();
-        replaceFragment(new ManualFragment());
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        clinetAdapter = new SendDataToClient(this);
-        sendDataDevice("!!!!!!!!!!!!!!!");
-    }
-
-    public void sendDataDevice(String data) {
-        clinetAdapter.send("!!!!!!!!!!!!!!!");
-        clinetAdapter.send(data);
-    }
-
-    public void sendDataDevice(byte[] data) {
-        if (data == null)
-            return;
-        clinetAdapter.send("!!!!!!!!!!!!!!!");
-        clinetAdapter.send(data);
     }
 
     public void takeDevice() {
-        Log.i("Cihazdan", "alma başlatıldı");
         clinetAdapter.receive();
     }
 
@@ -90,20 +67,22 @@ public class MainActivity extends AppCompatActivity
         fmTr.commit();
     }
 
-    private void initActivity() {
+    @Override
+    public void initActivity() {
+        super.initActivity();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
+        if (currentFragment == null)
+            replaceFragment(new ManualFragment());
     }
 
     @Override
@@ -118,15 +97,6 @@ public class MainActivity extends AppCompatActivity
             } else
                 super.onBackPressed();
         }
-    }
-
-    private void exit() {
-        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-        homeIntent.addCategory(Intent.CATEGORY_HOME);
-        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(homeIntent);
-        finish();
-        System.exit(0);
     }
 
     @Override
@@ -150,6 +120,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         if (id == R.id.fragment_manual) {
             replaceFragment(new ManualFragment());
         } else if (id == R.id.fragment_schedule) {
@@ -157,16 +129,16 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.fragment_effects) {
             replaceFragment(new EffectFragment());
         } else if (id == R.id.fragment_fav) {
-            replaceFragment(new FavoritFragment());
+            replaceFragment(new FavoriteFragment());
         } else if (id == R.id.fragment_aqualink) {
             replaceFragment(new AquaLinkFragment());
         } else if (id == R.id.fragment_settings) {
             replaceFragment(new SettingsFragment());
         }
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -180,4 +152,5 @@ public class MainActivity extends AppCompatActivity
             ((ShareFragment) currentFragment).setImage(selectedImage);
         }
     }
+
 }
