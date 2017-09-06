@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.network.LocationHelper;
 import com.cantekin.aquareef.ui.Fragment.AquaLinkFragment;
 import com.cantekin.aquareef.ui.Fragment.EffectFragment;
 import com.cantekin.aquareef.ui.Fragment.FavoriteFragment;
@@ -143,14 +144,21 @@ public class MainActivity extends _baseActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("onActivityResult", RESULT_LOAD_IMAGE + "");
-        Log.i("onActivityResult", requestCode + "");
-        Log.i("onActivityResult", "fds");
-        if (data != null) {
-            Uri selectedImage = data.getData();
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
-            ((ShareFragment) currentFragment).setImage(selectedImage);
+        switch (requestCode) {
+            case RESULT_LOAD_IMAGE:
+                Log.i("onActivityResult", RESULT_LOAD_IMAGE + "");
+                Log.i("onActivityResult", requestCode + "");
+                Log.i("onActivityResult", "fds");
+                if (data != null) {
+                    Uri selectedImage = data.getData();
+                    Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_content);
+                    ((ShareFragment) currentFragment).setImage(selectedImage);
+                }
+                break;
+            case LocationHelper.REQUEST_LOCATION:
+                break;
         }
+
     }
 
 }

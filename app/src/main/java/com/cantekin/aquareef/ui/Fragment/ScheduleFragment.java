@@ -157,7 +157,6 @@ public class ScheduleFragment extends _baseFragment {
                 switch (checkedId) {
                     case R.id.redToggle:
                         colorData = DefaultData.colorRed;
-
                         break;
                     case R.id.greenToggle:
                         colorData = DefaultData.colorGreen;
