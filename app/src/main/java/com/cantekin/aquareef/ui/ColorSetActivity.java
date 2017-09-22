@@ -1,6 +1,11 @@
 package com.cantekin.aquareef.ui;
 
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.View;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.cantekin.aquareef.Data.DataSchedule;
+import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.R;
@@ -57,7 +63,7 @@ public class ColorSetActivity extends _baseActivity {
         txtStop = (TextView) findViewById(R.id.color_txtStop);
         txtLevel = (TextView) findViewById(R.id.color_texLevel);
         seekBar = (SeekBar) findViewById(R.id.color_seek);
-
+        setSeekBarColor();
         blue = (ToggleSwitch) findViewById(R.id.color_toggle_blue);
         moon = (Switch) findViewById(R.id.color_sw_moon);
         loadData();
@@ -144,6 +150,42 @@ public class ColorSetActivity extends _baseActivity {
         getSupportActionBar().setTitle(color);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    private void setSeekBarColor() {
+        switch (color) {
+            case DefaultData.colorRed:
+                break;
+            case DefaultData.colorBlue:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorBlueC));
+                break;
+            case DefaultData.colorDWhite:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorDWhiteC));
+                break;
+            case DefaultData.colorGreen:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorGreenC));
+                break;
+            case DefaultData.colorMoon:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorMoonC));
+                break;
+            case DefaultData.colorRoyal:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorRoyalC));
+                break;
+            case DefaultData.colorUV:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorUVC));
+                break;
+            case DefaultData.colorWhite:
+                setBackGroundColor(seekBar, Color.parseColor(DefaultData.colorWhiteC));
+                break;
+
+        }
+    }
+
+    private void setBackGroundColor(SeekBar seekBar, int Color) {
+        LayerDrawable drawable = (LayerDrawable) seekBar.getProgressDrawable();
+        Drawable drawableItems = drawable.getDrawable(1);
+        ClipDrawable gradientDrawableUnChecked = (ClipDrawable) drawableItems;
+        gradientDrawableUnChecked.setColorFilter(Color, PorterDuff.Mode.SRC_OVER);
     }
 
     private void loadData() {
