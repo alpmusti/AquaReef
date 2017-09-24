@@ -9,16 +9,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.cantekin.aquareef.Data.Data;
 import com.cantekin.aquareef.Data.DefaultData;
 import com.cantekin.aquareef.Data.MyPreference;
 import com.cantekin.aquareef.Data.Schedule;
 import com.cantekin.aquareef.R;
+import com.cantekin.aquareef.ui.Fragment.FavoritesListAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * templatlerin listesi
@@ -28,6 +32,7 @@ import java.util.List;
 public class TemplateListActivity extends _baseActivity {
 
     private List<Schedule> favorites;
+    //private Map<String, Data> favorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,8 @@ public class TemplateListActivity extends _baseActivity {
         favorites = new ArrayList<>();
         if (fav != null)
             favorites = gson.fromJson(fav, type);
-        setList(favorites, R.id.fvrFavoritLists);
+        // setList(favorites, R.id.fvrFavoritLists);
+        setListDeleted(favorites, R.id.fvrFavoritLists);
         getSupportActionBar().setTitle(getString(R.string.templates));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -72,6 +78,24 @@ public class TemplateListActivity extends _baseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String value = (String) parent.getItemAtPosition(position);
                 questionsDialog(value);
+            }
+        });
+    }
+
+    private void setListDeleted(final List<Schedule> favoriList, int listView) {
+        List<String> defaultList = new ArrayList<>();
+        for (Schedule entry : favoriList) {
+            defaultList.add(entry.getName());
+        }
+        ListView defaultListView = (ListView) findViewById(listView);
+        TemplateListAdapter dfltAdapter = new TemplateListAdapter(getApplicationContext(), R.layout.row_register_device, defaultList, this);
+        defaultListView.setAdapter(dfltAdapter);
+        defaultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String value = (String) parent.getItemAtPosition(position);
+                questionsDialog(value);
+                //sendFavorites(favoriList.get(value).stringToSimpleArrayBufferFavorite());
             }
         });
     }
@@ -108,4 +132,17 @@ public class TemplateListActivity extends _baseActivity {
         builder.show();
     }
 
+
+    @Override
+    public void deleteItem(String item) {
+        Log.e("deleteItem", item);
+        for (Schedule entry : favorites) {
+            if (entry.getName().equals(item)) {
+                favorites.remove(entry);
+                break;
+            }
+        }
+        MyPreference.getPreference(getApplicationContext()).setData(MyPreference.FAVORITESCHEDULE, favorites);
+        setListDeleted(favorites, R.id.fvrFavoritLists);
+    }
 }

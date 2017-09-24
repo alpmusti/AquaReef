@@ -98,4 +98,7 @@ public abstract class _baseActivity extends AppCompatActivity {
     }
 
 
+    public void deleteItem(String ip) {
+
+    }
 }
